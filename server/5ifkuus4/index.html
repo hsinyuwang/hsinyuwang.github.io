@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <title>解决ARP报错 | 小新的个人站</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <script src="/iconfont/iconfont.js"></script>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="hsinyuwang" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="解决ARP报错"/>
+<meta name="twitter:description" content="报错信息：
+ The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib
+ 什么是APR？ APR(Apache portable Run-time libraries，Apache可移植运行库)的目的如其名称一样，主要为上层的应用程序提供一个可以跨越多操作系统平台使用的底层支持接口库。在早期 的Apache版本中，应用程序本身必须能够处理各种具体操作系统平台的细节，并针对不同的平台调用不同的处理函数。
+随着Apache的进一步开发，Apache组织决定将这些通用的函数独立出来并发展成为一个新的项目。这样，APR的开发就从Apache中独立出来，Apache仅仅是使用 APR而已。
+APR使得平台细节的处理进行下移。对于应用程序而言，它们根本就不需要考虑具体的平台，不管是Unix、Linux还是Window，应用程序执行的接口基本都是统一一致的。因此对于APR而言，可移植性和统一的上层接口是其考虑的一个重点。而APR最早的目的并不是如此，它最早只是希望将Apache中用到的所有代码合并为一个通用的代码库，然而这不是一个正确的策略，因此后来APR改变了其目标。有的时候使用公共代码并不是一件好事，比如如何将一个请求映射到线程或者进程是平台相关的，因此仅仅一个公共的代码库并不能完成这种区分。APR的目标则是希望安全合并所有的能够合并的代码而不需要牺牲性能。
+APR的最早的一个目标就是为所有的平台(不是部分)提供一个公共的统一操作函数接口，这是一个非常了不起的目的，当然也是不现实的一个目标。我们不可能支持所有平台的所有特征，因此APR目前只能为大多数平台提供所有的APR特性支持，包括Win32、OS/2、BeOS、Darwin、Linux等等。为了能够实现这个目标，APR开发者必须为那些不能运行于所有平台的特性创建了一系列的特征宏(FEATURE MACROS)以在各个平台之间区分这些特征。这些特征宏定义非常简单，通常用APR_HAS_FEATURE参数设置：
+如果某个平台具有这个特性，则该宏必须设置为true，比如Linux和window都具有内存映射文件，同时APR提供了内存映射文件的操作接口，因此在这两个平台上，APR_HAS_MMAP宏必须设置，同时ap_mmap_*函数应该将磁盘文件映射为内存并返回适当的状态码。如果你的操作系统并不支持内存映射，那么APR_HAS_MMAP必须设置为0，而且所有的ap_mmap_*函数也可以不需要定义。第二步就是对于那些在程序中使用了不支持的函数必须提出警告。
+解决方法 1、安装apr 首先安装依赖
+yum install openssl-develyum install apr-devel然后安装apr，下载链接为https://downloads.apache.org//apr/apr-1.7.0.tar.gz
+源码方式安装
+tar zxvf apr-1.7.0.tar.gzcd apr-1.7.0 ./configure make &amp;&amp; make installapr 默认安装在 /usr/local/apr
+或者
+yum install apr2、然后安装apr-util 下载链接为https://archive.apache.org/dist/apr/apr-util-1.6.1.tar.bz2
+源码方式安装
+tar -jxvf apr-util-1.6.1.tar.bz2 cd apr-util-1."/>
+
+    <meta property="og:title" content="解决ARP报错" />
+<meta property="og:description" content="报错信息：
+ The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib
+ 什么是APR？ APR(Apache portable Run-time libraries，Apache可移植运行库)的目的如其名称一样，主要为上层的应用程序提供一个可以跨越多操作系统平台使用的底层支持接口库。在早期 的Apache版本中，应用程序本身必须能够处理各种具体操作系统平台的细节，并针对不同的平台调用不同的处理函数。
+随着Apache的进一步开发，Apache组织决定将这些通用的函数独立出来并发展成为一个新的项目。这样，APR的开发就从Apache中独立出来，Apache仅仅是使用 APR而已。
+APR使得平台细节的处理进行下移。对于应用程序而言，它们根本就不需要考虑具体的平台，不管是Unix、Linux还是Window，应用程序执行的接口基本都是统一一致的。因此对于APR而言，可移植性和统一的上层接口是其考虑的一个重点。而APR最早的目的并不是如此，它最早只是希望将Apache中用到的所有代码合并为一个通用的代码库，然而这不是一个正确的策略，因此后来APR改变了其目标。有的时候使用公共代码并不是一件好事，比如如何将一个请求映射到线程或者进程是平台相关的，因此仅仅一个公共的代码库并不能完成这种区分。APR的目标则是希望安全合并所有的能够合并的代码而不需要牺牲性能。
+APR的最早的一个目标就是为所有的平台(不是部分)提供一个公共的统一操作函数接口，这是一个非常了不起的目的，当然也是不现实的一个目标。我们不可能支持所有平台的所有特征，因此APR目前只能为大多数平台提供所有的APR特性支持，包括Win32、OS/2、BeOS、Darwin、Linux等等。为了能够实现这个目标，APR开发者必须为那些不能运行于所有平台的特性创建了一系列的特征宏(FEATURE MACROS)以在各个平台之间区分这些特征。这些特征宏定义非常简单，通常用APR_HAS_FEATURE参数设置：
+如果某个平台具有这个特性，则该宏必须设置为true，比如Linux和window都具有内存映射文件，同时APR提供了内存映射文件的操作接口，因此在这两个平台上，APR_HAS_MMAP宏必须设置，同时ap_mmap_*函数应该将磁盘文件映射为内存并返回适当的状态码。如果你的操作系统并不支持内存映射，那么APR_HAS_MMAP必须设置为0，而且所有的ap_mmap_*函数也可以不需要定义。第二步就是对于那些在程序中使用了不支持的函数必须提出警告。
+解决方法 1、安装apr 首先安装依赖
+yum install openssl-develyum install apr-devel然后安装apr，下载链接为https://downloads.apache.org//apr/apr-1.7.0.tar.gz
+源码方式安装
+tar zxvf apr-1.7.0.tar.gzcd apr-1.7.0 ./configure make &amp;&amp; make installapr 默认安装在 /usr/local/apr
+或者
+yum install apr2、然后安装apr-util 下载链接为https://archive.apache.org/dist/apr/apr-util-1.6.1.tar.bz2
+源码方式安装
+tar -jxvf apr-util-1.6.1.tar.bz2 cd apr-util-1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.hsinyuwang.cn/server/5ifkuus4/" /><meta property="article:section" content="server" />
+<meta property="article:published_time" content="2020-09-21T10:11:20+08:00" />
+<meta property="article:modified_time" content="2020-09-21T10:11:20+08:00" />
+
+
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.hsinyuwang.cn"><img class="app-header-avatar" src="/avatar.jpg" alt="hsinyuwang" /></a>
+      <h1>Hsinyuwang&#39;s Blog</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/tags/">分类</a>
+      </nav>
+      <p>我的个人博客，有记录有分享</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/hsinyuwang" target="_blank" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a href="https://space.bilibili.com/284239797" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor"  class="icon">
+  <title>bilibili</title>
+  <use xlink:href="#icon-bilibili"></use>
+</svg>
+</a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">解决ARP报错</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Sep 21, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://www.hsinyuwang.cn/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p><strong>报错信息：</strong></p>
+<blockquote>
+<p>The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib</p>
+</blockquote>
+<h1 id="什么是apr">什么是APR？</h1>
+<p>APR(Apache portable Run-time libraries，Apache可移植运行库)的目的如其名称一样，主要为上层的应用程序提供一个可以跨越多操作系统平台使用的底层支持接口库。在早期 的Apache版本中，应用程序本身必须能够处理各种具体操作系统平台的细节，并针对不同的平台调用不同的处理函数。</p>
+<p>随着Apache的进一步开发，Apache组织决定将这些通用的函数独立出来并发展成为一个新的项目。这样，APR的开发就从Apache中独立出来，Apache仅仅是使用 APR而已。</p>
+<p>APR使得平台细节的处理进行下移。对于应用程序而言，它们根本就不需要考虑具体的平台，不管是Unix、Linux还是Window，应用程序执行的接口基本都是统一一致的。因此对于APR而言，可移植性和统一的上层接口是其考虑的一个重点。而APR最早的目的并不是如此，它最早只是希望将Apache中用到的所有代码合并为一个通用的代码库，然而这不是一个正确的策略，因此后来APR改变了其目标。有的时候使用公共代码并不是一件好事，比如如何将一个请求映射到线程或者进程是平台相关的，因此仅仅一个公共的代码库并不能完成这种区分。APR的目标则是希望安全合并所有的能够合并的代码而不需要牺牲性能。</p>
+<p>APR的最早的一个目标就是为所有的平台(不是部分)提供一个公共的统一操作函数接口，这是一个非常了不起的目的，当然也是不现实的一个目标。我们不可能支持所有平台的所有特征，因此APR目前只能为大多数平台提供所有的APR特性支持，包括Win32、OS/2、BeOS、Darwin、Linux等等。为了能够实现这个目标，APR开发者必须为那些不能运行于所有平台的特性创建了一系列的特征宏(FEATURE MACROS)以在各个平台之间区分这些特征。这些特征宏定义非常简单，通常用APR_HAS_FEATURE参数设置：</p>
+<p>如果某个平台具有这个特性，则该宏必须设置为true，比如Linux和window都具有内存映射文件，同时APR提供了内存映射文件的操作接口，因此在这两个平台上，APR_HAS_MMAP宏必须设置，同时ap_mmap_*函数应该将磁盘文件映射为内存并返回适当的状态码。如果你的操作系统并不支持内存映射，那么APR_HAS_MMAP必须设置为0，而且所有的ap_mmap_*函数也可以不需要定义。第二步就是对于那些在程序中使用了不支持的函数必须提出警告。</p>
+<h1 id="解决方法">解决方法</h1>
+<h2 id="1安装apr">1、安装apr</h2>
+<p><strong>首先安装依赖</strong></p>
+<pre tabindex="0"><code>yum install openssl-devel
+yum install apr-devel
+</code></pre><p><strong>然后安装apr，下载链接为https://downloads.apache.org//apr/apr-1.7.0.tar.gz</strong></p>
+<p>源码方式安装</p>
+<pre tabindex="0"><code>tar zxvf apr-1.7.0.tar.gz
+cd apr-1.7.0  
+./configure  
+make &amp;&amp; make install
+</code></pre><p>apr 默认安装在 /usr/local/apr</p>
+<p>或者</p>
+<pre tabindex="0"><code>yum install apr
+</code></pre><h2 id="2然后安装apr-util">2、然后安装apr-util</h2>
+<p><strong>下载链接为https://archive.apache.org/dist/apr/apr-util-1.6.1.tar.bz2</strong></p>
+<p>源码方式安装</p>
+<pre tabindex="0"><code>tar -jxvf apr-util-1.6.1.tar.bz2 
+cd apr-util-1.6.1  
+./configure --with-apr=/usr/local/apr  
+make &amp;&amp; make install
+</code></pre><p>或者</p>
+<pre tabindex="0"><code>yum install apr-util
+</code></pre><p><strong>注意：如果报如下错误的话是缺少依赖</strong></p>
+<pre tabindex="0"><code>[root@localhost apr-util-1.6.1]# make
+make[1]: Entering directory `/home/bak/software/apr-util-1.6.1'
+/bin/sh /usr/local/apr/build-1/libtool --silent --mode=compile gcc -g -O2 -pthread   -DHAVE_CONFIG_H  -DLINUX -D_REENTRANT -D_GNU_SOURCE   -I/home/bak/software/apr-util-1.6.1/include -I/home/bak/software/apr-util-1.6.1/include/private  -I/usr/local/apr/include/apr-1    -o xml/apr_xml.lo -c xml/apr_xml.c &amp;&amp; touch xml/apr_xml.lo
+xml/apr_xml.c:35:19: fatal error: expat.h: No such file or directory
+ #include &lt;expat.h&gt;
+                   ^
+compilation terminated.
+make[1]: *** [xml/apr_xml.lo] Error 1
+make[1]: Leaving directory `/home/bak/software/apr-util-1.6.1'
+make: *** [all-recursive] Error 1
+</code></pre><p><strong>需要安装expat-devel</strong></p>
+<pre tabindex="0"><code>yum install expat-devel
+</code></pre><h2 id="3安装tomcat-native">3、安装tomcat-native</h2>
+<p><strong>在tomcat安装包中已经有了tomcat-native，所以在tomcat/bin目录下直接解压安装</strong></p>
+<p>apr和jdk路径以实际为准</p>
+<pre tabindex="0"><code>tar zxvf tomcat-native.tar.gz  
+cd tomcat-native-1.2.7-src/native
+./configure --with-apr=/usr/local/apr --with-java-home=/usr/java/jdk_1.8.0_271 --with-ssl=yes
+make &amp;&amp; make install
+</code></pre><p><strong>注意：ssl要配置为yes，否则可能会报如下错误</strong></p>
+<blockquote>
+<p>Failed to initialize the SSLEngine</p>
+</blockquote>
+<p>或者</p>
+<pre tabindex="0"><code>yum install tomcat-native
+</code></pre><h2 id="4重启tomcat">4、重启tomcat</h2>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+    <meting-js
+    id="7628905309"
+    lrc-type="0"
+    server="netease"
+    order="list"
+    type="playlist"
+    fixed="true"
+    list-olded="true"
+    autoplay="true"
+    mutex="true"
+    >
+    </meting-js>
+  </body>
+</html>

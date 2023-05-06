@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <title>斐讯K2更换32M Flash | 小新的个人站</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <script src="/iconfont/iconfont.js"></script>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="hsinyuwang" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="斐讯K2更换32M Flash"/>
+<meta name="twitter:description" content="一、拆掉原厂flash 在更换之前先刷入breed，提取EEPROM固件，因为里面包含了WiFi射频参数和MAC地址，一机一码。注意：刷机需谨慎，一定要提前备份。
+1、备份固件 进入breed控制台，选择“备份固件”进行备份，将EEPROM固件下载到电脑，顺带看一下斐讯K2原厂的flash型号为兆易创新的GD25Q64 8MB。
+2、拆机 备份完成后就可以拆机了，找到flash芯片，用热风枪将其吹下，没有热风枪也可以用电烙铁堆两坨焊锡拆下。
+二、更换32M flash 这里使用的是华邦的W25Q256 32MB芯片，虽然芯片大小、引脚数量和原厂的不一样，但都是可以用的。
+1、先刷breed 在焊接之前，先用编程器刷入breed，也就是bootloader，否则空芯片无法启动。
+打开软件，点击自动，刷入breed的bin文件。
+2、焊接 斐讯K2的PCB上可以焊接两种封装的flash，这就是为什么芯片大小不一样却可以用的原因。在焊接时，需要注意芯片摆放位置，将图中左上角的圆点与芯片上的圆点对应即可。
+3、查看更换结果 开机，进入breed，这里已经显示为华邦W25Q256 32MB的flash了。
+三、恢复EEPROM和路由器固件 1、刷入EEPROM 未刷入EEPROM之前，MAC地址全是FF。
+这里我们先点击“固件更新”并选择之前备份好的eeprom.bin文件，进行刷入。
+刷入之后，MAC地址就都回来了。
+2、刷入路由器固件 路由器的固件可以选择，华硕padavan、潘多拉PandoraBox、openwrt等。刷入方式同EEPROM，选择“固件”，并勾选“自动重启”即可。"/>
+
+    <meta property="og:title" content="斐讯K2更换32M Flash" />
+<meta property="og:description" content="一、拆掉原厂flash 在更换之前先刷入breed，提取EEPROM固件，因为里面包含了WiFi射频参数和MAC地址，一机一码。注意：刷机需谨慎，一定要提前备份。
+1、备份固件 进入breed控制台，选择“备份固件”进行备份，将EEPROM固件下载到电脑，顺带看一下斐讯K2原厂的flash型号为兆易创新的GD25Q64 8MB。
+2、拆机 备份完成后就可以拆机了，找到flash芯片，用热风枪将其吹下，没有热风枪也可以用电烙铁堆两坨焊锡拆下。
+二、更换32M flash 这里使用的是华邦的W25Q256 32MB芯片，虽然芯片大小、引脚数量和原厂的不一样，但都是可以用的。
+1、先刷breed 在焊接之前，先用编程器刷入breed，也就是bootloader，否则空芯片无法启动。
+打开软件，点击自动，刷入breed的bin文件。
+2、焊接 斐讯K2的PCB上可以焊接两种封装的flash，这就是为什么芯片大小不一样却可以用的原因。在焊接时，需要注意芯片摆放位置，将图中左上角的圆点与芯片上的圆点对应即可。
+3、查看更换结果 开机，进入breed，这里已经显示为华邦W25Q256 32MB的flash了。
+三、恢复EEPROM和路由器固件 1、刷入EEPROM 未刷入EEPROM之前，MAC地址全是FF。
+这里我们先点击“固件更新”并选择之前备份好的eeprom.bin文件，进行刷入。
+刷入之后，MAC地址就都回来了。
+2、刷入路由器固件 路由器的固件可以选择，华硕padavan、潘多拉PandoraBox、openwrt等。刷入方式同EEPROM，选择“固件”，并勾选“自动重启”即可。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.hsinyuwang.cn/router/5v9hv26h/" /><meta property="article:section" content="router" />
+<meta property="article:published_time" content="2021-08-01T10:22:14+08:00" />
+<meta property="article:modified_time" content="2021-08-01T10:22:14+08:00" />
+
+
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.hsinyuwang.cn"><img class="app-header-avatar" src="/avatar.jpg" alt="hsinyuwang" /></a>
+      <h1>Hsinyuwang&#39;s Blog</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/tags/">分类</a>
+      </nav>
+      <p>我的个人博客，有记录有分享</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/hsinyuwang" target="_blank" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a href="https://space.bilibili.com/284239797" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor"  class="icon">
+  <title>bilibili</title>
+  <use xlink:href="#icon-bilibili"></use>
+</svg>
+</a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">斐讯K2更换32M Flash</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Aug 1, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://www.hsinyuwang.cn/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="一拆掉原厂flash">一、拆掉原厂flash</h1>
+<p>在更换之前先刷入breed，提取EEPROM固件，因为里面包含了WiFi射频参数和MAC地址，一机一码。注意：刷机需谨慎，一定要提前备份。</p>
+<h2 id="1备份固件">1、备份固件</h2>
+<p>进入breed控制台，选择“备份固件”进行备份，将EEPROM固件下载到电脑，顺带看一下斐讯K2原厂的flash型号为兆易创新的GD25Q64 8MB。</p>
+<p><img src="/images/5v9hv26h/1.png" alt=""></p>
+<h2 id="2拆机">2、拆机</h2>
+<p>备份完成后就可以拆机了，找到flash芯片，用热风枪将其吹下，没有热风枪也可以用电烙铁堆两坨焊锡拆下。</p>
+<p><img src="/images/5v9hv26h/2.png" alt=""></p>
+<h1 id="二更换32m-flash">二、更换32M flash</h1>
+<p>这里使用的是华邦的W25Q256 32MB芯片，虽然芯片大小、引脚数量和原厂的不一样，但都是可以用的。</p>
+<p><img src="/images/5v9hv26h/3.png" alt=""></p>
+<h2 id="1先刷breed">1、先刷breed</h2>
+<p>在焊接之前，先用编程器刷入breed，也就是bootloader，否则空芯片无法启动。</p>
+<p><img src="/images/5v9hv26h/4.png" alt=""></p>
+<p>打开软件，点击自动，刷入breed的bin文件。</p>
+<p><img src="/images/5v9hv26h/5.png" alt=""></p>
+<h2 id="2焊接">2、焊接</h2>
+<p>斐讯K2的PCB上可以焊接两种封装的flash，这就是为什么芯片大小不一样却可以用的原因。在焊接时，需要注意芯片摆放位置，将图中左上角的圆点与芯片上的圆点对应即可。</p>
+<p><img src="/images/5v9hv26h/6.png" alt=""></p>
+<p><img src="/images/5v9hv26h/7.png" alt=""></p>
+<h2 id="3查看更换结果">3、查看更换结果</h2>
+<p>开机，进入breed，这里已经显示为华邦W25Q256 32MB的flash了。</p>
+<p><img src="/images/5v9hv26h/8.png" alt=""></p>
+<h1 id="三恢复eeprom和路由器固件">三、恢复EEPROM和路由器固件</h1>
+<h2 id="1刷入eeprom">1、刷入EEPROM</h2>
+<p>未刷入EEPROM之前，MAC地址全是FF。</p>
+<p><img src="/images/5v9hv26h/9.png" alt=""></p>
+<p>这里我们先点击“固件更新”并选择之前备份好的eeprom.bin文件，进行刷入。</p>
+<p><img src="/images/5v9hv26h/10.png" alt=""></p>
+<p>刷入之后，MAC地址就都回来了。</p>
+<p><img src="/images/5v9hv26h/11.png" alt=""></p>
+<h2 id="2刷入路由器固件">2、刷入路由器固件</h2>
+<p>路由器的固件可以选择，华硕padavan、潘多拉PandoraBox、openwrt等。刷入方式同EEPROM，选择“固件”，并勾选“自动重启”即可。</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+    <meting-js
+    id="7628905309"
+    lrc-type="0"
+    server="netease"
+    order="list"
+    type="playlist"
+    fixed="true"
+    list-olded="true"
+    autoplay="true"
+    mutex="true"
+    >
+    </meting-js>
+  </body>
+</html>

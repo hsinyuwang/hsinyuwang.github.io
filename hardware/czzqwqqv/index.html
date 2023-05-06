@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <title>基于Linux自制GBA游戏机 | 小新的个人站</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <script src="/iconfont/iconfont.js"></script>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="hsinyuwang" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="基于Linux自制GBA游戏机"/>
+<meta name="twitter:description" content="开源地址 https://github.com/hsinyuwang/X-Boy
+视频介绍 https://www.bilibili.com/video/BV1JP4y1X7Uz
+.meta-media {position: relative;margin-bottom: 30px;display: flex;width: 100%;height: 0;padding-bottom: 75%;}.video {position: absolute;width: 100%;height: 100%;left: 0;top: 0;} 图片展示
+以下内容为镜像的构建过程，你也可以直接使用我制作好的镜像
+ 百度网盘
+链接：https://pan.baidu.com/s/1ftacGCXHLy-AFabczBg3yg
+提取码：9bp8
+ X-Boy 系统镜像构建全流程指南
+ ubuntu 系统安装  下载镜像 换源  备份源列表 修改 sources.list 文件 更改为清华镜像源 更新并升级 安装依赖库     安装交叉编译工具链  安装编译器  新建 tool 文件夹并进入 下载交叉编译链 创建文件夹并解压 配置环境变量 安装其他库 验证是否安装成功     uboot 编译  获取 uboot 修改 include/configs/sun8i."/>
+
+    <meta property="og:title" content="基于Linux自制GBA游戏机" />
+<meta property="og:description" content="开源地址 https://github.com/hsinyuwang/X-Boy
+视频介绍 https://www.bilibili.com/video/BV1JP4y1X7Uz
+.meta-media {position: relative;margin-bottom: 30px;display: flex;width: 100%;height: 0;padding-bottom: 75%;}.video {position: absolute;width: 100%;height: 100%;left: 0;top: 0;} 图片展示
+以下内容为镜像的构建过程，你也可以直接使用我制作好的镜像
+ 百度网盘
+链接：https://pan.baidu.com/s/1ftacGCXHLy-AFabczBg3yg
+提取码：9bp8
+ X-Boy 系统镜像构建全流程指南
+ ubuntu 系统安装  下载镜像 换源  备份源列表 修改 sources.list 文件 更改为清华镜像源 更新并升级 安装依赖库     安装交叉编译工具链  安装编译器  新建 tool 文件夹并进入 下载交叉编译链 创建文件夹并解压 配置环境变量 安装其他库 验证是否安装成功     uboot 编译  获取 uboot 修改 include/configs/sun8i." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.hsinyuwang.cn/hardware/czzqwqqv/" /><meta property="article:section" content="hardware" />
+<meta property="article:published_time" content="2022-12-10T20:54:06+08:00" />
+<meta property="article:modified_time" content="2022-12-10T20:54:06+08:00" />
+
+
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.hsinyuwang.cn"><img class="app-header-avatar" src="/avatar.jpg" alt="hsinyuwang" /></a>
+      <h1>Hsinyuwang&#39;s Blog</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/tags/">分类</a>
+      </nav>
+      <p>我的个人博客，有记录有分享</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/hsinyuwang" target="_blank" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a href="https://space.bilibili.com/284239797" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor"  class="icon">
+  <title>bilibili</title>
+  <use xlink:href="#icon-bilibili"></use>
+</svg>
+</a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">基于Linux自制GBA游戏机</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Dec 10, 2022
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          9 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://www.hsinyuwang.cn/tags/%E7%A1%AC%E4%BB%B6/">硬件</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>开源地址 <a href="https://github.com/hsinyuwang/X-Boy">https://github.com/hsinyuwang/X-Boy</a></p>
+<p>视频介绍 <a href="https://www.bilibili.com/video/BV1JP4y1X7Uz/?vd_source=2f25de86752ccc9cfafc4bcf1c352db1">https://www.bilibili.com/video/BV1JP4y1X7Uz</a></p>
+<style>
+    .meta-media {
+        position: relative;
+        margin-bottom: 30px;
+        display: flex;
+        width: 100%;
+        height: 0;
+        padding-bottom: 75%;
+    }
+
+    .video {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+    }
+</style>
+<div class="meta-media">
+    <iframe src="//player.bilibili.com/player.html?bvid=BV1JP4y1X7Uz&page=1"
+        frameborder="no" scrolling="yes" allowfullscreen="allowfullscreen" high_quality="1" framespacing="1"
+        class="video">
+    </iframe>
+</div>
+<p>图片展示</p>
+<p><img src="/images/czzqwqqv/7.jpg" alt=""></p>
+<p><img src="/images/czzqwqqv/6.jpg" alt=""></p>
+<p>以下内容为镜像的构建过程，你也可以直接使用我制作好的镜像</p>
+<blockquote>
+<p>百度网盘</p>
+<p>链接：https://pan.baidu.com/s/1ftacGCXHLy-AFabczBg3yg</p>
+<p>提取码：9bp8</p>
+</blockquote>
+<p><strong>X-Boy 系统镜像构建全流程指南</strong></p>
+<ul>
+<li><a href="#ubuntu-%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85">ubuntu 系统安装</a>
+<ul>
+<li><a href="#%E4%B8%8B%E8%BD%BD%E9%95%9C%E5%83%8F">下载镜像</a></li>
+<li><a href="#%E6%8D%A2%E6%BA%90">换源</a>
+<ul>
+<li><a href="#%E5%A4%87%E4%BB%BD%E6%BA%90%E5%88%97%E8%A1%A8">备份源列表</a></li>
+<li><a href="#%E4%BF%AE%E6%94%B9-sourceslist-%E6%96%87%E4%BB%B6">修改 sources.list 文件</a></li>
+<li><a href="#%E6%9B%B4%E6%94%B9%E4%B8%BA%E6%B8%85%E5%8D%8E%E9%95%9C%E5%83%8F%E6%BA%90">更改为清华镜像源</a></li>
+<li><a href="#%E6%9B%B4%E6%96%B0%E5%B9%B6%E5%8D%87%E7%BA%A7">更新并升级</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E5%BA%93">安装依赖库</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%AE%89%E8%A3%85%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7%E9%93%BE">安装交叉编译工具链</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91%E5%99%A8">安装编译器</a>
+<ul>
+<li><a href="#%E6%96%B0%E5%BB%BA-tool-%E6%96%87%E4%BB%B6%E5%A4%B9%E5%B9%B6%E8%BF%9B%E5%85%A5">新建 tool 文件夹并进入</a></li>
+<li><a href="#%E4%B8%8B%E8%BD%BD%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E9%93%BE">下载交叉编译链</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%E5%B9%B6%E8%A7%A3%E5%8E%8B">创建文件夹并解压</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F">配置环境变量</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85%E5%85%B6%E4%BB%96%E5%BA%93">安装其他库</a></li>
+<li><a href="#%E9%AA%8C%E8%AF%81%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F">验证是否安装成功</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#uboot-%E7%BC%96%E8%AF%91">uboot 编译</a>
+<ul>
+<li><a href="#%E8%8E%B7%E5%8F%96-uboot">获取 uboot</a></li>
+<li><a href="#%E4%BF%AE%E6%94%B9-includeconfigssun8ih">修改 include/configs/sun8i.h</a></li>
+<li><a href="#%E7%BC%96%E8%AF%91-uboot">编译 uboot</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%BB%E7%BA%BF-linux-%E7%BC%96%E8%AF%91">主线 Linux 编译</a>
+<ul>
+<li><a href="#%E4%B8%8B%E8%BD%BD%E6%BA%90%E7%A0%81">下载源码</a></li>
+<li><a href="#%E4%BF%AE%E6%94%B9%E9%A1%B6%E5%B1%82-makefile">修改顶层 Makefile</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE-ili9341-lcd">配置 ili9341 LCD</a></li>
+<li><a href="#%E7%BC%96%E8%AF%91">编译</a></li>
+</ul>
+</li>
+<li><a href="#buildroot-%E6%A0%B9%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA">Buildroot 根文件系统构建</a>
+<ul>
+<li><a href="#%E8%8E%B7%E5%8F%96-buildroot">获取 Buildroot</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE">基本配置</a></li>
+<li><a href="#%E7%BC%96%E8%AF%91%E9%93%BE%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE">编译链工具配置</a></li>
+<li><a href="#alsasdlfbv%E9%85%8D%E7%BD%AE">alsa、sdl、fbv配置</a></li>
+<li><a href="#%E7%BC%96%E8%AF%91-1">编译</a></li>
+</ul>
+</li>
+<li><a href="#tf-%E5%8D%A1%E5%88%86%E5%8C%BA%E5%8F%8A%E7%83%A7%E5%BD%95">TF 卡分区及烧录</a>
+<ul>
+<li><a href="#tf-%E5%8D%A1%E5%88%86%E5%8C%BA">TF 卡分区</a></li>
+<li><a href="#%E7%83%A7%E5%BD%95-uboot">烧录 uboot</a></li>
+<li><a href="#%E5%86%99%E5%85%A5%E5%86%85%E6%A0%B8%E5%92%8C%E8%AE%BE%E5%A4%87%E6%A0%91">写入内核和设备树</a></li>
+<li><a href="#%E5%86%99%E5%85%A5%E6%A0%B9%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F">写入根文件系统</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BC%96%E8%AF%91%E6%A8%A1%E6%8B%9F%E5%99%A8">编译模拟器</a>
+<ul>
+<li><a href="#%E7%BC%96%E8%AF%91-gpsp">编译 gpsp</a></li>
+<li><a href="#%E5%A4%8D%E5%88%B6%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6">复制可执行文件</a></li>
+</ul>
+</li>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE">系统配置</a>
+<ul>
+<li><a href="#%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD-fat-%E5%88%86%E5%8C%BA">自动挂载 fat 分区</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E5%8F%8C%E7%AB%AF%E6%98%BE%E7%A4%BA">配置双端显示</a></li>
+<li><a href="#%E5%90%AF%E5%8A%A8%E5%90%8E%E5%BC%80%E5%90%AF%E5%A3%B0%E9%9F%B3">启动后开启声音</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE-sdl-%E7%8E%AF%E5%A2%83">配置 SDL 环境</a></li>
+<li><a href="#%E8%87%AA%E5%90%AF%E5%8A%A8%E6%A8%A1%E6%8B%9F%E5%99%A8">自启动模拟器</a></li>
+</ul>
+</li>
+<li><a href="#%E5%88%B6%E4%BD%9C%E9%95%9C%E5%83%8F">制作镜像</a>
+<ul>
+<li><a href="#%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95">创建工作目录</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E7%A9%BA%E7%99%BD%E6%96%87%E4%BB%B6%E5%B9%B6%E5%88%86%E5%8C%BA">创建空白文件并分区</a></li>
+<li><a href="#%E5%B0%86%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E8%99%9A%E6%8B%9F%E6%88%90%E5%9D%97%E8%AE%BE%E5%A4%87">将镜像文件虚拟成块设备</a></li>
+<li><a href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%9D%97%E8%AE%BE%E5%A4%87%E5%B9%B6%E4%B8%94%E6%8C%82%E8%BD%BD">格式化块设备并且挂载</a></li>
+<li><a href="#%E7%83%A7%E5%BD%95-uboot-1">烧录 uboot</a></li>
+<li><a href="#%E5%86%99%E5%85%A5%E5%86%85%E6%A0%B8%E5%92%8C%E8%AE%BE%E5%A4%87%E6%A0%91-1">写入内核和设备树</a></li>
+<li><a href="#%E5%86%99%E5%85%A5%E6%A0%B9%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F-1">写入根文件系统</a></li>
+</ul>
+</li>
+<li><a href="#%E6%84%9F%E8%B0%A2">感谢</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5">参考链接</a></li>
+</ul>
+<hr>
+<h2 id="ubuntu-系统安装">ubuntu 系统安装</h2>
+<h3 id="下载镜像">下载镜像</h3>
+<pre tabindex="0"><code>https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/18.04/ubuntu-18.04.6-desktop-amd64.iso
+</code></pre><p>使用物理机或者虚拟机安装都可以</p>
+<h3 id="换源">换源</h3>
+<h4 id="备份源列表">备份源列表</h4>
+<pre tabindex="0"><code>sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+</code></pre><h4 id="修改-sourceslist-文件">修改 sources.list 文件</h4>
+<pre tabindex="0"><code>sudo gedit /etc/apt/sources.list
+</code></pre><h4 id="更改为清华镜像源">更改为清华镜像源</h4>
+<pre tabindex="0"><code># 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+# 预发布软件源，不建议启用
+# deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+</code></pre><h4 id="更新并升级">更新并升级</h4>
+<pre tabindex="0"><code>sudo apt-get update &amp;&amp; sudo apt-get upgrade
+</code></pre><h4 id="安装依赖库">安装依赖库</h4>
+<pre tabindex="0"><code>sudo apt-get install -y device-tree-compiler python flex bison ncurses-dev libssl-dev
+</code></pre><h2 id="安装交叉编译工具链">安装交叉编译工具链</h2>
+<h3 id="安装编译器">安装编译器</h3>
+<h4 id="新建-tool-文件夹并进入">新建 tool 文件夹并进入</h4>
+<pre tabindex="0"><code>mkdir ~/linux/tools &amp;&amp; cd ~/linux/tools
+</code></pre><h4 id="下载交叉编译链">下载交叉编译链</h4>
+<pre tabindex="0"><code>wget https://releases.linaro.org/components/toolchain/binaries/4.9-2017.01/arm-linux-gnueabihf/gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf.tar.xz
+</code></pre><h4 id="创建文件夹并解压">创建文件夹并解压</h4>
+<pre tabindex="0"><code>sudo mkdir /usr/local/arm &amp;&amp; sudo tar -vxf gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf.tar.xz -C /usr/local/arm
+</code></pre><h4 id="配置环境变量">配置环境变量</h4>
+<pre tabindex="0"><code>sudo vim ~/.bashrc
+export PATH=$PATH:/usr/local/arm/gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf/bin
+source ~/.bashrc
+</code></pre><h4 id="安装其他库">安装其他库</h4>
+<pre tabindex="0"><code>sudo apt-get install lsb-core lib32stdc++6
+</code></pre><h4 id="验证是否安装成功">验证是否安装成功</h4>
+<pre tabindex="0"><code>arm-linux-gnueabihf-gcc -v
+</code></pre><p><img src="/images/czzqwqqv/1.jpg" alt=""></p>
+<h2 id="uboot-编译">uboot 编译</h2>
+<h3 id="获取-uboot">获取 uboot</h3>
+<pre tabindex="0"><code>mkdir ~/v3s &amp;&amp; cd ~/v3s
+git clone https://github.com/Lichee-Pi/u-boot.git -b v3s-current
+</code></pre><p>uboot 的目录结构</p>
+<pre tabindex="0"><code>├── api                存放uboot提供的API接口函数
+├── arch               平台相关的部分我们只需要关心这个目录下的ARM文件夹
+│   ├──arm
+│   │   └──cpu
+│   │   │   └──armv7
+│   │   └──dts
+│   │   │   └──*.dts 存放设备的dts,也就是设备配置相关的引脚信息
+├── board              对于不同的平台的开发板对应的代码
+├── cmd                顾名思义，大部分的命令的实现都在这个文件夹下面。
+├── common             公共的代码
+├── configs            各个板子的对应的配置文件都在里面，我们的Lichee配置也在里面
+├── disk               对磁盘的一些操作都在这个文件夹里面，例如分区等。
+├── doc                参考文档，这里面有很多跟平台等相关的使用文档。
+├── drivers            各式各样的驱动文件都在这里面
+├── dts                一种树形结构（device tree）这个应该是uboot新的语法
+├── examples           官方给出的一些样例程序
+├── fs                 文件系统，uboot会用到的一些文件系统
+├── include            头文件，所有的头文件都在这个文件夹下面
+├── lib                一些常用的库文件在这个文件夹下面
+├── Licenses           这个其实跟编译无关了，就是一些license的声明
+├── net                网络相关的，需要用的小型网络协议栈
+├── post              上电自检程序
+├── scripts           编译脚本和Makefile文件
+├── spl               second program loader，即相当于二级uboot启动。
+├── test              小型的单元测试程序。
+└── tools             里面有很多uboot常用的工具。
+</code></pre><h3 id="修改-includeconfigssun8ih">修改 include/configs/sun8i.h</h3>
+<p>在文件中添加</p>
+<pre tabindex="0"><code>#define CONFIG_BOOTCOMMAND  &quot;setenv bootm_boot_mode sec; &quot; \
+                            &quot;load mmc 0:1 0x41000000 zImage; &quot;  \
+                            &quot;load mmc 0:1 0x41800000 sun8i-v3s-licheepi-zero-dock.dtb; &quot; \
+                            &quot;bootz 0x41000000 - 0x41800000;&quot;
+
+#define CONFIG_BOOTARGS &quot;console=tty0 console=ttyS0,115200 panic=5 rootwait root=/dev/mmcblk0p2 earlyprintk rw  vt.global_cursor_default=0&quot;
+</code></pre><p><img src="/images/czzqwqqv/2.jpg" alt=""></p>
+<h3 id="编译-uboot">编译 uboot</h3>
+<pre tabindex="0"><code>cd u-boot
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- LicheePi_Zero_defconfig
+make ARCH=arm menuconfig
+time make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- 2&gt;&amp;1 | tee build.log
+</code></pre><p>在 uboot 顶层 Makefile 的 248 行，添加默认编译器，就可以直接用 make 编译了。</p>
+<pre tabindex="0"><code># set default to nothing for native builds
+ifeq ($(HOSTARCH),$(ARCH))
+CROSS_COMPILE ?= 
+endif
+
+ARCH  ?= arm
+CROSS_COMPILE ?= arm-linux-gnueabihf-
+
+KCONFIG_CONFIG	?= .config
+export KCONFIG_CONFIG
+</code></pre><p>编译成功</p>
+<p><img src="/images/czzqwqqv/3.jpg" alt=""></p>
+<p>后面编译好 kernel 和 rootfs 然后一起烧录</p>
+<h2 id="主线-linux-编译">主线 Linux 编译</h2>
+<h3 id="下载源码">下载源码</h3>
+<pre tabindex="0"><code>cd ~/v3s
+git clone -b zero-5.2.y https://github.com/Lichee-Pi/linux.git
+</code></pre><h3 id="修改顶层-makefile">修改顶层 Makefile</h3>
+<p>在内核根目录下的 Makefile 364 行修改默认编译器，可以直接用 make 编译</p>
+<pre tabindex="0"><code># ARCH		?= $(SUBARCH)
+ARCH		?= arm
+CROSS_COMPILE	?= arm-linux-gnueabihf-
+</code></pre><h3 id="配置-ili9341-lcd">配置 ili9341 LCD</h3>
+<pre tabindex="0"><code>cd linux
+make licheepi_zero_defconfig
+make menuconfig
+</code></pre><p>勾选驱动</p>
+<pre tabindex="0"><code>Device Drivers  ---&gt;
+    Input device support  ---&gt;
+        &lt;*&gt;   Joystick interface
+        [*]   Joysticks/Gamepads  ---&gt;
+             &lt;*&gt;   X-Box gamepad support
+             [*]   X-Box gamepad rumble support
+             [*]   LED Support for Xbox360 controller 'BigX' LED
+    [ * ] Staging drivers  ---&gt;
+        &lt;*&gt;   Support for small TFT LCD display modules  ---&gt;
+                &lt;*&gt;   FB driver for the ILI9341 LCD Controller
+                &lt;*&gt;   Generic FB driver for TFT LCD displays
+</code></pre><p>修改设备树 arch/arm/boot/dts/sun8i-v3s-licheepi-zero.dts</p>
+<p>在 chosen 中添加 /delete-node/ framebuffer@0; 删除原来的 simplefb 节点（ uboot 里有使能 fb 的操作，必须删除而不是 disable ）</p>
+<pre tabindex="0"><code>chosen {
+		stdout-path = &quot;serial0:115200n8&quot;;
+		/delete-node/ framebuffer@0;
+	};
+</code></pre><p>删除 &amp;i2c0 节点</p>
+<pre tabindex="0"><code>&amp;i2c0 {
+	status = &quot;okay&quot;;
+
+	ns2009: ns2009@48 {
+		compatible = &quot;nsiway,ns2009&quot;;
+		reg = &lt;0x48&gt;;
+	};
+};
+</code></pre><p>修改设备树 arch/arm/boot/dts/sun8i-v3s-licheepi-zero-dock.dts</p>
+<p>删除 &amp;lradc 和 &amp;i2c0 （ lradc 用不到，gt911 占用引脚和屏幕的 spi 引脚有冲突，所以删掉）</p>
+<pre tabindex="0"><code>&amp;lradc {
+	vref-supply = &lt;&amp;reg_vcc3v0&gt;;
+	status = &quot;okay&quot;;
+
+	button-200 {
+		label = &quot;Volume Up&quot;;
+		linux,code = &lt;KEY_VOLUMEUP&gt;;
+		channel = &lt;0&gt;;
+		voltage = &lt;200000&gt;;
+	};
+
+	button-400 {
+		label = &quot;Volume Down&quot;;
+		linux,code = &lt;KEY_VOLUMEDOWN&gt;;
+		channel = &lt;0&gt;;
+		voltage = &lt;400000&gt;;
+	};
+
+	button-600 {
+		label = &quot;Select&quot;;
+		linux,code = &lt;KEY_SELECT&gt;;
+		channel = &lt;0&gt;;
+		voltage = &lt;600000&gt;;
+	};
+
+	button-800 {
+		label = &quot;Start&quot;;
+		linux,code = &lt;KEY_OK&gt;;
+		channel = &lt;0&gt;;
+		voltage = &lt;800000&gt;;
+	};
+};
+
+&amp;i2c0 {
+	gt911: touchscreen@14 {
+        compatible = &quot;goodix,gt911&quot;;
+        reg = &lt;0x5d&gt;;
+        interrupt-parent = &lt;&amp;pio&gt;;
+        interrupts = &lt;1 5 IRQ_TYPE_EDGE_FALLING&gt;; /* (PB5) */
+        pinctrl-names = &quot;default&quot;;
+        irq-gpios = &lt;&amp;pio 1 5 GPIO_ACTIVE_HIGH&gt;; /* (PB5) */
+        reset-gpios = &lt;&amp;pio 2 1 GPIO_ACTIVE_HIGH&gt;; /* RST (PC1) */
+        /* touchscreen-swapped-x-y */
+    };
+};
+</code></pre><p>在最后添加</p>
+<pre tabindex="0"><code>&amp;spi0 {
+       status = &quot;okay&quot;;
+
+       ili9341@0 {
+               compatible = &quot;ilitek,ili9341&quot;;
+               reg = &lt;0&gt;;
+
+               spi-max-frequency = &lt;60000000&gt;;
+               rotate = &lt;270&gt;;
+               bgr;
+               fps = &lt;50&gt;;
+               buswidth = &lt;8&gt;;
+               reset-gpios = &lt;&amp;pio 1 2 GPIO_ACTIVE_LOW&gt;;
+               dc-gpios = &lt;&amp;pio 1 5 GPIO_ACTIVE_LOW&gt;;
+               debug = &lt;0&gt;;
+       };
+};
+</code></pre><p>这样启动时的信息会通过 ili9341 LCD 显示</p>
+<p>5.2 内核需要修改 drivers/staging/fbtft/fbtft_core.c 的 fbtft_request_one_gpio() 方法，否则开机 log 会报申请 gpio 失败</p>
+<p>注意需要在该文件引入下面头文件，否则编译报错</p>
+<pre tabindex="0"><code>#include &lt;linux/of_gpio.h&gt;
+</code></pre><pre tabindex="0"><code>static int fbtft_request_one_gpio(struct fbtft_par *par,
+                  const char *name, int index,
+                  struct gpio_desc **gpiop)
+{
+    struct device *dev = par-&gt;info-&gt;device;
+    struct device_node *node = dev-&gt;of_node;
+    int gpio, flags, ret = 0;
+    enum of_gpio_flags of_flags;
+    if (of_find_property(node, name, NULL)) {
+        gpio = of_get_named_gpio_flags(node, name, index, &amp;of_flags);
+        if (gpio == -ENOENT)
+            return 0;
+        if (gpio == -EPROBE_DEFER)
+            return gpio;
+        if (gpio &lt; 0) {
+            dev_err(dev,
+                &quot;failed to get '%s' from DT\n&quot;, name);
+            return gpio;
+        }
+         //active low translates to initially low
+        flags = (of_flags &amp; OF_GPIO_ACTIVE_LOW) ? GPIOF_OUT_INIT_LOW :
+                            GPIOF_OUT_INIT_HIGH;
+        ret = devm_gpio_request_one(dev, gpio, flags,
+                        dev-&gt;driver-&gt;name);
+        if (ret) {
+            dev_err(dev,
+                &quot;gpio_request_one('%s'=%d) failed with %d\n&quot;,
+                name, gpio, ret);
+            return ret;
+        }
+ 
+        *gpiop = gpio_to_desc(gpio);
+        fbtft_par_dbg(DEBUG_REQUEST_GPIOS, par, &quot;%s: '%s' = GPIO%d\n&quot;,
+                            __func__, name, gpio);
+    }
+ 
+    return ret;
+}
+</code></pre><p>修改引脚 bug</p>
+<p>fbtft_bus.c 的 fbtft_write_vmem16_bus8() 方法</p>
+<pre tabindex="0"><code>int fbtft_write_vmem16_bus8(struct fbtft_par *par, size_t offset, size_t len)
+{
+	u16 *vmem16;
+	__be16 *txbuf16 = par-&gt;txbuf.buf;
+	size_t remain;
+	size_t to_copy;
+	size_t tx_array_size;
+	int i;
+	int ret = 0;
+	size_t startbyte_size = 0;
+ 
+	fbtft_par_dbg(DEBUG_WRITE_VMEM, par, &quot;%s(offset=%zu, len=%zu)\n&quot;,
+		      __func__, offset, len);
+ 
+	remain = len / 2;
+	vmem16 = (u16 *)(par-&gt;info-&gt;screen_buffer + offset);
+ 
+	if (par-&gt;gpio.dc)
+	{
+		//printk(&quot;dc拉高！\n&quot;);
+		gpiod_set_value(par-&gt;gpio.dc, 1);
+	}
+	/* non buffered write */
+	if (!par-&gt;txbuf.buf)
+		return par-&gt;fbtftops.write(par, vmem16, len);
+ 
+	/* buffered write */
+	tx_array_size = par-&gt;txbuf.len / 2;
+ 
+	if (par-&gt;startbyte) {
+		txbuf16 = par-&gt;txbuf.buf + 1;
+		tx_array_size -= 2;
+		*(u8 *)(par-&gt;txbuf.buf) = par-&gt;startbyte | 0x2;
+		startbyte_size = 1;
+	}
+ 
+	while (remain) {
+		to_copy = min(tx_array_size, remain);
+		dev_dbg(par-&gt;info-&gt;device, &quot;to_copy=%zu, remain=%zu\n&quot;,
+			to_copy, remain - to_copy);
+ 
+		for (i = 0; i &lt; to_copy; i++)
+			txbuf16[i] = cpu_to_be16(vmem16[i]);
+ 
+		vmem16 = vmem16 + to_copy;
+		ret = par-&gt;fbtftops.write(par, par-&gt;txbuf.buf,
+						startbyte_size + to_copy * 2);
+		if (ret &lt; 0)
+			return ret;
+		remain -= to_copy;
+	}
+ 
+	return ret;
+}
+</code></pre><h3 id="编译">编译</h3>
+<pre tabindex="0"><code>make -j4
+make -j4 INSTALL_MOD_PATH=out modules
+make -j4 INSTALL_MOD_PATH=out modules_install
+# 修改了设备树文件后编译
+make dtbs
+</code></pre><ul>
+<li>编译完成后，zImage 在 arch/arm/boot/ ，驱动模块在 out/</li>
+<li>设备树文件在 arch/arm/boot/dts/</li>
+<li>dock板的设备树：sun8i-v3s-licheepi-zero-dock.dtb</li>
+</ul>
+<h2 id="buildroot-根文件系统构建">Buildroot 根文件系统构建</h2>
+<h3 id="获取-buildroot">获取 Buildroot</h3>
+<pre tabindex="0"><code>cd ~/v3s
+wget https://buildroot.org/downloads/buildroot-2019.08.tar.gz
+tar xvf buildroot-2019.08.tar.gz &amp;&amp; cd buildroot-2019.08/
+make menuconfig
+</code></pre><h3 id="基本配置">基本配置</h3>
+<pre tabindex="0"><code>Target options  ---&gt;
+	Target Architecture (ARM (little endian))  ---&gt;
+	Target Binary Format (ELF)  ---&gt;
+	Target Architecture Variant (cortex-A7)  ---&gt;
+	Target ABI (EABIhf)  ---&gt;
+	Floating point strategy (VFPv4-D16)  ---&gt;
+	ARM instruction set (ARM)  ---&gt; 
+</code></pre><h3 id="编译链工具配置">编译链工具配置</h3>
+<pre tabindex="0"><code>Toolchain  ---&gt;
+	Toolchain type (External toolchain)  ---&gt;
+	*** Toolchain External Options ***
+	Toolchain (Custom toolchain)  ---&gt;
+	Toolchain origin (Pre-installed toolchain)  ---&gt;
+	(/usr/local/arm/gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf/) Toolchain path
+	($(ARCH)-linux-gnueabihf) Toolchain prefix
+	External toolchain gcc version (4.9.x)  ---&gt;
+	External toolchain kernel headers series (4.0.x)  ---&gt;
+	External toolchain C library (glibc/eglibc)  ---&gt;
+	[*] Toolchain has SSP support? (NEW)
+	[*] Toolchain has RPC support? (NEW)
+	[*] Toolchain has C++ support? 
+	[*] Enable MMU support (NEW) 
+</code></pre><h3 id="alsasdlfbv配置">alsa、sdl、fbv配置</h3>
+<pre tabindex="0"><code>Target packages  ---&gt;
+	Audio and video applications  ---&gt;
+		[*] alsa-utils  ---&gt;
+		[*]   alsaconf
+		[*]   aconnect
+		[*]   alsactl
+		[*]   alsaloop
+		[*]   alsamixer
+		[*]   alsaucm
+		[*]   alsatplg
+		[*]   amidi
+		[*]   amixer
+		[*]   aplay/arecord
+		[*]   aplaymidi
+		[*]   arecordmidi
+		[*]   aseqdump
+		[*]   aseqnet
+		[*]   bat
+		[*]   iecset
+		[*]   speaker-test
+	Graphic libraries and applications (graphic/text)  ---&gt;
+		[*] fbv
+		[*]   PNG support
+		[*]   JPEG support
+		[*]   GIF support 
+		[*] SDL
+		[*]   SDL framebuffer console video driver
+		[*]   SDL_gfx
+		[*]   SDL_image  ---&gt;
+		[*]   SDL_mixer
+		[*]   SDL_net
+		[*]   SDL_sound
+		[*]     install playsound tool
+		[*]   SDL_TTF
+</code></pre><h3 id="编译-1">编译</h3>
+<pre tabindex="0"><code>make -j4
+</code></pre><p>生成的根文件系统在 output/images/czzqwqqv/rootfs.tar</p>
+<h2 id="tf-卡分区及烧录">TF 卡分区及烧录</h2>
+<h3 id="tf-卡分区">TF 卡分区</h3>
+<pre tabindex="0"><code>sudo fdisk -l     		# 首先查看电脑上已插入的TF卡的设备号（一般为 /dev/sdb1,下面以/dev/sdb1为例）
+sudo umount /dev/sdb1 	# 若自动挂载了TF设备，请先卸载(有多个分区则全部卸载)
+sudo umount /dev/sdb2
+sudo fdisk /dev/sdb   	# 进行分区操作
+##### 操作步骤如下 #####
+# 若已存分区即按 d 删除各个分区
+# 通过 n 新建分区，第一分区暂且申请为16M(f1c100s)、32M(v3s)，剩下的空间都给第二分区
+	# 第一分区操作：n p 1 2048 +32M
+		# p 主分区、默认 1 分区、默认2048、+32M
+	# 第二分区操作：n 后面全部回车默认即可
+		# p 主分区、默认 2 分区、默认、默认剩下的全部空间
+# p 查询分区表确定是否分区成功
+# w 保存写入并退出
+########################
+
+sudo mkfs.ext4 /dev/sdb1 # 将第一分区格式化成EXT4
+sudo mkfs.ext4 /dev/sdb2 # 将第二分区格式化成EXT4
+
+# 格式说明
+	# EXT4：只用于Linux系统的内部磁盘
+	# NTFS：与Windows共用的磁盘
+	# FAT：所有系统和设备共用的磁盘
+</code></pre><p>后期为了能够在 windows 上方便添加 rom ，使用 gparted 划分三个分区，最后一个分区为 fat 类型</p>
+<p>安装并启动</p>
+<pre tabindex="0"><code>sudo apt-get install gparted
+sudo gparted
+</code></pre><p>分区如下</p>
+<p><img src="/images/czzqwqqv/4.jpg" alt=""></p>
+<h3 id="烧录-uboot">烧录 uboot</h3>
+<pre tabindex="0"><code>cd ~/v3s/u-boot/
+sudo dd if=u-boot-sunxi-with-spl.bin of=/dev/sdb bs=1024 seek=8
+</code></pre><h3 id="写入内核和设备树">写入内核和设备树</h3>
+<pre tabindex="0"><code>sudo cp ~/v3s/linux/arch/arm/boot/zImage /挂载的tf卡第一个分区目录
+sudo cp ~/v3s/linux/arch/arm/boot/dts/sun8i-v3s-licheepi-zero-dock.dtb /挂载 tf 卡第一个分区目录
+</code></pre><h3 id="写入根文件系统">写入根文件系统</h3>
+<pre tabindex="0"><code>sudo tar xvf ~/v3s/buildroot-2019.08/output/images/czzqwqqv/rootfs.tar -C /挂载 tf 卡第二个分区目录
+</code></pre><h2 id="编译模拟器">编译模拟器</h2>
+<h3 id="编译-gpsp">编译 gpsp</h3>
+<pre tabindex="0"><code>cd ~/v3s
+git clone https://github.com/hsinyuwang/gpsp.git
+
+cd gpsp/v3s
+make -j4
+</code></pre><h3 id="复制可执行文件">复制可执行文件</h3>
+<p>将生成的可执行文件复制到挂载的 tf 卡第二个分区目录，gpsp 同级目录下必须包含 gba_bios.bin 和 game_config.txt 文件</p>
+<p>例如：</p>
+<ul>
+<li>在 /root 下创建 gpsp 文件夹，将 gpsp、gba_bios.bin、game_config.txt 复制到 gpsp 文件夹中</li>
+<li>在 /root 下创建 fceux 文件夹，将 fceux 复制到 fceux 文件夹中</li>
+</ul>
+<h2 id="系统配置">系统配置</h2>
+<p>插入 TF 卡，开机</p>
+<h3 id="自动挂载-fat-分区">自动挂载 fat 分区</h3>
+<pre tabindex="0"><code>mkdir /root/roms
+vi /etc/fstab
+
+# 最后一行添加
+/dev/mmcblk0p3  /root/roms      vfat    defaults        0       0
+</code></pre><h3 id="配置双端显示">配置双端显示</h3>
+<pre tabindex="0"><code>vi /etc/inittab
+
+#console::respawn:-/bin/sh
+ttyS0::respawn:-/bin/sh
+tty0::respawn:-/bin/sh
+</code></pre><h3 id="启动后开启声音">启动后开启声音</h3>
+<pre tabindex="0"><code>vi /etc/init.d/S99runOnBoot
+
+# 添加
+amixer -c 0 sset 'Headphone',0 60% unmute
+
+# 添加可执行权限
+chmod +x /etc/init.d/S99runOnBoot
+</code></pre><h3 id="配置-sdl-环境">配置 SDL 环境</h3>
+<pre tabindex="0"><code>vi /etc/profile
+
+# SDL 配置
+export SDL_NOMOUSE=1
+
+# 启动模拟器
+/root/startup.sh
+</code></pre><h3 id="自启动模拟器">自启动模拟器</h3>
+<pre tabindex="0"><code>vi /root/startup.sh
+
+#!/bin/sh /root/startup.sh
+for i in `seq 5`
+do
+        sleep 1s
+        if [ -c &quot;/dev/input/js0&quot; ]
+        then
+                /root/gpsp/gpsp
+                break
+        else
+                if [ $i -eq 5 ]
+                then
+                        echo &quot;No gamepad found!&quot;
+                fi
+        fi
+done
+
+chmod +x startup.sh
+</code></pre><h2 id="制作镜像">制作镜像</h2>
+<h3 id="创建工作目录">创建工作目录</h3>
+<pre tabindex="0"><code>mkdir ~/img
+cd ~/img
+mkdir kernel
+mkdir rootfs
+mkdir roms
+</code></pre><h3 id="创建空白文件并分区">创建空白文件并分区</h3>
+<p>分区表</p>
+<table>
+<thead>
+<tr>
+<th>分区序号</th>
+<th>起始地址</th>
+<th>大小</th>
+<th>内容</th>
+<th>文件系统</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1M</td>
+<td>u-boot-sunxi-with-spl.bin</td>
+<td>无</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1 x 1024 x 1024</td>
+<td>32M</td>
+<td>zImage + sun8i-v3s-licheepi-zero-dock.dtb</td>
+<td>ext4</td>
+</tr>
+<tr>
+<td>3</td>
+<td>33 x 1024 x 1024</td>
+<td>128M</td>
+<td>rootfs</td>
+<td>ext4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>161 x 1024 x 1024</td>
+<td>剩余空间</td>
+<td>roms</td>
+<td>fat</td>
+</tr>
+</tbody>
+</table>
+<pre tabindex="0"><code>dd if=/dev/zero of=X-Boy_20221019.img bs=512k count=512  &amp;&amp; sync
+sudo parted X-Boy_20221019.img mklabel msdos
+sudo parted X-Boy_20221019.img mkpart primary ext4 2048s 67583s
+sudo parted X-Boy_20221019.img mkpart primary ext4 67584s 329727s
+sudo parted X-Boy_20221019.img mkpart primary fat32 329728s 100%
+</code></pre><p>检查分区是否创建成功</p>
+<pre tabindex="0"><code>sudo parted X-Boy_20221019.img
+</code></pre><p>输入</p>
+<pre tabindex="0"><code>print free
+
+# 退出
+q
+</code></pre><h3 id="将镜像文件虚拟成块设备">将镜像文件虚拟成块设备</h3>
+<pre tabindex="0"><code>sudo losetup -f --show X-Boy_20221019.img
+</code></pre><p><img src="/images/czzqwqqv/5.jpg" alt=""></p>
+<p>这里的 loop25 记录下来 ，以实际显示为准</p>
+<p>挂载虚拟文件系统</p>
+<pre tabindex="0"><code>sudo kpartx -va /dev/loop25
+</code></pre><h3 id="格式化块设备并且挂载">格式化块设备并且挂载</h3>
+<p>格式化分区</p>
+<pre tabindex="0"><code>sudo mkfs.ext4 /dev/mapper/loop25p1
+sudo mkfs.ext4 /dev/mapper/loop25p2
+sudo mkfs.vfat /dev/mapper/loop25p3
+</code></pre><p>挂载到之前创建的目录</p>
+<pre tabindex="0"><code>sudo mount /dev/mapper/loop25p1 ~/img/kernel/
+sudo mount /dev/mapper/loop25p2 ~/img/rootfs/
+sudo mount /dev/mapper/loop25p3 ~/img/roms/
+</code></pre><h3 id="烧录-uboot-1">烧录 uboot</h3>
+<pre tabindex="0"><code>cd ~/v3s/u-boot/
+sudo dd if=u-boot-sunxi-with-spl.bin of=/dev/loop25 bs=512 seek=16
+</code></pre><h3 id="写入内核和设备树-1">写入内核和设备树</h3>
+<pre tabindex="0"><code>sudo cp ~/v3s/linux/arch/arm/boot/zImage ~/img/kernel
+sudo cp ~/v3s/linux/arch/arm/boot/dts/sun8i-v3s-licheepi-zero-dock.dtb ~/img/kernel
+</code></pre><h3 id="写入根文件系统-1">写入根文件系统</h3>
+<pre tabindex="0"><code>sudo tar xvf ~/v3s/buildroot-2019.08/output/images/czzqwqqv/rootfs.tar -C ~/img/rootfs
+</code></pre><h2 id="感谢">感谢</h2>
+<p><a href="https://github.com/steward-fu">steward-fu</a></p>
+<p><a href="https://github.com/nesvera/STM32-X360-xinput">STM32-X360-xinput</a></p>
+<h2 id="参考链接">参考链接</h2>
+<p><a href="https://blog.csdn.net/p1279030826/article/details/114981681">全志V3S（荔枝派zero）学习笔记</a></p>
+<p><a href="https://whycan.com/t_561.html">荔枝派Zero V3s开发板入坑记录</a></p>
+<p><a href="http://t.zoukankan.com/beyonne-p-10932152.html">Linux系统中使用Xbox360手柄</a></p>
+<p><a href="https://blog.csdn.net/qulang000/article/details/114686525">f1c100s spi fbtft ILI9341屏配置</a></p>
+<p><a href="https://www.kancloud.cn/lichee/lpi0/538999">点屏之SPI屏 ili9341</a></p>
+<p><a href="https://blog.csdn.net/qq_28877125/article/details/120007416">嵌入式Linux&ndash;荔枝派Zero&ndash;V3s&ndash;ST7789v</a></p>
+<p><a href="https://blog.csdn.net/lengyuefeng212/article/details/120055703">v3S驱动音频</a></p>
+<p><a href="https://blog.csdn.net/mzy2364/article/details/113364250">制作imx6ull Linux系统的img镜像</a></p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+    <meting-js
+    id="7628905309"
+    lrc-type="0"
+    server="netease"
+    order="list"
+    type="playlist"
+    fixed="true"
+    list-olded="true"
+    autoplay="true"
+    mutex="true"
+    >
+    </meting-js>
+  </body>
+</html>

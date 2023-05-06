@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <title>Linux设置定时任务 | 小新的个人站</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <script src="/iconfont/iconfont.js"></script>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="hsinyuwang" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux设置定时任务"/>
+<meta name="twitter:description" content="常用命令
+## 编辑定时任务crontab -e## 显示定时任务crontab -l查看执行的日志
+cat /var/log/cron基本格式为
+* * * * * commond 前面的五个星号分别表示 分 时 日 月 周，commond表示你要操作的命令
+分（1-59）（或/1表示每分钟）
+时（1-23）（0表示0点）
+日（1-31）
+月（1-12）
+周（1-6）（0表示周日）
+   字段 允许值 允许的特殊字符     秒 0-59 - * /   分 0-59 - * /   小时 0-23 - * /   日期 1-31 - * ? / L W C   月份 1-12 或者 JAN-DEC - * /   星期 1-7 或者 SUN-SAT - * ?"/>
+
+    <meta property="og:title" content="Linux设置定时任务" />
+<meta property="og:description" content="常用命令
+## 编辑定时任务crontab -e## 显示定时任务crontab -l查看执行的日志
+cat /var/log/cron基本格式为
+* * * * * commond 前面的五个星号分别表示 分 时 日 月 周，commond表示你要操作的命令
+分（1-59）（或/1表示每分钟）
+时（1-23）（0表示0点）
+日（1-31）
+月（1-12）
+周（1-6）（0表示周日）
+   字段 允许值 允许的特殊字符     秒 0-59 - * /   分 0-59 - * /   小时 0-23 - * /   日期 1-31 - * ? / L W C   月份 1-12 或者 JAN-DEC - * /   星期 1-7 或者 SUN-SAT - * ?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.hsinyuwang.cn/server/vtxpza4k/" /><meta property="article:section" content="server" />
+<meta property="article:published_time" content="2020-09-22T15:30:08+08:00" />
+<meta property="article:modified_time" content="2020-09-22T15:30:08+08:00" />
+
+
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.hsinyuwang.cn"><img class="app-header-avatar" src="/avatar.jpg" alt="hsinyuwang" /></a>
+      <h1>Hsinyuwang&#39;s Blog</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/tags/">分类</a>
+      </nav>
+      <p>我的个人博客，有记录有分享</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/hsinyuwang" target="_blank" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a href="https://space.bilibili.com/284239797" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor"  class="icon">
+  <title>bilibili</title>
+  <use xlink:href="#icon-bilibili"></use>
+</svg>
+</a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Linux设置定时任务</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Sep 22, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          2 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://www.hsinyuwang.cn/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p><strong>常用命令</strong></p>
+<pre tabindex="0"><code>## 编辑定时任务
+crontab -e
+## 显示定时任务
+crontab -l
+</code></pre><p><strong>查看执行的日志</strong></p>
+<pre tabindex="0"><code>cat /var/log/cron
+</code></pre><p><strong>基本格式为</strong></p>
+<p>* * * * * commond
+前面的五个星号分别表示 分 时 日 月 周，commond表示你要操作的命令</p>
+<p>分（1-59）（<em>或</em>/1表示每分钟）</p>
+<p>时（1-23）（0表示0点）</p>
+<p>日（1-31）</p>
+<p>月（1-12）</p>
+<p>周（1-6）（0表示周日）</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>允许值</th>
+<th>允许的特殊字符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>秒</td>
+<td>0-59</td>
+<td>- * /</td>
+</tr>
+<tr>
+<td>分</td>
+<td>0-59</td>
+<td>- * /</td>
+</tr>
+<tr>
+<td>小时</td>
+<td>0-23</td>
+<td>- * /</td>
+</tr>
+<tr>
+<td>日期</td>
+<td>1-31</td>
+<td>- * ? / L W C</td>
+</tr>
+<tr>
+<td>月份</td>
+<td>1-12 或者 JAN-DEC</td>
+<td>- * /</td>
+</tr>
+<tr>
+<td>星期</td>
+<td>1-7 或者 SUN-SAT</td>
+<td>- * ? / L C #</td>
+</tr>
+<tr>
+<td>年（可选） 留空</td>
+<td>1970-2099</td>
+<td>- * /</td>
+</tr>
+</tbody>
+</table>
+<p>1.星号(*)表示取值范围内的所有值。例如，*在hour的位置，表示每小时执行一次。</p>
+<p>2.连字符(-)表示一个范围。例如，8-12表示8、9、10、11、12。</p>
+<p>3.逗号(,)表示分割指定的数值。例如：3,5-7,9表示3,5,6,7,9。</p>
+<p>4.正斜杠(/)表示步进值。例如，分钟的位置为*/5，表示每五分钟执行一次</p>
+<p>5.“？”只用于 日(Day of month) 和 星期(Day of week)，表示不指定值，可以用于代替 *</p>
+<p>6.“#”字符：表示该月第几个周X。6#3表示该月第3个周五</p>
+<p>7.“L”字符：用在日表示一个月中的最后一天，用在周表示该月最后一个星期X</p>
+<p>8.“W”字符：指定离给定日期最近的工作日(周一到周五)</p>
+<p><strong>一些例子</strong></p>
+<p>“0 0 12 * * ?” 每天中午12点触发</p>
+<p>“0 15 10 ? * *” 每天上午10:15触发</p>
+<p>“0 15 10 * * ?” 每天上午10:15触发</p>
+<p>“0 15 10 * * ? *” 每天上午10:15触发</p>
+<p>“0 15 10 * * ? 2005” 2005年的每天上午10:15触发</p>
+<p>“0 * 14 * * ?” 在每天下午2点到下午2:59期间的每1分钟触发</p>
+<p>“0 0/5 14 * * ?” 在每天下午2点到下午2:55期间的每5分钟触发</p>
+<p>“0 0/5 14,18 * * ?” 在每天下午2点到2:55期间和下午6点到6:55期间的每5分钟触发</p>
+<p>“0 0-5 14 * * ?” 在每天下午2点到下午2:05期间的每1分钟触发</p>
+<p>“0 10,44 14 ? 3 WED” 每年三月的星期三的下午2:10和2:44触发</p>
+<p>“0 15 10 ? * MON-FRI” 周一至周五的上午10:15触发</p>
+<p>“0 15 10 15 * ?” 每月15日上午10:15触发</p>
+<p>“0 15 10 L * ?” 每月最后一日的上午10:15触发</p>
+<p>“0 15 10 ? * 6L” 每月的最后一个星期五上午10:15触发</p>
+<p>“0 15 10 ? * 6L 2002-2005” 2002年至2005年的每月的最后一个星期五上午10:15触发</p>
+<p>“0 15 10 ? * 6#3” 每月的第三个星期五上午10:15触发</p>
+<p>每天早上6点</p>
+<p>0 6 * * *</p>
+<p>每两个小时</p>
+<p>0 */2 * * *</p>
+<p>晚上11点到早上8点之间每两个小时，早上八点</p>
+<p>0 23-7/2，8 * * *</p>
+<p>每个月的4号和每个礼拜的礼拜一到礼拜三的早上11点</p>
+<p>0 11 4 * 1-3</p>
+<p>1月1日早上4点</p>
+<p>0 4 1 1 *</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+    <meting-js
+    id="7628905309"
+    lrc-type="0"
+    server="netease"
+    order="list"
+    type="playlist"
+    fixed="true"
+    list-olded="true"
+    autoplay="true"
+    mutex="true"
+    >
+    </meting-js>
+  </body>
+</html>

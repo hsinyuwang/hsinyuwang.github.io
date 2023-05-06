@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>硬件 on Hsinyuwang&#39;s Blog</title>
+    <link>https://www.hsinyuwang.cn/tags/%E7%A1%AC%E4%BB%B6/</link>
+    <description>Recent content in 硬件 on Hsinyuwang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sat, 10 Dec 2022 20:54:06 +0800</lastBuildDate><atom:link href="https://www.hsinyuwang.cn/tags/%E7%A1%AC%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>基于Linux自制GBA游戏机</title>
+      <link>https://www.hsinyuwang.cn/hardware/czzqwqqv/</link>
+      <pubDate>Sat, 10 Dec 2022 20:54:06 +0800</pubDate>
+      
+      <guid>https://www.hsinyuwang.cn/hardware/czzqwqqv/</guid>
+      <description>开源地址 https://github.com/hsinyuwang/X-Boy
+视频介绍 https://www.bilibili.com/video/BV1JP4y1X7Uz
+.meta-media {position: relative;margin-bottom: 30px;display: flex;width: 100%;height: 0;padding-bottom: 75%;}.video {position: absolute;width: 100%;height: 100%;left: 0;top: 0;} 图片展示
+以下内容为镜像的构建过程，你也可以直接使用我制作好的镜像
+ 百度网盘
+链接：https://pan.baidu.com/s/1ftacGCXHLy-AFabczBg3yg
+提取码：9bp8
+ X-Boy 系统镜像构建全流程指南
+ ubuntu 系统安装  下载镜像 换源  备份源列表 修改 sources.list 文件 更改为清华镜像源 更新并升级 安装依赖库     安装交叉编译工具链  安装编译器  新建 tool 文件夹并进入 下载交叉编译链 创建文件夹并解压 配置环境变量 安装其他库 验证是否安装成功     uboot 编译  获取 uboot 修改 include/configs/sun8i.</description>
+    </item>
+    
+    <item>
+      <title>自制linux小电脑</title>
+      <link>https://www.hsinyuwang.cn/hardware/q3g0cbos/</link>
+      <pubDate>Mon, 01 Aug 2022 10:29:02 +0800</pubDate>
+      
+      <guid>https://www.hsinyuwang.cn/hardware/q3g0cbos/</guid>
+      <description>简介  主控采用全志V3S，单核Cortex-A7，64MB内存 板子带有rj45网口、耳机、麦克风、tf卡槽、USB、40pin RGB屏幕接口 4.3寸800x480分辨率屏幕 外壳为亚克力（见设计图Shell，导出DXF文件可以在某宝定制切割），M2.5螺丝固定  演示视频 https://www.bilibili.com/video/BV19r4y1M7cf
+.meta-media {position: relative;margin-bottom: 30px;display: flex;width: 100%;height: 0;padding-bottom: 75%;}.video {position: absolute;width: 100%;height: 100%;left: 0;top: 0;} 项目地址 https://github.com/hsinyuwang/Allwinner-V3s-Computer
+实物图 </description>
+    </item>
+    
+  </channel>
+</rss>

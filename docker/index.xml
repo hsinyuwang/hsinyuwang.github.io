@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dockers on Hsinyuwang&#39;s Blog</title>
+    <link>https://www.hsinyuwang.cn/docker/</link>
+    <description>Recent content in Dockers on Hsinyuwang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Thu, 23 Mar 2023 15:00:11 +0800</lastBuildDate><atom:link href="https://www.hsinyuwang.cn/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>docker部署Minio</title>
+      <link>https://www.hsinyuwang.cn/docker/k3gsfd9w/</link>
+      <pubDate>Thu, 23 Mar 2023 15:00:11 +0800</pubDate>
+      
+      <guid>https://www.hsinyuwang.cn/docker/k3gsfd9w/</guid>
+      <description>1、创建目录 mkdir -p /docker/minio/data /docker/minio/config2、拉取镜像 docker pull minio/minio3、运行容器 docker run -p 9000:9000 -p 9090:9090 \--name minio \-d --restart=always \-e &amp;quot;MINIO_ACCESS_KEY=admin&amp;quot; \-e &amp;quot;MINIO_SECRET_KEY=admin123456&amp;quot; \-v /docker/minio/data:/data \-v /docker/minio/config:/root/.minio \minio/minio server /data --console-address &amp;quot;:9090&amp;quot; -address &amp;quot;:9000&amp;quot;4、访问地址 http://ip:9090</description>
+    </item>
+    
+    <item>
+      <title>docker部署RockerMQ</title>
+      <link>https://www.hsinyuwang.cn/docker/gsczcj1s/</link>
+      <pubDate>Thu, 23 Mar 2023 14:39:14 +0800</pubDate>
+      
+      <guid>https://www.hsinyuwang.cn/docker/gsczcj1s/</guid>
+      <description>安装NameServer 1、拉取镜像 docker pull rocketmqinc/rocketmq2、创建数据目录 mkdir -p /docker/rocketmq/nameserver/logs /docker/rocketmq/nameserver/store3、运行 docker run -d \--restart=always \--name rmqnamesrv \--privileged=true \-p 9876:9876 \-v /docker/rocketmq/nameserver/logs:/root/logs \-v /docker/rocketmq/nameserver/store:/root/store \-e &amp;quot;MAX_POSSIBLE_HEAP=100000000&amp;quot; rocketmqinc/rocketmq \sh mqnamesrv安装broker 1、创建broker.conf配置文件 目录为 /opt/docker/rocketmq/broker.conf
+brokerClusterName = DefaultClusterbrokerName = broker-abrokerId = 0deleteWhen = 04fileReservedTime = 48brokerRole = ASYNC_MASTERflushDiskType = ASYNC_FLUSHbrokerIP1 = 主机的IP2、启动broker docker run -d \--restart=always \--name rmqbroker \--link rmqnamesrv:namesrv \-p 10911:10911 \-p 10909:10909 \--privileged=true \-v /docker/rocketmq/data/broker/logs:/root/logs \-v /docker/rocketmq/data/broker/store:/root/store \-v /docker/rocketmq/conf/broker.</description>
+    </item>
+    
+    <item>
+      <title>搭建docker私有镜像站</title>
+      <link>https://www.hsinyuwang.cn/docker/2rls5bbe/</link>
+      <pubDate>Thu, 21 Oct 2021 17:10:40 +0800</pubDate>
+      
+      <guid>https://www.hsinyuwang.cn/docker/2rls5bbe/</guid>
+      <description>在本地（局域网）搭建一个私有镜像站，搭建好之后，我们可以将镜像提交到私有仓库中，避免镜像被暴露的风险。
+一、服务器部署 下载镜像
+docker pull registry运行registry容器
+docker run -itd -v /data/registry:/var/lib/registry -p 5000:5000 --restart=always --name registry registry:latest参数说明：
+ -itd：在容器中打开一个伪终端进行交互操作，并在后台运行 -v：把宿主机的/data/registry目录绑定到容器/var/lib/registry目录(这个目录是registry容器中存放镜像文件的目录)，来实现数据的持久化 -p：映射端口，访问宿主机的5000端口就访问到registry容器的服务了 &amp;ndash;restart=always：这是重启的策略，假如这个容器异常退出会自动重启容器 &amp;ndash;name registry：创建容器命名为registry registry:latest：这个是刚才pull下来的镜像  二、用户端docker部署 修改镜像源，添加如下内容，并重启docker服务
+vim /etc/docker/daemon.json{ &amp;#34;registry-mirror&amp;#34;: [&amp;#34;https://registry.docker-cn.com&amp;#34;], &amp;#34;insecure-registries&amp;#34;: [&amp;#34;192.168.43.249:5000&amp;#34;] } 上传镜像到服务器
+docker push 192.168.43.249:5000/image:tag从服务器下载镜像
+docker pull 192.168.43.249:5000/image:tag</description>
+    </item>
+    
+    <item>
+      <title>docker本地镜像的导出导入</title>
+      <link>https://www.hsinyuwang.cn/docker/ix7y3wpi/</link>
+      <pubDate>Fri, 10 Sep 2021 15:30:08 +0800</pubDate>
+      
+      <guid>https://www.hsinyuwang.cn/docker/ix7y3wpi/</guid>
+      <description>有时我们需要将一台电脑上的镜像复制到另一台电脑上使用，除了可以借助仓库外，还可以直接将镜像保存成一个文件，再拷贝到另一台电脑上导入使用。
+对于镜像的导出和导入，Docker 提供了两种方案，下面分别进行介绍。
+一、使用 export 和 import
+1、查看本机的容器
+这两个命令是通过容器来导入、导出镜像。首先我们使用 docker ps -a 命令查看本机所有的容器。
+2、导出镜像
+（1）使用 docker export 命令根据容器 ID 将镜像导出成一个文件。
+docker export 容器id &amp;gt; xxx.tar（2）上面命令执行后，可以看到文件已经保存到当前的 docker 终端目录下。
+3、导入镜像
+（1）使用 docker import 命令则可将这个镜像文件导入进来。
+docker import - 镜像名称 &amp;lt; xxx.tar（2）执行 docker images 命令可以看到镜像确实已经导入进来了。
+二、使用 save 和 load
+1、查看本机的容器
+这两个命令是通过镜像来保存、加载镜像文件的。首先我们使用 docker images 命令查看本机所有的镜像。
+2、保存镜像
+（1）下面使用 docker save 命令根据 ID 将镜像保存成一个文件。
+docker save 镜像id &amp;gt; xxx.tar（2）我们还可以同时将多个 image 打包成一个文件，比如下面将镜像库中的 postgres 和 mongo 打包：</description>
+    </item>
+    
+    <item>
+      <title>docker-compose常用命令</title>
+      <link>https://www.hsinyuwang.cn/docker/i4rpkuhx/</link>
+      <pubDate>Fri, 06 Aug 2021 15:30:08 +0800</pubDate>
+      
+      <guid>https://www.hsinyuwang.cn/docker/i4rpkuhx/</guid>
+      <description>docker-compose常用命令
+docker-compose up -d nginx 构建建启动nignx容器
+docker-compose exec nginx bash 登录到nginx容器中
+docker-compose down 删除所有nginx容器,镜像
+docker-compose ps 显示所有容器
+docker-compose restart nginx 重新启动nginx容器
+docker-compose run &amp;ndash;no-deps &amp;ndash;rm php-fpm php -v 在php-fpm中不启动关联容器，并容器执行php -v 执行完成后删除容器
+docker-compose build nginx 构建镜像 。
+docker-compose build &amp;ndash;no-cache nginx 不带缓存的构建。
+docker-compose logs nginx 查看nginx的日志
+docker-compose logs -f nginx 查看nginx的实时日志
+docker-compose config -q 验证（docker-compose.yml）文件配置，当配置正确时，不输出任何内容，当文件配置错误，输出错误信息。
+docker-compose events &amp;ndash;json nginx 以json的形式输出nginx的docker日志
+docker-compose pause nginx 暂停nignx容器
+docker-compose unpause nginx 恢复ningx容器
+docker-compose rm nginx 删除容器（删除前必须关闭容器）</description>
+    </item>
+    
+    <item>
+      <title>CentOS 7安装docker</title>
+      <link>https://www.hsinyuwang.cn/docker/895biq0n/</link>
+      <pubDate>Mon, 07 Jun 2021 15:30:08 +0800</pubDate>
+      
+      <guid>https://www.hsinyuwang.cn/docker/895biq0n/</guid>
+      <description>一、安装docker
+1、Docker 要求 CentOS 系统的内核版本高于 3.10 ，查看本页面的前提条件来验证你的CentOS 版本是否支持 Docker 。
+通过 uname -r 命令查看你当前的内核版本
+ $ uname -r2、使用 root 权限登录 Centos。确保 yum 包更新到最新。
+$ sudo yum update3、卸载旧版本(如果安装过旧版本的话)
+$ sudo yum remove docker docker-common docker-selinux docker-engine4、安装需要的软件包， yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的
+$ sudo yum install -y yum-utils device-mapper-persistent-data lvm25、设置yum源
+$ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo6、可以查看所有仓库中所有docker版本，并选择特定版本安装
+$ yum list docker-ce --showduplicates | sort -r7、安装docker
+$ sudo yum install docker-ce #由于repo中默认只开启stable仓库，故这里安装的是最新稳定版17.12.0$ sudo yum install &amp;lt;FQPN&amp;gt; # 例如：sudo yum install docker-ce-17.</description>
+    </item>
+    
+    <item>
+      <title>CentOS 7安装docker-compose</title>
+      <link>https://www.hsinyuwang.cn/docker/5nx4vvn1/</link>
+      <pubDate>Mon, 07 Jun 2021 15:30:08 +0800</pubDate>
+      
+      <guid>https://www.hsinyuwang.cn/docker/5nx4vvn1/</guid>
+      <description> centos 7中python-pip模块不存在，是因为像centos这类衍生的发行版，源跟新滞后，或者不存在。即使使用yum去search python-pip也找不到软件包。
+  为了使用安装滞后或源中不存在的安装包，需要安装扩展源EPEL。扩展源EPEL(http://fedoraproject.org/wiki/EPEL) 是由 Fedora 社区打造，为 RHEL 及衍生发行版如 CentOS、Scientific Linux 等提供高质量软件包的项目。
+ 安装扩展源 yum -y install epel-release安装python-pip模块 yum install python-pip此时执行 docker-compose version 命令可能会出现命令不存在的问题，需要进行安装
+cd /usr/local/bin/wget https://github.com/docker/compose/releases/download/1.14.0-rc2/docker-compose-Linux-x86_64rename docker-compose-Linux-x86_64 docker-compose docker-compose-Linux-x86_64chmod +x /usr/local/bin/docker-compose</description>
+    </item>
+    
+  </channel>
+</rss>

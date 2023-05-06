@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <title>浅谈黑苹果系统安装 | 小新的个人站</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <script src="/iconfont/iconfont.js"></script>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="hsinyuwang" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="浅谈黑苹果系统安装"/>
+<meta name="twitter:description" content="一、概述 目前比较推荐的黑苹果引导方式是使用OpenCore，相较于Clover，OpenCore能够支持更多版本的macOS、更快的启动速度、更好的稳定性、安全性等优点。在安装之前，大家可能会有所顾虑，比如：黑苹果支持哪些硬件、怎么获取macOS安装镜像、安装时遇到问题如何解决等。那么这些问题，其实OpenCore安装指南都已做了详细的解答，结合这篇指南对于几个重要的问题谈一下自己心得。
+二、先决条件  时间和耐心：如果有重要的工作，先不要干这件事，另外不要熬夜，熬夜的那点时间可能根本不够用； 有基本的命令行知识：能够通过命令访问目录或者删除文件等操作，否则安装时对于某些问题的处理会很困难； 熟悉自己的硬件：比如CPU、GPU、硬盘、网卡等； 已安装好Windows系统：准备好U盘，并且电脑已经安装好Windows系统（Windows10）。  三、安装思路 首先就是确认自己的电脑能不能安装，对于CPU而言，大多数英特尔的CPU都支持，而AMD的CPU虽然也能够安装，但并不推荐，因为在白苹果上没有采用过AMD的CPU，而且有些软件不能够正常使用，出现崩溃等问题。如果想体验最新的macOS12，GPU则推荐AMD的显卡或者英特尔核显，而英伟达的显卡最高只支持到macOS11，当然这里只是做简单的概述，并不是一棒打死，不同的系列或型号支持的版本也是不一样的。无线网卡则推荐博通，以上具体的支持列表可以查看硬件限制。
+确认所有硬件都支持了，就可以进行下一步了，制作SSDT，对DSDT进行修正，那么什么是DSDT和SSDT？这些是固件中存在的表格，概述了硬件设备，如USB控制器、CPU线程、嵌入式控制器、系统时钟等。可以将DSDT（差分系统描述表）视为包含大部分信息的主体，而SSDT（辅助系统描述表）则传递较小的信息位。您可以将DSDT视为建筑蓝图，其中SSDT是概述项目额外细节的便签。对应教程ACPI入门，找到对应的CPU架构，获取SSDT。
+上面也是相对复杂的一步，接下来就是收集Kexts和固件驱动程序，下载macOS恢复镜像并制作启动盘。
+现在已经有了所有的 Kexts(.kext)、SSDTs(.aml) 和固件驱动程序 (.efi)，需要将这些文件配置到config.plist文件中。
+四、故障排除 详见教程一般故障排除。
+我这里遇到的问题是HDMI外接显示器紫屏，macOS系统默认DP接口输出，所以这里推荐使用DP接口，当然出现紫屏也有相应的解决办法。
+解决方案：
+ 下载脚本patch-edid.rb 打开终端，cd到桌面，然后使用ruby命令再将脚本拖入终端回车； 桌面会生成显示器的edid文件； 右键点击访达，输入：/System/Library/Displays/Contents/Resources/Overrides/ 将生成的文件拖入该文件夹重启即可。  Mac 10.15注意事项
+ Mac OS 10.15系统版本开启了SIP系统完整性保护功能，系统文件夹是只有读权限的，无法将edid文件拖入系统文件夹,需要在恢复模式关闭SIP后再对系统文件读写。通过开机时按住 cmd&#43;R 进入恢复模式。如果是黑苹果，在OpenCore引导界面，进入Recovery（恢复）模式。
+ 在屏幕最上方的工具栏找到实用工具，打开终端，输入
+csrutil disable然后确认是否已经禁用
+csrutil status禁用系统防护（SIP）后，重启系统，打开终端，sudo su 并输入密码进入全局模式，然后输入
+sudo mount -o rw / sudo cp -r &#39;将桌面上的edid拖入终端&#39; /System/Library/Displays/Contents/Resources/Overrides/解决问题后，再次重启进入恢复模式，打开终端，输入
+csrutil enable五、最终效果 同时也附上我制作好的两个EFI引导程序，一个是Thinkpad-E470笔记本，另一个是ASUS-P8H61台式机。"/>
+
+    <meta property="og:title" content="浅谈黑苹果系统安装" />
+<meta property="og:description" content="一、概述 目前比较推荐的黑苹果引导方式是使用OpenCore，相较于Clover，OpenCore能够支持更多版本的macOS、更快的启动速度、更好的稳定性、安全性等优点。在安装之前，大家可能会有所顾虑，比如：黑苹果支持哪些硬件、怎么获取macOS安装镜像、安装时遇到问题如何解决等。那么这些问题，其实OpenCore安装指南都已做了详细的解答，结合这篇指南对于几个重要的问题谈一下自己心得。
+二、先决条件  时间和耐心：如果有重要的工作，先不要干这件事，另外不要熬夜，熬夜的那点时间可能根本不够用； 有基本的命令行知识：能够通过命令访问目录或者删除文件等操作，否则安装时对于某些问题的处理会很困难； 熟悉自己的硬件：比如CPU、GPU、硬盘、网卡等； 已安装好Windows系统：准备好U盘，并且电脑已经安装好Windows系统（Windows10）。  三、安装思路 首先就是确认自己的电脑能不能安装，对于CPU而言，大多数英特尔的CPU都支持，而AMD的CPU虽然也能够安装，但并不推荐，因为在白苹果上没有采用过AMD的CPU，而且有些软件不能够正常使用，出现崩溃等问题。如果想体验最新的macOS12，GPU则推荐AMD的显卡或者英特尔核显，而英伟达的显卡最高只支持到macOS11，当然这里只是做简单的概述，并不是一棒打死，不同的系列或型号支持的版本也是不一样的。无线网卡则推荐博通，以上具体的支持列表可以查看硬件限制。
+确认所有硬件都支持了，就可以进行下一步了，制作SSDT，对DSDT进行修正，那么什么是DSDT和SSDT？这些是固件中存在的表格，概述了硬件设备，如USB控制器、CPU线程、嵌入式控制器、系统时钟等。可以将DSDT（差分系统描述表）视为包含大部分信息的主体，而SSDT（辅助系统描述表）则传递较小的信息位。您可以将DSDT视为建筑蓝图，其中SSDT是概述项目额外细节的便签。对应教程ACPI入门，找到对应的CPU架构，获取SSDT。
+上面也是相对复杂的一步，接下来就是收集Kexts和固件驱动程序，下载macOS恢复镜像并制作启动盘。
+现在已经有了所有的 Kexts(.kext)、SSDTs(.aml) 和固件驱动程序 (.efi)，需要将这些文件配置到config.plist文件中。
+四、故障排除 详见教程一般故障排除。
+我这里遇到的问题是HDMI外接显示器紫屏，macOS系统默认DP接口输出，所以这里推荐使用DP接口，当然出现紫屏也有相应的解决办法。
+解决方案：
+ 下载脚本patch-edid.rb 打开终端，cd到桌面，然后使用ruby命令再将脚本拖入终端回车； 桌面会生成显示器的edid文件； 右键点击访达，输入：/System/Library/Displays/Contents/Resources/Overrides/ 将生成的文件拖入该文件夹重启即可。  Mac 10.15注意事项
+ Mac OS 10.15系统版本开启了SIP系统完整性保护功能，系统文件夹是只有读权限的，无法将edid文件拖入系统文件夹,需要在恢复模式关闭SIP后再对系统文件读写。通过开机时按住 cmd&#43;R 进入恢复模式。如果是黑苹果，在OpenCore引导界面，进入Recovery（恢复）模式。
+ 在屏幕最上方的工具栏找到实用工具，打开终端，输入
+csrutil disable然后确认是否已经禁用
+csrutil status禁用系统防护（SIP）后，重启系统，打开终端，sudo su 并输入密码进入全局模式，然后输入
+sudo mount -o rw / sudo cp -r &#39;将桌面上的edid拖入终端&#39; /System/Library/Displays/Contents/Resources/Overrides/解决问题后，再次重启进入恢复模式，打开终端，输入
+csrutil enable五、最终效果 同时也附上我制作好的两个EFI引导程序，一个是Thinkpad-E470笔记本，另一个是ASUS-P8H61台式机。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.hsinyuwang.cn/hackintosh/irrodsyl/" /><meta property="article:section" content="hackintosh" />
+<meta property="article:published_time" content="2021-12-18T21:01:00+08:00" />
+<meta property="article:modified_time" content="2021-12-18T21:01:00+08:00" />
+
+
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.hsinyuwang.cn"><img class="app-header-avatar" src="/avatar.jpg" alt="hsinyuwang" /></a>
+      <h1>Hsinyuwang&#39;s Blog</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/tags/">分类</a>
+      </nav>
+      <p>我的个人博客，有记录有分享</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/hsinyuwang" target="_blank" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a href="https://space.bilibili.com/284239797" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor"  class="icon">
+  <title>bilibili</title>
+  <use xlink:href="#icon-bilibili"></use>
+</svg>
+</a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">浅谈黑苹果系统安装</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Dec 18, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://www.hsinyuwang.cn/tags/hackintosh/">hackintosh</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h2 id="一概述">一、概述</h2>
+<p>目前比较推荐的黑苹果引导方式是使用OpenCore，相较于Clover，OpenCore能够支持更多版本的macOS、更快的启动速度、更好的稳定性、安全性等优点。在安装之前，大家可能会有所顾虑，比如：黑苹果支持哪些硬件、怎么获取macOS安装镜像、安装时遇到问题如何解决等。那么这些问题，其实<a href="https://dortania.github.io/OpenCore-Install-Guide">OpenCore安装指南</a>都已做了详细的解答，结合这篇指南对于几个重要的问题谈一下自己心得。</p>
+<h2 id="二先决条件">二、先决条件</h2>
+<ul>
+<li>时间和耐心：如果有重要的工作，先不要干这件事，另外不要熬夜，熬夜的那点时间可能根本不够用；</li>
+<li>有基本的命令行知识：能够通过命令访问目录或者删除文件等操作，否则安装时对于某些问题的处理会很困难；</li>
+<li>熟悉自己的硬件：比如CPU、GPU、硬盘、网卡等；</li>
+<li>已安装好Windows系统：准备好U盘，并且电脑已经安装好Windows系统（Windows10）。</li>
+</ul>
+<h2 id="三安装思路">三、安装思路</h2>
+<p>首先就是确认自己的电脑能不能安装，对于CPU而言，大多数英特尔的CPU都支持，而AMD的CPU虽然也能够安装，但并不推荐，因为在白苹果上没有采用过AMD的CPU，而且有些软件不能够正常使用，出现崩溃等问题。如果想体验最新的macOS12，GPU则推荐AMD的显卡或者英特尔核显，而英伟达的显卡最高只支持到macOS11，当然这里只是做简单的概述，并不是一棒打死，不同的系列或型号支持的版本也是不一样的。无线网卡则推荐博通，以上具体的支持列表可以查看<a href="https://dortania.github.io/OpenCore-Install-Guide/macos-limits.html#cpu-support">硬件限制</a>。</p>
+<p>确认所有硬件都支持了，就可以进行下一步了，制作SSDT，对DSDT进行修正，那么什么是DSDT和SSDT？这些是固件中存在的表格，概述了硬件设备，如USB控制器、CPU线程、嵌入式控制器、系统时钟等。可以将DSDT（差分系统描述表）视为包含大部分信息的主体，而SSDT（辅助系统描述表）则传递较小的信息位。您可以将DSDT视为建筑蓝图，其中SSDT是概述项目额外细节的便签。对应教程<a href="https://dortania.github.io/Getting-Started-With-ACPI">ACPI入门</a>，找到对应的CPU架构，获取SSDT。</p>
+<p>上面也是相对复杂的一步，接下来就是收集<a href="https://dortania.github.io/OpenCore-Install-Guide/ktext.html">Kexts和固件驱动程序</a>，下载macOS恢复镜像并<a href="https://dortania.github.io/OpenCore-Install-Guide/installer-guide/winblows-install.html">制作启动盘</a>。</p>
+<p>现在已经有了所有的 Kexts(.kext)、SSDTs(.aml) 和固件驱动程序 (.efi)，需要将这些文件配置到config.plist文件中。</p>
+<h2 id="四故障排除">四、故障排除</h2>
+<p>详见教程<a href="https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html">一般故障排除</a>。</p>
+<p>我这里遇到的问题是HDMI外接显示器紫屏，macOS系统默认DP接口输出，所以这里推荐使用DP接口，当然出现紫屏也有相应的解决办法。</p>
+<p>解决方案：</p>
+<ul>
+<li>下载脚本<a href="https://github.com/hsinyuwang/Thinkpad-E470-OpenCore">patch-edid.rb</a></li>
+<li>打开终端，cd到桌面，然后使用ruby命令再将脚本拖入终端回车；</li>
+<li>桌面会生成显示器的edid文件；</li>
+<li>右键点击访达，输入：/System/Library/Displays/Contents/Resources/Overrides/</li>
+<li>将生成的文件拖入该文件夹重启即可。</li>
+</ul>
+<p><strong>Mac 10.15注意事项</strong></p>
+<blockquote>
+<p>Mac OS 10.15系统版本开启了SIP系统完整性保护功能，系统文件夹是只有读权限的，无法将edid文件拖入系统文件夹,需要在恢复模式关闭SIP后再对系统文件读写。通过开机时按住 cmd+R 进入恢复模式。如果是黑苹果，在OpenCore引导界面，进入Recovery（恢复）模式。</p>
+</blockquote>
+<p>在屏幕最上方的工具栏找到实用工具，打开终端，输入</p>
+<pre tabindex="0"><code>csrutil disable
+</code></pre><p>然后确认是否已经禁用</p>
+<pre tabindex="0"><code>csrutil status
+</code></pre><p>禁用系统防护（SIP）后，重启系统，打开终端，sudo su 并输入密码进入全局模式，然后输入</p>
+<pre tabindex="0"><code>sudo mount -o rw / 
+sudo cp -r '将桌面上的edid拖入终端' /System/Library/Displays/Contents/Resources/Overrides/
+</code></pre><p>解决问题后，再次重启进入恢复模式，打开终端，输入</p>
+<pre tabindex="0"><code>csrutil enable
+</code></pre><h2 id="五最终效果">五、最终效果</h2>
+<p><img src="/images/irrodsyl/1.jpg" alt=""></p>
+<p>同时也附上我制作好的两个EFI引导程序，一个是<a href="https://github.com/hsinyuwang/Thinkpad-E470-OpenCore">Thinkpad-E470</a>笔记本，另一个是<a href="https://github.com/hsinyuwang/ASUS-P8H61-MLX-OpenCore">ASUS-P8H61</a>台式机。</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+    <meting-js
+    id="7628905309"
+    lrc-type="0"
+    server="netease"
+    order="list"
+    type="playlist"
+    fixed="true"
+    list-olded="true"
+    autoplay="true"
+    mutex="true"
+    >
+    </meting-js>
+  </body>
+</html>

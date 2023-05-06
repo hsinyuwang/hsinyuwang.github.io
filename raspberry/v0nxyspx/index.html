@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <title>树莓派安装wiringPi | 小新的个人站</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <script src="/iconfont/iconfont.js"></script>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="hsinyuwang" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="树莓派安装wiringPi"/>
+<meta name="twitter:description" content="在执行gpio -v时出现如下错误
+发现系统支持的最高版本为GLIBC_2.23,显然不支持GLIBC_2.28
+解决办法： 进入wiringPI官网找到 http://wiringpi.com/wiringpi-updated-for-the-pi-v3plus/
+修改下载wiringPi的库版本
+cd /tmpwget https://unicorn.drogon.net/wiringpi-2.46-1.debsudo dpkg -i wiringpi-2.46-1.deb"/>
+
+    <meta property="og:title" content="树莓派安装wiringPi" />
+<meta property="og:description" content="在执行gpio -v时出现如下错误
+发现系统支持的最高版本为GLIBC_2.23,显然不支持GLIBC_2.28
+解决办法： 进入wiringPI官网找到 http://wiringpi.com/wiringpi-updated-for-the-pi-v3plus/
+修改下载wiringPi的库版本
+cd /tmpwget https://unicorn.drogon.net/wiringpi-2.46-1.debsudo dpkg -i wiringpi-2.46-1.deb" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.hsinyuwang.cn/raspberry/v0nxyspx/" /><meta property="article:section" content="raspberry" />
+<meta property="article:published_time" content="2021-07-29T15:30:08+08:00" />
+<meta property="article:modified_time" content="2021-07-29T15:30:08+08:00" />
+
+
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.hsinyuwang.cn"><img class="app-header-avatar" src="/avatar.jpg" alt="hsinyuwang" /></a>
+      <h1>Hsinyuwang&#39;s Blog</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/tags/">分类</a>
+      </nav>
+      <p>我的个人博客，有记录有分享</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/hsinyuwang" target="_blank" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a href="https://space.bilibili.com/284239797" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor"  class="icon">
+  <title>bilibili</title>
+  <use xlink:href="#icon-bilibili"></use>
+</svg>
+</a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">树莓派安装wiringPi</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jul 29, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://www.hsinyuwang.cn/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>在执行gpio -v时出现如下错误</p>
+<p><img src="/images/v0nxyspx/1.png" alt=""></p>
+<p>发现系统支持的最高版本为GLIBC_2.23,显然不支持GLIBC_2.28</p>
+<p>解决办法：
+进入wiringPI官网找到
+<a href="http://wiringpi.com/wiringpi-updated-for-the-pi-v3plus/">http://wiringpi.com/wiringpi-updated-for-the-pi-v3plus/</a></p>
+<p>修改下载wiringPi的库版本</p>
+<pre tabindex="0"><code>cd /tmp
+wget https://unicorn.drogon.net/wiringpi-2.46-1.deb
+sudo dpkg -i wiringpi-2.46-1.deb
+</code></pre>
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+    <meting-js
+    id="7628905309"
+    lrc-type="0"
+    server="netease"
+    order="list"
+    type="playlist"
+    fixed="true"
+    list-olded="true"
+    autoplay="true"
+    mutex="true"
+    >
+    </meting-js>
+  </body>
+</html>

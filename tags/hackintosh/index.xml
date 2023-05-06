@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hackintosh on Hsinyuwang&#39;s Blog</title>
+    <link>https://www.hsinyuwang.cn/tags/hackintosh/</link>
+    <description>Recent content in hackintosh on Hsinyuwang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sat, 18 Dec 2021 21:01:00 +0800</lastBuildDate><atom:link href="https://www.hsinyuwang.cn/tags/hackintosh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>浅谈黑苹果系统安装</title>
+      <link>https://www.hsinyuwang.cn/hackintosh/irrodsyl/</link>
+      <pubDate>Sat, 18 Dec 2021 21:01:00 +0800</pubDate>
+      
+      <guid>https://www.hsinyuwang.cn/hackintosh/irrodsyl/</guid>
+      <description>一、概述 目前比较推荐的黑苹果引导方式是使用OpenCore，相较于Clover，OpenCore能够支持更多版本的macOS、更快的启动速度、更好的稳定性、安全性等优点。在安装之前，大家可能会有所顾虑，比如：黑苹果支持哪些硬件、怎么获取macOS安装镜像、安装时遇到问题如何解决等。那么这些问题，其实OpenCore安装指南都已做了详细的解答，结合这篇指南对于几个重要的问题谈一下自己心得。
+二、先决条件  时间和耐心：如果有重要的工作，先不要干这件事，另外不要熬夜，熬夜的那点时间可能根本不够用； 有基本的命令行知识：能够通过命令访问目录或者删除文件等操作，否则安装时对于某些问题的处理会很困难； 熟悉自己的硬件：比如CPU、GPU、硬盘、网卡等； 已安装好Windows系统：准备好U盘，并且电脑已经安装好Windows系统（Windows10）。  三、安装思路 首先就是确认自己的电脑能不能安装，对于CPU而言，大多数英特尔的CPU都支持，而AMD的CPU虽然也能够安装，但并不推荐，因为在白苹果上没有采用过AMD的CPU，而且有些软件不能够正常使用，出现崩溃等问题。如果想体验最新的macOS12，GPU则推荐AMD的显卡或者英特尔核显，而英伟达的显卡最高只支持到macOS11，当然这里只是做简单的概述，并不是一棒打死，不同的系列或型号支持的版本也是不一样的。无线网卡则推荐博通，以上具体的支持列表可以查看硬件限制。
+确认所有硬件都支持了，就可以进行下一步了，制作SSDT，对DSDT进行修正，那么什么是DSDT和SSDT？这些是固件中存在的表格，概述了硬件设备，如USB控制器、CPU线程、嵌入式控制器、系统时钟等。可以将DSDT（差分系统描述表）视为包含大部分信息的主体，而SSDT（辅助系统描述表）则传递较小的信息位。您可以将DSDT视为建筑蓝图，其中SSDT是概述项目额外细节的便签。对应教程ACPI入门，找到对应的CPU架构，获取SSDT。
+上面也是相对复杂的一步，接下来就是收集Kexts和固件驱动程序，下载macOS恢复镜像并制作启动盘。
+现在已经有了所有的 Kexts(.kext)、SSDTs(.aml) 和固件驱动程序 (.efi)，需要将这些文件配置到config.plist文件中。
+四、故障排除 详见教程一般故障排除。
+我这里遇到的问题是HDMI外接显示器紫屏，macOS系统默认DP接口输出，所以这里推荐使用DP接口，当然出现紫屏也有相应的解决办法。
+解决方案：
+ 下载脚本patch-edid.rb 打开终端，cd到桌面，然后使用ruby命令再将脚本拖入终端回车； 桌面会生成显示器的edid文件； 右键点击访达，输入：/System/Library/Displays/Contents/Resources/Overrides/ 将生成的文件拖入该文件夹重启即可。  Mac 10.15注意事项
+ Mac OS 10.15系统版本开启了SIP系统完整性保护功能，系统文件夹是只有读权限的，无法将edid文件拖入系统文件夹,需要在恢复模式关闭SIP后再对系统文件读写。通过开机时按住 cmd+R 进入恢复模式。如果是黑苹果，在OpenCore引导界面，进入Recovery（恢复）模式。
+ 在屏幕最上方的工具栏找到实用工具，打开终端，输入
+csrutil disable然后确认是否已经禁用
+csrutil status禁用系统防护（SIP）后，重启系统，打开终端，sudo su 并输入密码进入全局模式，然后输入
+sudo mount -o rw / sudo cp -r &#39;将桌面上的edid拖入终端&#39; /System/Library/Displays/Contents/Resources/Overrides/解决问题后，再次重启进入恢复模式，打开终端，输入
+csrutil enable五、最终效果 同时也附上我制作好的两个EFI引导程序，一个是Thinkpad-E470笔记本，另一个是ASUS-P8H61台式机。</description>
+    </item>
+    
+  </channel>
+</rss>

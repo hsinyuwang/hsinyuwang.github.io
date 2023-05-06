@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <title>esp8266Linux下开发环境搭建 | 小新的个人站</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <script src="/iconfont/iconfont.js"></script>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="hsinyuwang" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="esp8266Linux下开发环境搭建"/>
+<meta name="twitter:description" content="前言：esp8266的开发方式有多种，例如：AT指令版、SDK版、Arduino版、NodeMCU固件和Lua、MicroPython、JS开发esp8266等等。而SDK版的开发成本低，不像AT指令版那样需要外置MCU，所以本教程就采用乐鑫官方的SDk为例进行环境的搭建，此环境需要用到的软件：VirtualBox&#43;Linux&#43;交叉编译工具。（文章过于久远，已不再适用&mdash;&mdash;2021年10月18日）
+一、创建一个工程模板 1、以RTOS版本为例，在乐鑫官网下载SDK
+ 链接：https://www.espressif.com/zh-hans/support/download/sdks-demos  点击下载会跳转到Github，选择zip文件
+2、下载后解压，在ESP8266_RTOS_SDK-2.0.0文件夹下新建一个app文件夹
+3、将ESP8266_RTOS_SDK-2.0.0\examples\smart_config目录下的所有文件复制到app文件夹下，目录结构如下：
+4、修改app目录下的gen_misc.sh文件，添加如下路径（后面讲为什么是这个路径）
+export SDK_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0export BIN_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0/bin5、因为分离了sdk和project目录，所以编译之前必须先指定一个SDK_PATH和BIN_PATH，修改ESP8266_RTOS_SDK-2.0.0/app目录下的makefile，添加以下内容并保存
+parent_dir:=$(abspath $(shell pwd)/$(lastword $(MAKEFILE_LIST)))parent_dir:=$(shell dirname $(parent_dir))parent_dir:=$(shell dirname $(parent_dir))SDK_PATH= $(parent_dir)BIN_PATH=$(SDK_PATH)/bin这样，一个ESP8266_RTOS_SDK-2.0.0的工程模板就做好了，保存备用。
+二、安装虚拟机和Linux系统 1、乐鑫esp8266论坛提供了Lubuntu系统
+ 论坛链接：https://bbs.espressif.com  打开链接，点击Tools
+点击ESP8266 Compilre On Lubuntu
+下载ESP8266_GCC，论坛很贴心，压缩包里同时提供了Virtual Box虚拟机软件
+下载好之后解压ESO8266_GCC.zip并安装Virtual Box软件，然后导入 Lubuntu镜像，配置按默认就好。
+2、在D盘目录下新建一个VM文件夹，VM文件夹下新建名为Share的共享文件夹 之后，启动虚拟机
+3、打开终端，输入ls查看文件，输入./mount.sh挂载共享目录
+为了验证是否挂载成功，可新建一个文件验证一下
+同时在windows文件夹下看是否成功新建了这个文件
+如图，说明文件挂载成功，那么就打通了Windows和Linux文件的交互障碍。
+4、终端中输入pwd命令查看当前所在路径
+没错！这个路径也就是上面修改SDK的路径，这时，我们在Windows环境下把之前修改好的工程模板复制到Share文件夹就好了！ 之后输入ls查看
+恭喜！到这里，我们的任务就快完成了。
+三、编译工程文件 1、进入到ESP8266_RTOS_SDK-2.0.0/app目录下
+2、输入./gen_misc.sh执行，并根据提示和你的esp8266模块型号进行配置之后等待编译完成
+到这里，一个Linux下的编译环境就搭建好了，user1.4096.new.4.bin的文件输出在D:\VM\Share\ESP8266_RTOS_SDK-2.0.0\bin\upgrade目录下。"/>
+
+    <meta property="og:title" content="esp8266Linux下开发环境搭建" />
+<meta property="og:description" content="前言：esp8266的开发方式有多种，例如：AT指令版、SDK版、Arduino版、NodeMCU固件和Lua、MicroPython、JS开发esp8266等等。而SDK版的开发成本低，不像AT指令版那样需要外置MCU，所以本教程就采用乐鑫官方的SDk为例进行环境的搭建，此环境需要用到的软件：VirtualBox&#43;Linux&#43;交叉编译工具。（文章过于久远，已不再适用&mdash;&mdash;2021年10月18日）
+一、创建一个工程模板 1、以RTOS版本为例，在乐鑫官网下载SDK
+ 链接：https://www.espressif.com/zh-hans/support/download/sdks-demos  点击下载会跳转到Github，选择zip文件
+2、下载后解压，在ESP8266_RTOS_SDK-2.0.0文件夹下新建一个app文件夹
+3、将ESP8266_RTOS_SDK-2.0.0\examples\smart_config目录下的所有文件复制到app文件夹下，目录结构如下：
+4、修改app目录下的gen_misc.sh文件，添加如下路径（后面讲为什么是这个路径）
+export SDK_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0export BIN_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0/bin5、因为分离了sdk和project目录，所以编译之前必须先指定一个SDK_PATH和BIN_PATH，修改ESP8266_RTOS_SDK-2.0.0/app目录下的makefile，添加以下内容并保存
+parent_dir:=$(abspath $(shell pwd)/$(lastword $(MAKEFILE_LIST)))parent_dir:=$(shell dirname $(parent_dir))parent_dir:=$(shell dirname $(parent_dir))SDK_PATH= $(parent_dir)BIN_PATH=$(SDK_PATH)/bin这样，一个ESP8266_RTOS_SDK-2.0.0的工程模板就做好了，保存备用。
+二、安装虚拟机和Linux系统 1、乐鑫esp8266论坛提供了Lubuntu系统
+ 论坛链接：https://bbs.espressif.com  打开链接，点击Tools
+点击ESP8266 Compilre On Lubuntu
+下载ESP8266_GCC，论坛很贴心，压缩包里同时提供了Virtual Box虚拟机软件
+下载好之后解压ESO8266_GCC.zip并安装Virtual Box软件，然后导入 Lubuntu镜像，配置按默认就好。
+2、在D盘目录下新建一个VM文件夹，VM文件夹下新建名为Share的共享文件夹 之后，启动虚拟机
+3、打开终端，输入ls查看文件，输入./mount.sh挂载共享目录
+为了验证是否挂载成功，可新建一个文件验证一下
+同时在windows文件夹下看是否成功新建了这个文件
+如图，说明文件挂载成功，那么就打通了Windows和Linux文件的交互障碍。
+4、终端中输入pwd命令查看当前所在路径
+没错！这个路径也就是上面修改SDK的路径，这时，我们在Windows环境下把之前修改好的工程模板复制到Share文件夹就好了！ 之后输入ls查看
+恭喜！到这里，我们的任务就快完成了。
+三、编译工程文件 1、进入到ESP8266_RTOS_SDK-2.0.0/app目录下
+2、输入./gen_misc.sh执行，并根据提示和你的esp8266模块型号进行配置之后等待编译完成
+到这里，一个Linux下的编译环境就搭建好了，user1.4096.new.4.bin的文件输出在D:\VM\Share\ESP8266_RTOS_SDK-2.0.0\bin\upgrade目录下。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.hsinyuwang.cn/esp8266/lgpyq9gi/" /><meta property="article:section" content="esp8266" />
+<meta property="article:published_time" content="2019-06-05T07:12:26+08:00" />
+<meta property="article:modified_time" content="2019-06-05T07:12:26+08:00" />
+
+
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.hsinyuwang.cn"><img class="app-header-avatar" src="/avatar.jpg" alt="hsinyuwang" /></a>
+      <h1>Hsinyuwang&#39;s Blog</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/tags/">分类</a>
+      </nav>
+      <p>我的个人博客，有记录有分享</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/hsinyuwang" target="_blank" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a href="https://space.bilibili.com/284239797" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor"  class="icon">
+  <title>bilibili</title>
+  <use xlink:href="#icon-bilibili"></use>
+</svg>
+</a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">esp8266Linux下开发环境搭建</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jun 5, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://www.hsinyuwang.cn/tags/esp8266/">esp8266</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>前言：esp8266的开发方式有多种，例如：AT指令版、SDK版、Arduino版、NodeMCU固件和Lua、MicroPython、JS开发esp8266等等。而SDK版的开发成本低，不像AT指令版那样需要外置MCU，所以本教程就采用乐鑫官方的SDk为例进行环境的搭建，此环境需要用到的软件：VirtualBox+Linux+交叉编译工具。（文章过于久远，已不再适用&mdash;&mdash;2021年10月18日）</p>
+<h2 id="一创建一个工程模板">一、创建一个工程模板</h2>
+<p>1、以RTOS版本为例，在乐鑫官网下载SDK</p>
+<ul>
+<li>链接：https://www.espressif.com/zh-hans/support/download/sdks-demos</li>
+</ul>
+<p><img src="/images/lgpyq9gi/1.png" alt=""></p>
+<p>点击下载会跳转到Github，选择zip文件</p>
+<p><img src="/images/lgpyq9gi/2.png" alt=""></p>
+<p>2、下载后解压，在ESP8266_RTOS_SDK-2.0.0文件夹下新建一个app文件夹</p>
+<p><img src="/images/lgpyq9gi/3.png" alt=""></p>
+<p>3、将ESP8266_RTOS_SDK-2.0.0\examples\smart_config目录下的所有文件复制到app文件夹下，目录结构如下：</p>
+<p><img src="/images/lgpyq9gi/4.png" alt=""></p>
+<p>4、修改app目录下的gen_misc.sh文件，添加如下路径（后面讲为什么是这个路径）</p>
+<pre tabindex="0"><code>export SDK_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0
+export BIN_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0/bin
+</code></pre><p><img src="/images/lgpyq9gi/20.png" alt=""></p>
+<p>5、因为分离了sdk和project目录，所以编译之前必须先指定一个SDK_PATH和BIN_PATH，修改ESP8266_RTOS_SDK-2.0.0/app目录下的makefile，添加以下内容并保存</p>
+<pre tabindex="0"><code>parent_dir:=$(abspath $(shell pwd)/$(lastword $(MAKEFILE_LIST)))
+parent_dir:=$(shell dirname $(parent_dir))
+parent_dir:=$(shell dirname $(parent_dir))
+
+SDK_PATH= $(parent_dir)
+BIN_PATH=$(SDK_PATH)/bin
+</code></pre><p><img src="/images/lgpyq9gi/5.png" alt=""></p>
+<p>这样，一个ESP8266_RTOS_SDK-2.0.0的工程模板就做好了，保存备用。</p>
+<h2 id="二安装虚拟机和linux系统">二、安装虚拟机和Linux系统</h2>
+<p>1、乐鑫esp8266论坛提供了Lubuntu系统</p>
+<ul>
+<li>论坛链接：https://bbs.espressif.com</li>
+</ul>
+<p>打开链接，点击Tools</p>
+<p><img src="/images/lgpyq9gi/6.png" alt=""></p>
+<p>点击ESP8266 Compilre On Lubuntu</p>
+<p><img src="/images/lgpyq9gi/7.png" alt=""></p>
+<p>下载ESP8266_GCC，论坛很贴心，压缩包里同时提供了Virtual Box虚拟机软件</p>
+<p><img src="/images/lgpyq9gi/8.png" alt=""></p>
+<p>下载好之后解压ESO8266_GCC.zip并安装Virtual Box软件，然后导入 Lubuntu镜像，配置按默认就好。</p>
+<p><img src="/images/lgpyq9gi/9.png" alt=""></p>
+<p>2、在D盘目录下新建一个VM文件夹，VM文件夹下新建名为Share的共享文件夹 之后，启动虚拟机</p>
+<p><img src="/images/lgpyq9gi/10.png" alt=""></p>
+<p>3、打开终端，输入ls查看文件，输入./mount.sh挂载共享目录</p>
+<p><img src="/images/lgpyq9gi/11.png" alt=""></p>
+<p>为了验证是否挂载成功，可新建一个文件验证一下</p>
+<p><img src="/images/lgpyq9gi/12.png" alt=""></p>
+<p>同时在windows文件夹下看是否成功新建了这个文件</p>
+<p><img src="/images/lgpyq9gi/13.png" alt=""></p>
+<p>如图，说明文件挂载成功，那么就打通了Windows和Linux文件的交互障碍。</p>
+<p>4、终端中输入pwd命令查看当前所在路径</p>
+<p><img src="/images/lgpyq9gi/14.png" alt=""></p>
+<p>没错！这个路径也就是上面修改SDK的路径，这时，我们在Windows环境下把之前修改好的工程模板复制到Share文件夹就好了！
+之后输入ls查看</p>
+<p><img src="/images/lgpyq9gi/15.png" alt=""></p>
+<p>恭喜！到这里，我们的任务就快完成了。</p>
+<h2 id="三编译工程文件">三、编译工程文件</h2>
+<p>1、进入到ESP8266_RTOS_SDK-2.0.0/app目录下</p>
+<p><img src="/images/lgpyq9gi/16.png" alt=""></p>
+<p>2、输入./gen_misc.sh执行，并根据提示和你的esp8266模块型号进行配置之后等待编译完成</p>
+<p><img src="/images/lgpyq9gi/17.png" alt=""></p>
+<p><img src="/images/lgpyq9gi/18.png" alt=""></p>
+<p>到这里，一个Linux下的编译环境就搭建好了，user1.4096.new.4.bin的文件输出在D:\VM\Share\ESP8266_RTOS_SDK-2.0.0\bin\upgrade目录下。</p>
+<p><img src="/images/lgpyq9gi/19.png" alt=""></p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+    <meting-js
+    id="7628905309"
+    lrc-type="0"
+    server="netease"
+    order="list"
+    type="playlist"
+    fixed="true"
+    list-olded="true"
+    autoplay="true"
+    mutex="true"
+    >
+    </meting-js>
+  </body>
+</html>

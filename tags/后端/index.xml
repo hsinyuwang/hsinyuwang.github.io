@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>后端 on Hsinyuwang&#39;s Blog</title>
+    <link>https://www.hsinyuwang.cn/tags/%E5%90%8E%E7%AB%AF/</link>
+    <description>Recent content in 后端 on Hsinyuwang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 01 Aug 2022 10:04:04 +0800</lastBuildDate><atom:link href="https://www.hsinyuwang.cn/tags/%E5%90%8E%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>基于Netty和json格式的自定义协议物联网云平台</title>
+      <link>https://www.hsinyuwang.cn/backend/uar9bqpe/</link>
+      <pubDate>Mon, 01 Aug 2022 10:04:04 +0800</pubDate>
+      
+      <guid>https://www.hsinyuwang.cn/backend/uar9bqpe/</guid>
+      <description>🍊项目简介 基于Netty和json格式的自定义协议物联网云平台（目前实现了基本的数据传输流程和设备接入的管理，平台代码全部开源，可以二次开发，并提供一个温湿度计的硬件接入示例，全套的解决方案，欢迎Star⭐️）
+项目仓库地址：Github
+项目演示视频：bilibili
+.meta-media {position: relative;margin-bottom: 30px;display: flex;width: 100%;height: 0;padding-bottom: 75%;}.video {position: absolute;width: 100%;height: 100%;left: 0;top: 0;} 🍒目录结构  cloud 平台后端，采用Spring Boot、JWT、MyBatis、Netty cloud-ui 平台前端，采用Vue、Element-ui、Axios、Echarts framework 旋转太空人主题温湿度计硬件代码，采用乐鑫官方ESP-IDF框架（IDF版本v4.3.2） hardware 旋转太空人主题温湿度计原理图和Gerber、BOM  🍓如何使用 🍚后端部分 导入 cloud 目录到idea，配置好jdk和maven，修改redis和mysql配置；将picoideal.sql导入到mysql数据库。
+🍜 前端部分 安装node.js，进入到 cloud-ui 目录，然后运行
+npm run serve🍨硬件代码 安装乐鑫 ESP-IDF 并配置好环境（我是用 vscode 和 Espressif IDF 插件开发的）</description>
+    </item>
+    
+    <item>
+      <title>Spring Boot拦截器配置</title>
+      <link>https://www.hsinyuwang.cn/backend/lttvxhkk/</link>
+      <pubDate>Sat, 16 Oct 2021 15:30:08 +0800</pubDate>
+      
+      <guid>https://www.hsinyuwang.cn/backend/lttvxhkk/</guid>
+      <description>1、启用拦截器配置
+import org.springframework.context.annotation.Configuration; import org.springframework.web.servlet.config.annotation.InterceptorRegistry; import org.springframework.web.servlet.config.annotation.WebMvcConfigurer; import com.easiweb.core.interceptor.RequestInterceptor; @Configuration public class InterceptorConfig implements WebMvcConfigurer { public void addInterceptors(InterceptorRegistry registry) { registry.addInterceptor(new RequestInterceptor()).addPathPatterns(&amp;#34;/**&amp;#34;); } } 2、在拦截器里做请求校验
+import java.io.IOException; import javax.servlet.http.HttpServletRequest; import javax.servlet.http.HttpServletResponse; import org.springframework.stereotype.Component; import org.springframework.web.servlet.HandlerInterceptor; import org.springframework.web.servlet.ModelAndView; import com.easiweb.core.utils.Result; import com.fasterxml.jackson.databind.ObjectMapper; @Component public class RequestInterceptor implements HandlerInterceptor { @Override public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception { String token = request.getHeader(&amp;#34;token&amp;#34;); if (token == null) { // 根据业务编写逻辑 	getResponse(response, Result.</description>
+    </item>
+    
+    <item>
+      <title>logging level级别</title>
+      <link>https://www.hsinyuwang.cn/backend/ixlo7m8y/</link>
+      <pubDate>Sun, 09 May 2021 15:30:08 +0800</pubDate>
+      
+      <guid>https://www.hsinyuwang.cn/backend/ixlo7m8y/</guid>
+      <description>日志记录器(Logger)是日志处理的核心组件。log4j具有5种正常级别(Level)。
+  static Level DEBUG：指出细粒度信息事件对调试应用程序是非常有帮助的,一般认为比较重要的方法执行需要详细查看运行情况的则开启debug。
+  static Level INFO：表明消息在粗粒度级别上突出强调应用程序的运行过程，只需要了解该方法是否运行的可以使用INFO
+  static Level WARN：表明会出现潜在错误的情形。
+  static Level ERROR：指出虽然发生错误事件，但仍然不影响系统的继续运行。一般异常处理等情况都需要ERROR
+  static Level FATAL：指出每个严重的错误事件将会导致应用程序的退出。
+  另外，还有两个可用的特别的日志记录级别:
+ static Level ALL：是最低等级的，用于打开所有日志记录。 static Level OFF：是最高等级的，用于关闭所有日志记录。   日志记录器（Logger）的行为是分等级的： 分为OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL或者您定义的级别。Log4j建议只使用四个级别，优先级 从高到低分别是 ERROR、WARN、INFO、DEBUG。 通过在这里定义的级别，您可以控制到应用程序中相应级别的日志信息的开关。比如在这里定义了INFO级别， 则应用程序中所有DEBUG级别的日志信息将不被打印出来。
+ 优先级高的将被打印出来。项目上生产环境时候建议把debug的日志级别重新调为warn或者更高，避免产生大量日志。</description>
+    </item>
+    
+    <item>
+      <title>SpringBoot统一返回结果</title>
+      <link>https://www.hsinyuwang.cn/backend/ofvwk2w7/</link>
+      <pubDate>Mon, 08 Jun 2020 15:30:08 +0800</pubDate>
+      
+      <guid>https://www.hsinyuwang.cn/backend/ofvwk2w7/</guid>
+      <description>实现统一返回非常简单，只需要三个功能
+ResponseData&amp;lt;T&amp;gt; ResponseDataUtils ResultEnum1、ResponseData
+public class ResponseData&amp;lt;T&amp;gt; implements Serializable { private String code; private String msg; private T data; public ResponseData(String code, String msg, T data) { this.code = code; this.msg = msg; this.data = data; } public ResponseData(String code, String msg) { this.code = code; this.msg = msg; } public ResponseData(ResultEnums resultEnums) { this.code = resultEnums.getCode(); this.msg = resultEnums.getMsg(); } public ResponseData(ResultEnums resultEnums, T data) { this.code = resultEnums.</description>
+    </item>
+    
+  </channel>
+</rss>

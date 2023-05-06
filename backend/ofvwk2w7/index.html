@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <title>SpringBoot统一返回结果 | 小新的个人站</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <script src="/iconfont/iconfont.js"></script>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="hsinyuwang" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="SpringBoot统一返回结果"/>
+<meta name="twitter:description" content="实现统一返回非常简单，只需要三个功能
+ResponseData&lt;T&gt; ResponseDataUtils ResultEnum1、ResponseData
+public class ResponseData&lt;T&gt; implements Serializable { private String code; private String msg; private T data; public ResponseData(String code, String msg, T data) { this.code = code; this.msg = msg; this.data = data; } public ResponseData(String code, String msg) { this.code = code; this.msg = msg; } public ResponseData(ResultEnums resultEnums) { this.code = resultEnums.getCode(); this.msg = resultEnums.getMsg(); } public ResponseData(ResultEnums resultEnums, T data) { this.code = resultEnums."/>
+
+    <meta property="og:title" content="SpringBoot统一返回结果" />
+<meta property="og:description" content="实现统一返回非常简单，只需要三个功能
+ResponseData&lt;T&gt; ResponseDataUtils ResultEnum1、ResponseData
+public class ResponseData&lt;T&gt; implements Serializable { private String code; private String msg; private T data; public ResponseData(String code, String msg, T data) { this.code = code; this.msg = msg; this.data = data; } public ResponseData(String code, String msg) { this.code = code; this.msg = msg; } public ResponseData(ResultEnums resultEnums) { this.code = resultEnums.getCode(); this.msg = resultEnums.getMsg(); } public ResponseData(ResultEnums resultEnums, T data) { this.code = resultEnums." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.hsinyuwang.cn/backend/ofvwk2w7/" /><meta property="article:section" content="backend" />
+<meta property="article:published_time" content="2020-06-08T15:30:08+08:00" />
+<meta property="article:modified_time" content="2020-06-08T15:30:08+08:00" />
+
+
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.hsinyuwang.cn"><img class="app-header-avatar" src="/avatar.jpg" alt="hsinyuwang" /></a>
+      <h1>Hsinyuwang&#39;s Blog</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/tags/">分类</a>
+      </nav>
+      <p>我的个人博客，有记录有分享</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/hsinyuwang" target="_blank" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a href="https://space.bilibili.com/284239797" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor"  class="icon">
+  <title>bilibili</title>
+  <use xlink:href="#icon-bilibili"></use>
+</svg>
+</a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">SpringBoot统一返回结果</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jun 8, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          2 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://www.hsinyuwang.cn/tags/%E5%90%8E%E7%AB%AF/">后端</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p><strong>实现统一返回非常简单，只需要三个功能</strong></p>
+<pre tabindex="0"><code>ResponseData&lt;T&gt; ResponseDataUtils ResultEnum
+</code></pre><p><strong>1、ResponseData<!-- raw HTML omitted --></strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ResponseData</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">implements</span> Serializable <span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">private</span> String code<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">private</span> String msg<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">private</span> T data<span style="color:#f92672">;</span>
+
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">ResponseData</span><span style="color:#f92672">(</span>String code<span style="color:#f92672">,</span> String msg<span style="color:#f92672">,</span> T data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">code</span> <span style="color:#f92672">=</span> code<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">msg</span> <span style="color:#f92672">=</span> msg<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> data<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">ResponseData</span><span style="color:#f92672">(</span>String code<span style="color:#f92672">,</span> String msg<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">code</span> <span style="color:#f92672">=</span> code<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">msg</span> <span style="color:#f92672">=</span> msg<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">ResponseData</span><span style="color:#f92672">(</span>ResultEnums resultEnums<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">code</span> <span style="color:#f92672">=</span> resultEnums<span style="color:#f92672">.</span><span style="color:#a6e22e">getCode</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">msg</span> <span style="color:#f92672">=</span> resultEnums<span style="color:#f92672">.</span><span style="color:#a6e22e">getMsg</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">ResponseData</span><span style="color:#f92672">(</span>ResultEnums resultEnums<span style="color:#f92672">,</span> T data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">code</span> <span style="color:#f92672">=</span> resultEnums<span style="color:#f92672">.</span><span style="color:#a6e22e">getCode</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">msg</span> <span style="color:#f92672">=</span> resultEnums<span style="color:#f92672">.</span><span style="color:#a6e22e">getMsg</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> data<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">ResponseData</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getCode</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> code<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setCode</span><span style="color:#f92672">(</span>String code<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">code</span> <span style="color:#f92672">=</span> code<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getMsg</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> msg<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setMsg</span><span style="color:#f92672">(</span>String msg<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">msg</span> <span style="color:#f92672">=</span> msg<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> T <span style="color:#a6e22e">getData</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> data<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setData</span><span style="color:#f92672">(</span>T data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> data<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><strong>2、ResponseDataUtils</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ResponseDataUtil</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * 带实体的统一返回
+</span><span style="color:#75715e">     *
+</span><span style="color:#75715e">     * @param data 实体
+</span><span style="color:#75715e">     * @param &lt;T&gt;  实体类型
+</span><span style="color:#75715e">     * @return
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> ResponseData <span style="color:#a6e22e">buildSuccess</span><span style="color:#f92672">(</span>T data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ResponseData<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;(</span>ResultEnums<span style="color:#f92672">.</span><span style="color:#a6e22e">SUCCESS</span><span style="color:#f92672">,</span> data<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> ResponseData <span style="color:#a6e22e">buildSuccess</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ResponseData<span style="color:#f92672">(</span>ResultEnums<span style="color:#f92672">.</span><span style="color:#a6e22e">SUCCESS</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> ResponseData <span style="color:#a6e22e">buildSuccess</span><span style="color:#f92672">(</span>String msg<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ResponseData<span style="color:#f92672">(</span>ResultEnums<span style="color:#f92672">.</span><span style="color:#a6e22e">SUCCESS</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getCode</span><span style="color:#f92672">(),</span> msg<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> ResponseData <span style="color:#a6e22e">buildSuccess</span><span style="color:#f92672">(</span>String code<span style="color:#f92672">,</span> String msg<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ResponseData<span style="color:#f92672">(</span>code<span style="color:#f92672">,</span> msg<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> ResponseData <span style="color:#a6e22e">buildSuccess</span><span style="color:#f92672">(</span>String code<span style="color:#f92672">,</span> String msg<span style="color:#f92672">,</span> T data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ResponseData<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;(</span>code<span style="color:#f92672">,</span> msg<span style="color:#f92672">,</span> data<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> ResponseData <span style="color:#a6e22e">buildSuccess</span><span style="color:#f92672">(</span>ResultEnums resultEnums<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ResponseData<span style="color:#f92672">(</span>resultEnums<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> ResponseData <span style="color:#a6e22e">buildError</span><span style="color:#f92672">(</span>T data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ResponseData<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;(</span>ResultEnums<span style="color:#f92672">.</span><span style="color:#a6e22e">ERROR</span><span style="color:#f92672">,</span> data<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> ResponseData <span style="color:#a6e22e">buildError</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ResponseData<span style="color:#f92672">(</span>ResultEnums<span style="color:#f92672">.</span><span style="color:#a6e22e">ERROR</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> ResponseData <span style="color:#a6e22e">buildError</span><span style="color:#f92672">(</span>String msg<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ResponseData<span style="color:#f92672">(</span>ResultEnums<span style="color:#f92672">.</span><span style="color:#a6e22e">ERROR</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getCode</span><span style="color:#f92672">(),</span> msg<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> ResponseData <span style="color:#a6e22e">buildError</span><span style="color:#f92672">(</span>String code<span style="color:#f92672">,</span> String msg<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ResponseData<span style="color:#f92672">(</span>code<span style="color:#f92672">,</span> msg<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> ResponseData <span style="color:#a6e22e">buildError</span><span style="color:#f92672">(</span>String code<span style="color:#f92672">,</span> String msg<span style="color:#f92672">,</span> T data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ResponseData<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;(</span>code<span style="color:#f92672">,</span> msg<span style="color:#f92672">,</span> data<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> ResponseData <span style="color:#a6e22e">buildError</span><span style="color:#f92672">(</span>ResultEnums resultEnums<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ResponseData<span style="color:#f92672">(</span>resultEnums<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>3、ResultEnum</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> ResultEnums <span style="color:#f92672">{</span>
+
+    SUCCESS<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;0000&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;请求成功&#34;</span><span style="color:#f92672">),</span>
+    ERROR<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;1111&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;请求失败&#34;</span><span style="color:#f92672">),</span>
+    SYSTEM_ERROR<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;1000&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;系统异常&#34;</span><span style="color:#f92672">),</span>
+    BUSSINESS_ERROR<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;2001&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;业务逻辑错误&#34;</span><span style="color:#f92672">),</span>
+    VERIFY_CODE_ERROR<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;2002&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;业务参数错误&#34;</span><span style="color:#f92672">),</span>
+    PARAM_ERROR<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;2002&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;业务参数错误&#34;</span><span style="color:#f92672">);</span>
+
+    <span style="color:#66d9ef">private</span> String code<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> String msg<span style="color:#f92672">;</span>
+
+    ResultEnums<span style="color:#f92672">(</span>String code<span style="color:#f92672">,</span> String msg<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">code</span> <span style="color:#f92672">=</span> code<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">msg</span> <span style="color:#f92672">=</span> msg<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getCode</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> code<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setCode</span><span style="color:#f92672">(</span>String code<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">code</span> <span style="color:#f92672">=</span> code<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getMsg</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> msg<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setMsg</span><span style="color:#f92672">(</span>String msg<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">msg</span> <span style="color:#f92672">=</span> msg<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div>
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+    <meting-js
+    id="7628905309"
+    lrc-type="0"
+    server="netease"
+    order="list"
+    type="playlist"
+    fixed="true"
+    list-olded="true"
+    autoplay="true"
+    mutex="true"
+    >
+    </meting-js>
+  </body>
+</html>

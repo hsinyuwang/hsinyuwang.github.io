@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Routers on Hsinyuwang&#39;s Blog</title>
+    <link>https://www.hsinyuwang.cn/router/</link>
+    <description>Recent content in Routers on Hsinyuwang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sun, 01 Aug 2021 10:22:14 +0800</lastBuildDate><atom:link href="https://www.hsinyuwang.cn/router/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>斐讯K2更换32M Flash</title>
+      <link>https://www.hsinyuwang.cn/router/5v9hv26h/</link>
+      <pubDate>Sun, 01 Aug 2021 10:22:14 +0800</pubDate>
+      
+      <guid>https://www.hsinyuwang.cn/router/5v9hv26h/</guid>
+      <description>一、拆掉原厂flash 在更换之前先刷入breed，提取EEPROM固件，因为里面包含了WiFi射频参数和MAC地址，一机一码。注意：刷机需谨慎，一定要提前备份。
+1、备份固件 进入breed控制台，选择“备份固件”进行备份，将EEPROM固件下载到电脑，顺带看一下斐讯K2原厂的flash型号为兆易创新的GD25Q64 8MB。
+2、拆机 备份完成后就可以拆机了，找到flash芯片，用热风枪将其吹下，没有热风枪也可以用电烙铁堆两坨焊锡拆下。
+二、更换32M flash 这里使用的是华邦的W25Q256 32MB芯片，虽然芯片大小、引脚数量和原厂的不一样，但都是可以用的。
+1、先刷breed 在焊接之前，先用编程器刷入breed，也就是bootloader，否则空芯片无法启动。
+打开软件，点击自动，刷入breed的bin文件。
+2、焊接 斐讯K2的PCB上可以焊接两种封装的flash，这就是为什么芯片大小不一样却可以用的原因。在焊接时，需要注意芯片摆放位置，将图中左上角的圆点与芯片上的圆点对应即可。
+3、查看更换结果 开机，进入breed，这里已经显示为华邦W25Q256 32MB的flash了。
+三、恢复EEPROM和路由器固件 1、刷入EEPROM 未刷入EEPROM之前，MAC地址全是FF。
+这里我们先点击“固件更新”并选择之前备份好的eeprom.bin文件，进行刷入。
+刷入之后，MAC地址就都回来了。
+2、刷入路由器固件 路由器的固件可以选择，华硕padavan、潘多拉PandoraBox、openwrt等。刷入方式同EEPROM，选择“固件”，并勾选“自动重启”即可。</description>
+    </item>
+    
+  </channel>
+</rss>

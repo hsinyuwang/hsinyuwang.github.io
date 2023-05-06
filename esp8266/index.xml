@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Esp8266s on Hsinyuwang&#39;s Blog</title>
+    <link>https://www.hsinyuwang.cn/esp8266/</link>
+    <description>Recent content in Esp8266s on Hsinyuwang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Wed, 05 Jun 2019 07:12:26 +0800</lastBuildDate><atom:link href="https://www.hsinyuwang.cn/esp8266/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>esp8266Linux下开发环境搭建</title>
+      <link>https://www.hsinyuwang.cn/esp8266/lgpyq9gi/</link>
+      <pubDate>Wed, 05 Jun 2019 07:12:26 +0800</pubDate>
+      
+      <guid>https://www.hsinyuwang.cn/esp8266/lgpyq9gi/</guid>
+      <description>前言：esp8266的开发方式有多种，例如：AT指令版、SDK版、Arduino版、NodeMCU固件和Lua、MicroPython、JS开发esp8266等等。而SDK版的开发成本低，不像AT指令版那样需要外置MCU，所以本教程就采用乐鑫官方的SDk为例进行环境的搭建，此环境需要用到的软件：VirtualBox+Linux+交叉编译工具。（文章过于久远，已不再适用&amp;mdash;&amp;mdash;2021年10月18日）
+一、创建一个工程模板 1、以RTOS版本为例，在乐鑫官网下载SDK
+ 链接：https://www.espressif.com/zh-hans/support/download/sdks-demos  点击下载会跳转到Github，选择zip文件
+2、下载后解压，在ESP8266_RTOS_SDK-2.0.0文件夹下新建一个app文件夹
+3、将ESP8266_RTOS_SDK-2.0.0\examples\smart_config目录下的所有文件复制到app文件夹下，目录结构如下：
+4、修改app目录下的gen_misc.sh文件，添加如下路径（后面讲为什么是这个路径）
+export SDK_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0export BIN_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0/bin5、因为分离了sdk和project目录，所以编译之前必须先指定一个SDK_PATH和BIN_PATH，修改ESP8266_RTOS_SDK-2.0.0/app目录下的makefile，添加以下内容并保存
+parent_dir:=$(abspath $(shell pwd)/$(lastword $(MAKEFILE_LIST)))parent_dir:=$(shell dirname $(parent_dir))parent_dir:=$(shell dirname $(parent_dir))SDK_PATH= $(parent_dir)BIN_PATH=$(SDK_PATH)/bin这样，一个ESP8266_RTOS_SDK-2.0.0的工程模板就做好了，保存备用。
+二、安装虚拟机和Linux系统 1、乐鑫esp8266论坛提供了Lubuntu系统
+ 论坛链接：https://bbs.espressif.com  打开链接，点击Tools
+点击ESP8266 Compilre On Lubuntu
+下载ESP8266_GCC，论坛很贴心，压缩包里同时提供了Virtual Box虚拟机软件
+下载好之后解压ESO8266_GCC.zip并安装Virtual Box软件，然后导入 Lubuntu镜像，配置按默认就好。
+2、在D盘目录下新建一个VM文件夹，VM文件夹下新建名为Share的共享文件夹 之后，启动虚拟机
+3、打开终端，输入ls查看文件，输入./mount.sh挂载共享目录
+为了验证是否挂载成功，可新建一个文件验证一下
+同时在windows文件夹下看是否成功新建了这个文件
+如图，说明文件挂载成功，那么就打通了Windows和Linux文件的交互障碍。
+4、终端中输入pwd命令查看当前所在路径
+没错！这个路径也就是上面修改SDK的路径，这时，我们在Windows环境下把之前修改好的工程模板复制到Share文件夹就好了！ 之后输入ls查看
+恭喜！到这里，我们的任务就快完成了。
+三、编译工程文件 1、进入到ESP8266_RTOS_SDK-2.0.0/app目录下
+2、输入./gen_misc.sh执行，并根据提示和你的esp8266模块型号进行配置之后等待编译完成
+到这里，一个Linux下的编译环境就搭建好了，user1.4096.new.4.bin的文件输出在D:\VM\Share\ESP8266_RTOS_SDK-2.0.0\bin\upgrade目录下。</description>
+    </item>
+    
+  </channel>
+</rss>
