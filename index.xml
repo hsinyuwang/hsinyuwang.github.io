@@ -6,7 +6,7 @@
     <description>Recent content on Hsinyuwang&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Tue, 20 Jun 2023 11:05:59 +0800</lastBuildDate><atom:link href="https://www.hsinyuwang.cn/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Jun 2023 09:54:27 +0800</lastBuildDate><atom:link href="https://www.hsinyuwang.cn/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>基于Linux自制GBA游戏机</title>
       <link>https://www.hsinyuwang.cn/hardware/czzqwqqv/</link>
@@ -22,6 +22,18 @@
 提取码：9bp8
  X-Boy 系统镜像构建全流程指南
  ubuntu 系统安装  下载镜像 换源  备份源列表 修改 sources.list 文件 更改为清华镜像源 更新并升级 安装依赖库     安装交叉编译工具链  安装编译器  新建 tool 文件夹并进入 下载交叉编译链 创建文件夹并解压 配置环境变量 安装其他库 验证是否安装成功     uboot 编译  获取 uboot 修改 include/configs/sun8i.</description>
+    </item>
+    
+    <item>
+      <title>T113 tina linux 适配 ili9488 屏幕 i80 16bit</title>
+      <link>https://www.hsinyuwang.cn/hardware/imqrpx8l/</link>
+      <pubDate>Thu, 29 Jun 2023 09:54:27 +0800</pubDate>
+      
+      <guid>https://www.hsinyuwang.cn/hardware/imqrpx8l/</guid>
+      <description>前言 在上一篇文章已经搞定了 T113 tina linux 移植 gpsp 模拟器 接下来适配屏幕驱动。 因为 GBA 原生分辨率是 240x160，所以屏幕选用的是 480x320 的 ili9488，正好可以整数倍缩放。
+初始化屏幕 先从 tina linux 自带的驱动中 copy 一份 st7789v_cpu 的代码，然后对照 ili9488 屏幕厂商提供的初始化代码做修改
+完整代码
+/** drivers/video/fbdev/sunxi/disp2/disp/lcd/ili9488_cpu.c** Copyright (c) 2007-2018 Allwinnertech Co., Ltd.* Author: zhengxiaobin &amp;lt;zhengxiaobin@allwinnertech.com&amp;gt;** This software is licensed under the terms of the GNU General Public* License version 2, as published by the Free Software Foundation, and* may be copied, distributed, and modified under those terms.</description>
     </item>
     
     <item>

@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <title>T113 tina linux 适配 ili9488 屏幕 i80 16bit | 小新的个人站</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <script src="/iconfont/iconfont.js"></script>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="hsinyuwang" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="T113 tina linux 适配 ili9488 屏幕 i80 16bit"/>
+<meta name="twitter:description" content="前言 在上一篇文章已经搞定了 T113 tina linux 移植 gpsp 模拟器 接下来适配屏幕驱动。 因为 GBA 原生分辨率是 240x160，所以屏幕选用的是 480x320 的 ili9488，正好可以整数倍缩放。
+初始化屏幕 先从 tina linux 自带的驱动中 copy 一份 st7789v_cpu 的代码，然后对照 ili9488 屏幕厂商提供的初始化代码做修改
+完整代码
+/** drivers/video/fbdev/sunxi/disp2/disp/lcd/ili9488_cpu.c** Copyright (c) 2007-2018 Allwinnertech Co., Ltd.* Author: zhengxiaobin &lt;zhengxiaobin@allwinnertech.com&gt;** This software is licensed under the terms of the GNU General Public* License version 2, as published by the Free Software Foundation, and* may be copied, distributed, and modified under those terms."/>
+
+    <meta property="og:title" content="T113 tina linux 适配 ili9488 屏幕 i80 16bit" />
+<meta property="og:description" content="前言 在上一篇文章已经搞定了 T113 tina linux 移植 gpsp 模拟器 接下来适配屏幕驱动。 因为 GBA 原生分辨率是 240x160，所以屏幕选用的是 480x320 的 ili9488，正好可以整数倍缩放。
+初始化屏幕 先从 tina linux 自带的驱动中 copy 一份 st7789v_cpu 的代码，然后对照 ili9488 屏幕厂商提供的初始化代码做修改
+完整代码
+/** drivers/video/fbdev/sunxi/disp2/disp/lcd/ili9488_cpu.c** Copyright (c) 2007-2018 Allwinnertech Co., Ltd.* Author: zhengxiaobin &lt;zhengxiaobin@allwinnertech.com&gt;** This software is licensed under the terms of the GNU General Public* License version 2, as published by the Free Software Foundation, and* may be copied, distributed, and modified under those terms." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.hsinyuwang.cn/hardware/imqrpx8l/" /><meta property="article:section" content="hardware" />
+<meta property="article:published_time" content="2023-06-29T09:54:27+08:00" />
+<meta property="article:modified_time" content="2023-06-29T09:54:27+08:00" />
+
+
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.hsinyuwang.cn"><img class="app-header-avatar" src="/avatar.jpg" alt="hsinyuwang" /></a>
+      <h1>Hsinyuwang&#39;s Blog</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/tags/">分类</a>
+      </nav>
+      <p>我的个人博客，有记录有分享</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/hsinyuwang" target="_blank" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a href="https://space.bilibili.com/284239797" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor"  class="icon">
+  <title>bilibili</title>
+  <use xlink:href="#icon-bilibili"></use>
+</svg>
+</a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">T113 tina linux 适配 ili9488 屏幕 i80 16bit</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jun 29, 2023
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          6 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://www.hsinyuwang.cn/tags/%E7%A1%AC%E4%BB%B6/">硬件</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h3 id="前言">前言</h3>
+<p>在上一篇文章已经搞定了 T113 tina linux 移植 gpsp 模拟器 接下来适配屏幕驱动。
+因为 GBA 原生分辨率是 240x160，所以屏幕选用的是 480x320 的 ili9488，正好可以整数倍缩放。</p>
+<h3 id="初始化屏幕">初始化屏幕</h3>
+<p>先从 tina linux 自带的驱动中 copy 一份 st7789v_cpu 的代码，然后对照 ili9488 屏幕厂商提供的初始化代码做修改</p>
+<p><img src="/images/imqrpx8l/1.png" alt=""></p>
+<p>完整代码</p>
+<pre tabindex="0"><code>/*
+ * drivers/video/fbdev/sunxi/disp2/disp/lcd/ili9488_cpu.c
+ *
+ * Copyright (c) 2007-2018 Allwinnertech Co., Ltd.
+ * Author: zhengxiaobin &lt;zhengxiaobin@allwinnertech.com&gt;
+ *
+ * This software is licensed under the terms of the GNU General Public
+ * License version 2, as published by the Free Software Foundation, and
+ * may be copied, distributed, and modified under those terms.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ *
+ */
+
+#include &quot;ili9488_cpu.h&quot;
+
+#define CPU_TRI_MODE
+
+#define DBG_INFO(format, args...) (printk(&quot;[ILI9488 LCD INFO] LINE:%04d--&gt;%s:&quot;format, __LINE__, __func__, ##args))
+#define DBG_ERR(format, args...) (printk(&quot;[ILI9488 LCD ERR] LINE:%04d--&gt;%s:&quot;format, __LINE__, __func__, ##args))
+#define panel_reset(val) sunxi_lcd_gpio_set_value(sel, 0, val)
+#define lcd_cs(val)  sunxi_lcd_gpio_set_value(sel, 1, val)
+
+static void lcd_panel_ili9488_init(u32 sel, struct disp_panel_para *info);
+static void LCD_power_on(u32 sel);
+static void LCD_power_off(u32 sel);
+static void LCD_bl_open(u32 sel);
+static void LCD_bl_close(u32 sel);
+
+static void LCD_panel_init(u32 sel);
+static void LCD_panel_exit(u32 sel);
+
+static void LCD_cfg_panel_info(struct panel_extend_para *info)
+{
+#if 0
+	u32 i = 0, j = 0;
+	u32 items;
+	u8 lcd_gamma_tbl[][2] = {
+	    //{input value, corrected value}
+	    {0, 0},     {15, 15},   {30, 30},   {45, 45},   {60, 60},
+	    {75, 75},   {90, 90},   {105, 105}, {120, 120}, {135, 135},
+	    {150, 150}, {165, 165}, {180, 180}, {195, 195}, {210, 210},
+	    {225, 225}, {240, 240}, {255, 255},
+	};
+
+	u32 lcd_cmap_tbl[2][3][4] = {
+	    {
+		{LCD_CMAP_G0, LCD_CMAP_B1, LCD_CMAP_G2, LCD_CMAP_B3},
+		{LCD_CMAP_B0, LCD_CMAP_R1, LCD_CMAP_B2, LCD_CMAP_R3},
+		{LCD_CMAP_R0, LCD_CMAP_G1, LCD_CMAP_R2, LCD_CMAP_G3},
+	    },
+	    {
+		{LCD_CMAP_B3, LCD_CMAP_G2, LCD_CMAP_B1, LCD_CMAP_G0},
+		{LCD_CMAP_R3, LCD_CMAP_B2, LCD_CMAP_R1, LCD_CMAP_B0},
+		{LCD_CMAP_G3, LCD_CMAP_R2, LCD_CMAP_G1, LCD_CMAP_R0},
+	    },
+	};
+
+	items = sizeof(lcd_gamma_tbl) / 2;
+	for (i = 0; i &lt; items - 1; i++) {
+		u32 num = lcd_gamma_tbl[i + 1][0] - lcd_gamma_tbl[i][0];
+
+		for (j = 0; j &lt; num; j++) {
+			u32 value = 0;
+
+			value =
+			    lcd_gamma_tbl[i][1] +
+			    ((lcd_gamma_tbl[i + 1][1] - lcd_gamma_tbl[i][1]) *
+			     j) /
+				num;
+			info-&gt;lcd_gamma_tbl[lcd_gamma_tbl[i][0] + j] =
+			    (value &lt;&lt; 16) + (value &lt;&lt; 8) + value;
+		}
+	}
+	info-&gt;lcd_gamma_tbl[255] = (lcd_gamma_tbl[items - 1][1] &lt;&lt; 16) +
+				   (lcd_gamma_tbl[items - 1][1] &lt;&lt; 8) +
+				   lcd_gamma_tbl[items - 1][1];
+
+	memcpy(info-&gt;lcd_cmap_tbl, lcd_cmap_tbl, sizeof(lcd_cmap_tbl));
+#endif
+}
+
+static s32 LCD_open_flow(u32 sel)
+{
+	LCD_OPEN_FUNC(sel, LCD_power_on, 120);
+#ifdef CPU_TRI_MODE
+	LCD_OPEN_FUNC(sel, LCD_panel_init, 100);
+	LCD_OPEN_FUNC(sel, sunxi_lcd_tcon_enable, 50);
+#else
+	LCD_OPEN_FUNC(sel, sunxi_lcd_tcon_enable, 100);
+	LCD_OPEN_FUNC(sel, LCD_panel_init, 50);
+#endif
+	LCD_OPEN_FUNC(sel, LCD_bl_open, 0);
+
+	return 0;
+}
+
+static s32 LCD_close_flow(u32 sel)
+{
+	LCD_CLOSE_FUNC(sel, LCD_bl_close, 20);
+#ifdef CPU_TRI_MODE
+	LCD_CLOSE_FUNC(sel, sunxi_lcd_tcon_disable, 10);
+	LCD_CLOSE_FUNC(sel, LCD_panel_exit, 50);
+#else
+	LCD_CLOSE_FUNC(sel, LCD_panel_exit, 10);
+	LCD_CLOSE_FUNC(sel, sunxi_lcd_tcon_disable, 10);
+#endif
+	LCD_CLOSE_FUNC(sel, LCD_power_off, 0);
+
+	return 0;
+}
+
+static void LCD_power_on(u32 sel)
+{
+	/*config lcd_power pin to open lcd power0 */
+	sunxi_lcd_power_enable(sel, 0);
+	sunxi_lcd_pin_cfg(sel, 1);
+
+}
+
+static void LCD_power_off(u32 sel)
+{
+	/*lcd_cs, active low */
+	lcd_cs(1);
+	sunxi_lcd_delay_ms(10);
+	/*lcd_rst, active hight */
+	panel_reset(1);
+	sunxi_lcd_delay_ms(10);
+
+	sunxi_lcd_pin_cfg(sel, 0);
+	/*config lcd_power pin to close lcd power0 */
+	sunxi_lcd_power_disable(sel, 0);
+}
+
+static void LCD_bl_open(u32 sel)
+{
+	sunxi_lcd_pwm_enable(sel);
+	/*config lcd_bl_en pin to open lcd backlight */
+	sunxi_lcd_backlight_enable(sel);
+}
+
+static void LCD_bl_close(u32 sel)
+{
+	/*config lcd_bl_en pin to close lcd backlight */
+	sunxi_lcd_backlight_disable(sel);
+	sunxi_lcd_pwm_disable(sel);
+}
+
+/*static int bootup_flag = 0;*/
+static void LCD_panel_init(u32 sel)
+{
+	struct disp_panel_para *info =
+	    kmalloc(sizeof(struct disp_panel_para), GFP_KERNEL);
+
+	DBG_INFO(&quot;\n&quot;);
+	bsp_disp_get_panel_info(sel, info);
+	lcd_panel_ili9488_init(sel, info);
+
+	kfree(info);
+	return;
+}
+
+static void LCD_panel_exit(u32 sel)
+{
+	sunxi_lcd_cpu_write_index(0, 0x28);
+    sunxi_lcd_delay_ms(10);
+	sunxi_lcd_cpu_write_index(0, 0x10);
+    sunxi_lcd_delay_ms(120);
+}
+
+
+static void lcd_panel_ili9488_init(u32 sel, struct disp_panel_para *info)
+{
+	DBG_INFO(&quot;\n&quot;);
+	/*lcd_cs, active low */
+	lcd_cs(0);
+	sunxi_lcd_delay_ms(10);
+	panel_reset(1);
+	sunxi_lcd_delay_ms(20);
+	panel_reset(0);
+	sunxi_lcd_delay_ms(20);
+	panel_reset(1);
+	sunxi_lcd_delay_ms(120);
+
+	sunxi_lcd_cpu_write_index(0, 0xF7);
+	sunxi_lcd_cpu_write_data(0, 0xA9);
+	sunxi_lcd_cpu_write_data(0, 0x51);
+	sunxi_lcd_cpu_write_data(0, 0x2C);
+	sunxi_lcd_cpu_write_data(0, 0x82);
+
+	sunxi_lcd_cpu_write_index(0, 0xC0);
+	sunxi_lcd_cpu_write_data(0, 0x11);
+	sunxi_lcd_cpu_write_data(0, 0x09);
+
+	sunxi_lcd_cpu_write_index(0, 0xC1);
+	sunxi_lcd_cpu_write_data(0, 0x41);
+
+	sunxi_lcd_cpu_write_index(0, 0xC5);
+	sunxi_lcd_cpu_write_data(0, 0x00);
+	sunxi_lcd_cpu_write_data(0, 0x2A);
+	sunxi_lcd_cpu_write_data(0, 0x80);
+
+	sunxi_lcd_cpu_write_index(0, 0xB1);
+	sunxi_lcd_cpu_write_data(0, 0xB0);
+	sunxi_lcd_cpu_write_data(0, 0x11);
+
+	sunxi_lcd_cpu_write_index(0, 0xB4);
+	sunxi_lcd_cpu_write_data(0, 0x02);
+
+	sunxi_lcd_cpu_write_index(0, 0xB6);
+	sunxi_lcd_cpu_write_data(0, 0x02);
+	sunxi_lcd_cpu_write_data(0, 0x22);
+
+	sunxi_lcd_cpu_write_index(0, 0xB7);
+	sunxi_lcd_cpu_write_data(0, 0xC6);
+
+	sunxi_lcd_cpu_write_index(0, 0xBE);
+	sunxi_lcd_cpu_write_data(0, 0x00);
+	sunxi_lcd_cpu_write_data(0, 0x04);
+
+	sunxi_lcd_cpu_write_index(0, 0xE9);
+	sunxi_lcd_cpu_write_data(0, 0x00);
+
+	sunxi_lcd_cpu_write_index(0, 0x3A);
+	sunxi_lcd_cpu_write_data(0, 0x55);
+
+	sunxi_lcd_cpu_write_index(0, 0xE0);
+	sunxi_lcd_cpu_write_data(0, 0x00);
+	sunxi_lcd_cpu_write_data(0, 0x07);
+	sunxi_lcd_cpu_write_data(0, 0x12);
+	sunxi_lcd_cpu_write_data(0, 0x0B);
+	sunxi_lcd_cpu_write_data(0, 0x18);
+	sunxi_lcd_cpu_write_data(0, 0x0B);
+	sunxi_lcd_cpu_write_data(0, 0x3F);
+	sunxi_lcd_cpu_write_data(0, 0x9B);
+	sunxi_lcd_cpu_write_data(0, 0x4B);
+	sunxi_lcd_cpu_write_data(0, 0x0B);
+	sunxi_lcd_cpu_write_data(0, 0x0F);
+	sunxi_lcd_cpu_write_data(0, 0x0B);
+	sunxi_lcd_cpu_write_data(0, 0x15);
+	sunxi_lcd_cpu_write_data(0, 0x17);
+	sunxi_lcd_cpu_write_data(0, 0x0F);
+
+	sunxi_lcd_cpu_write_index(0, 0xE1);
+	sunxi_lcd_cpu_write_data(0, 0x00);
+	sunxi_lcd_cpu_write_data(0, 0x16);
+	sunxi_lcd_cpu_write_data(0, 0x1B);
+	sunxi_lcd_cpu_write_data(0, 0x02);
+	sunxi_lcd_cpu_write_data(0, 0x0F);
+	sunxi_lcd_cpu_write_data(0, 0x06);
+	sunxi_lcd_cpu_write_data(0, 0x34);
+	sunxi_lcd_cpu_write_data(0, 0x46);
+	sunxi_lcd_cpu_write_data(0, 0x48);
+	sunxi_lcd_cpu_write_data(0, 0x04);
+	sunxi_lcd_cpu_write_data(0, 0x0D);
+	sunxi_lcd_cpu_write_data(0, 0x0D);
+	sunxi_lcd_cpu_write_data(0, 0x35);
+	sunxi_lcd_cpu_write_data(0, 0x36);
+	sunxi_lcd_cpu_write_data(0, 0x0F);
+
+	sunxi_lcd_cpu_write_index(0, 0x2A);
+	sunxi_lcd_cpu_write_data(0, 0x00);
+	sunxi_lcd_cpu_write_data(0, 0x00);
+	sunxi_lcd_cpu_write_data(0, 0x01);
+	sunxi_lcd_cpu_write_data(0, 0xDF);
+
+	sunxi_lcd_cpu_write_index(0, 0x2B);
+	sunxi_lcd_cpu_write_data(0, 0x00);
+	sunxi_lcd_cpu_write_data(0, 0x00);
+	sunxi_lcd_cpu_write_data(0, 0x01);
+	sunxi_lcd_cpu_write_data(0, 0x3F);
+
+	sunxi_lcd_cpu_write_index(0, 0x36);
+	sunxi_lcd_cpu_write_data(0, 0x68);
+
+
+#if defined(CPU_TRI_MODE)
+	/* enable te, mode 0 */
+
+	sunxi_lcd_cpu_write_index(0, 0x35);
+	sunxi_lcd_cpu_write_data(0, 0x00);
+
+#endif
+	sunxi_lcd_cpu_write_index(0, 0x11);
+	sunxi_lcd_delay_ms(120);
+	sunxi_lcd_cpu_write_index(0, 0x29);
+	sunxi_lcd_cpu_write_index(0, 0x2c);
+}
+
+
+/* panel driver name, must mach the name of lcd_drv_name in sys_config.fex */
+struct __lcd_panel ili9488_cpu_panel = {
+	.name = &quot;ili9488_cpu&quot;,
+	.func = {
+		.cfg_panel_info = LCD_cfg_panel_info,
+		.cfg_open_flow = LCD_open_flow,
+		.cfg_close_flow = LCD_close_flow,
+	},
+};
+
+</code></pre><p>Kconfig 添加</p>
+<pre tabindex="0"><code>config LCD_SUPPORT_ILI9488_CPU
+	bool &quot;LCD support ili9488_cpu panel&quot;
+	default n
+	---help---
+		If you want to support ili9488_cpu panel for display driver, select it.
+
+</code></pre><p>Makefile 添加</p>
+<pre tabindex="0"><code>disp-$(CONFIG_LCD_SUPPORT_ILI9488_CPU) += lcd/ili9488_cpu.o
+</code></pre><p>panels.c 添加</p>
+<pre tabindex="0"><code>#ifdef CONFIG_LCD_SUPPORT_ILI9488_CPU
+	&amp;ili9488_cpu_panel,
+#endif
+</code></pre><p>panels.h 添加</p>
+<pre tabindex="0"><code>#ifdef CONFIG_LCD_SUPPORT_ILI9488_CPU
+extern struct __lcd_panel ili9488_cpu_panel;
+#endif
+</code></pre><p>再打开 m kernel_menuconfig</p>
+<pre tabindex="0"><code>Device Drivers  ---&gt;
+	Graphics support  ---&gt; 
+		Frame buffer Devices  ---&gt;
+			Video support for sunxi  ---&gt;
+				LCD panels select  ---&gt;
+					 [*] LCD support ili9488_cpu panel
+</code></pre><h3 id="修改-boarddts">修改 board.dts</h3>
+<p>disp</p>
+<pre tabindex="0"><code>&amp;disp {
+	disp_init_enable         = &lt;1&gt;;
+	disp_mode                = &lt;0&gt;;
+
+	screen0_output_type      = &lt;1&gt;;
+	screen0_output_mode      = &lt;4&gt;;
+
+	screen1_output_type      = &lt;3&gt;;
+	screen1_output_mode      = &lt;4&gt;;
+	
+	screen1_output_format    = &lt;0&gt;;
+	screen1_output_bits      = &lt;0&gt;;
+	screen1_output_eotf      = &lt;4&gt;;
+	screen1_output_cs        = &lt;257&gt;;
+	screen1_output_dvi_hdmi  = &lt;2&gt;;
+	screen1_output_range     = &lt;2&gt;;
+	screen1_output_scan      = &lt;0&gt;;
+	screen1_output_aspect_ratio = &lt;8&gt;;
+	dev0_output_type         = &lt;1&gt;;
+	dev0_output_mode         = &lt;4&gt;;
+	dev0_screen_id           = &lt;0&gt;;
+	dev0_do_hpd              = &lt;0&gt;;
+
+	dev1_output_type         = &lt;4&gt;;
+	dev1_output_mode         = &lt;10&gt;;
+	dev1_screen_id           = &lt;1&gt;;
+	dev1_do_hpd              = &lt;1&gt;;
+
+	def_output_dev           = &lt;1&gt;;
+	hdmi_mode_check          = &lt;3&gt;;
+	disp_rotation_used		 = &lt;1&gt;;
+	degree0					 = &lt;0&gt;;
+	fb0_format               = &lt;10&gt;;
+	fb0_buffer_num           = &lt;1&gt;;	
+	/*fb0_width                = &lt;800&gt;;*/
+	/*fb0_height               = &lt;480&gt;;*/  /*read from lcd*/
+	fb1_format               = &lt;0&gt;;
+	fb1_width                = &lt;0&gt;;
+	fb1_height               = &lt;0&gt;;
+	chn_cfg_mode             = &lt;1&gt;;
+
+	disp_para_zone           = &lt;1&gt;;
+	/*VCC-LCD*/
+/*	dc1sw-supply = &lt;&amp;reg_dc1sw&gt;;*/
+	/*VCC-DSI*/
+/*	eldo3-supply = &lt;&amp;reg_eldo3&gt;;*/
+	/*VCC-PD*/
+/*	dcdc1-supply = &lt;&amp;reg_dcdc1&gt;;*/
+};
+</code></pre><p>lcd0</p>
+<pre tabindex="0"><code>&amp;lcd0 {
+
+	/* part 1 */
+	lcd_used            = &lt;1&gt;;
+	lcd_driver_name     = &quot;ili9488_cpu&quot;;
+
+	/* part 2 */
+	lcd_if              = &lt;1&gt;;
+	lcd_cpu_if	        = &lt;8&gt;;
+
+	/* part 3 */
+	lcd_x               = &lt;480&gt;;
+	lcd_y               = &lt;320&gt;;
+	lcd_width           = &lt;72&gt;;
+	lcd_height          = &lt;48&gt;;
+	lcd_dclk_freq       = &lt;10&gt;;
+	lcd_hbp             = &lt;2&gt;;
+	lcd_ht              = &lt;486&gt;;
+	lcd_hspw            = &lt;2&gt;;
+	lcd_vbp             = &lt;20&gt;;
+	lcd_vt              = &lt;342&gt;;
+	lcd_vspw            = &lt;2&gt;;
+
+	/* part 4 */
+	lcd_pwm_used        = &lt;1&gt;;
+	lcd_pwm_ch          = &lt;8&gt;;
+	lcd_pwm_freq        = &lt;50000&gt;;
+	lcd_pwm_pol         = &lt;1&gt;;
+	lcd_pwm_max_limit   = &lt;255&gt;;
+	lcd_bright_curve_en = &lt;0&gt;;
+
+	/* part 5 */
+	lcd_cpu_mode        = &lt;1&gt;;
+	lcd_cpu_te          = &lt;1&gt;;
+
+	/* part 6 */
+	lcd_frm             = &lt;2&gt;;
+	lcd_gamma_en        = &lt;0&gt;;
+	lcd_cmap_en         = &lt;0&gt;;
+	lcd_rb_swap			= &lt;0&gt;;
+
+	/* part 7 */
+	// reset pin
+	lcd_gpio_0 = &lt;&amp;pio PD 0 GPIO_ACTIVE_HIGH&gt;;
+	// cs pin
+	lcd_gpio_1 = &lt;&amp;pio PD 9 GPIO_ACTIVE_HIGH&gt;;
+	pinctrl-0 = &lt;&amp;rgb16_pins_a&gt;;
+	pinctrl-1 = &lt;&amp;rgb16_pins_b&gt;;
+};
+</code></pre><p>然后在pio中添加</p>
+<pre tabindex="0"><code>rgb16_pins_a: rgb16@0 {
+		pins = &quot;PD1&quot;, &quot;PD2&quot;,&quot;PD3&quot;,&quot;PD4&quot;,&quot;PD5&quot;,&quot;PD6&quot;, &quot;PD7&quot;, &quot;PD8&quot;, \
+				&quot;PD10&quot;, &quot;PD11&quot;, &quot;PD12&quot;, &quot;PD13&quot;, &quot;PD14&quot;, &quot;PD15&quot;, &quot;PD16&quot;, &quot;PD17&quot;, \
+				&quot;PD18&quot;, &quot;PD19&quot;, &quot;PD20&quot;, &quot;PD21&quot;;
+		function = &quot;lcd0&quot;;
+		drive-strength = &lt;30&gt;;
+		bias-disable;
+	};
+
+	rgb16_pins_b: rgb16@1 {
+		pins = &quot;PD1&quot;, &quot;PD2&quot;,&quot;PD3&quot;,&quot;PD4&quot;,&quot;PD5&quot;,&quot;PD6&quot;, &quot;PD7&quot;, &quot;PD8&quot;, \
+				&quot;PD10&quot;, &quot;PD11&quot;, &quot;PD12&quot;, &quot;PD13&quot;, &quot;PD14&quot;, &quot;PD15&quot;, &quot;PD16&quot;, &quot;PD17&quot;, \
+				&quot;PD18&quot;, &quot;PD19&quot;, &quot;PD20&quot;, &quot;PD21&quot;;
+		function = &quot;io_disabled&quot;;
+		bias-disable;
+	};
+</code></pre><h3 id="测试-gpsp-显示">测试 gpsp 显示</h3>
+<p><img src="/images/imqrpx8l/2.png" alt=""></p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+    <meting-js
+    id="7628905309"
+    lrc-type="0"
+    server="netease"
+    order="list"
+    type="playlist"
+    fixed="true"
+    list-olded="true"
+    autoplay="true"
+    mutex="true"
+    >
+    </meting-js>
+  </body>
+</html>
