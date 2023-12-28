@@ -2,27 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://www.hsinyuwang.cn/hardware/czzqwqqv/</loc>
-    <lastmod>2022-12-10T20:54:06+08:00</lastmod>
-  </url><url>
-    <loc>https://www.hsinyuwang.cn/hardware/</loc>
-    <lastmod>2023-06-29T09:54:27+08:00</lastmod>
-  </url><url>
-    <loc>https://www.hsinyuwang.cn/</loc>
-    <lastmod>2023-06-29T09:54:27+08:00</lastmod>
-  </url><url>
-    <loc>https://www.hsinyuwang.cn/hardware/imqrpx8l/</loc>
-    <lastmod>2023-06-29T09:54:27+08:00</lastmod>
-  </url><url>
-    <loc>https://www.hsinyuwang.cn/tags/</loc>
-    <lastmod>2023-06-29T09:54:27+08:00</lastmod>
-  </url><url>
-    <loc>https://www.hsinyuwang.cn/tags/%E7%A1%AC%E4%BB%B6/</loc>
-    <lastmod>2023-06-29T09:54:27+08:00</lastmod>
-  </url><url>
-    <loc>https://www.hsinyuwang.cn/hardware/frwto8re/</loc>
-    <lastmod>2023-06-20T11:05:59+08:00</lastmod>
-  </url><url>
     <loc>https://www.hsinyuwang.cn/tags/docker/</loc>
     <lastmod>2023-03-23T15:00:11+08:00</lastmod>
   </url><url>
@@ -32,29 +11,14 @@
     <loc>https://www.hsinyuwang.cn/docker/k3gsfd9w/</loc>
     <lastmod>2023-03-23T15:00:11+08:00</lastmod>
   </url><url>
+    <loc>https://www.hsinyuwang.cn/</loc>
+    <lastmod>2023-03-23T15:00:11+08:00</lastmod>
+  </url><url>
+    <loc>https://www.hsinyuwang.cn/tags/</loc>
+    <lastmod>2023-03-23T15:00:11+08:00</lastmod>
+  </url><url>
     <loc>https://www.hsinyuwang.cn/docker/gsczcj1s/</loc>
     <lastmod>2023-03-23T14:39:14+08:00</lastmod>
-  </url><url>
-    <loc>https://www.hsinyuwang.cn/hardware/q3g0cbos/</loc>
-    <lastmod>2022-08-01T10:29:02+08:00</lastmod>
-  </url><url>
-    <loc>https://www.hsinyuwang.cn/backend/</loc>
-    <lastmod>2022-08-01T10:04:04+08:00</lastmod>
-  </url><url>
-    <loc>https://www.hsinyuwang.cn/tags/%E5%90%8E%E7%AB%AF/</loc>
-    <lastmod>2022-08-01T10:04:04+08:00</lastmod>
-  </url><url>
-    <loc>https://www.hsinyuwang.cn/backend/uar9bqpe/</loc>
-    <lastmod>2022-08-01T10:04:04+08:00</lastmod>
-  </url><url>
-    <loc>https://www.hsinyuwang.cn/tags/esp32/</loc>
-    <lastmod>2022-01-11T09:39:42+08:00</lastmod>
-  </url><url>
-    <loc>https://www.hsinyuwang.cn/esp32/</loc>
-    <lastmod>2022-01-11T09:39:42+08:00</lastmod>
-  </url><url>
-    <loc>https://www.hsinyuwang.cn/esp32/oh2juknh/</loc>
-    <lastmod>2022-01-11T09:39:42+08:00</lastmod>
   </url><url>
     <loc>https://www.hsinyuwang.cn/tags/hackintosh/</loc>
     <lastmod>2021-12-18T21:01:00+08:00</lastmod>
@@ -68,7 +32,13 @@
     <loc>https://www.hsinyuwang.cn/docker/2rls5bbe/</loc>
     <lastmod>2021-10-21T17:10:40+08:00</lastmod>
   </url><url>
+    <loc>https://www.hsinyuwang.cn/backend/</loc>
+    <lastmod>2021-10-16T15:30:08+08:00</lastmod>
+  </url><url>
     <loc>https://www.hsinyuwang.cn/backend/lttvxhkk/</loc>
+    <lastmod>2021-10-16T15:30:08+08:00</lastmod>
+  </url><url>
+    <loc>https://www.hsinyuwang.cn/tags/%E5%90%8E%E7%AB%AF/</loc>
     <lastmod>2021-10-16T15:30:08+08:00</lastmod>
   </url><url>
     <loc>https://www.hsinyuwang.cn/tags/python/</loc>

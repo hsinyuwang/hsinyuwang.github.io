@@ -5,21 +5,20 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <script src="/iconfont/iconfont.js"></script>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="generator" content="Hugo 0.121.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="hsinyuwang" />
     <meta name="description" content="" />
     <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
 
     
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="docker部署RockerMQ"/>
-<meta name="twitter:description" content="安装NameServer 1、拉取镜像 docker pull rocketmqinc/rocketmq2、创建数据目录 mkdir -p /docker/rocketmq/nameserver/logs /docker/rocketmq/nameserver/store3、运行 docker run -d \--restart=always \--name rmqnamesrv \--privileged=true \-p 9876:9876 \-v /docker/rocketmq/nameserver/logs:/root/logs \-v /docker/rocketmq/nameserver/store:/root/store \-e &quot;MAX_POSSIBLE_HEAP=100000000&quot; rocketmqinc/rocketmq \sh mqnamesrv安装broker 1、创建broker.conf配置文件 目录为 /opt/docker/rocketmq/broker.conf
-brokerClusterName = DefaultClusterbrokerName = broker-abrokerId = 0deleteWhen = 04fileReservedTime = 48brokerRole = ASYNC_MASTERflushDiskType = ASYNC_FLUSHbrokerIP1 = 主机的IP2、启动broker docker run -d \--restart=always \--name rmqbroker \--link rmqnamesrv:namesrv \-p 10911:10911 \-p 10909:10909 \--privileged=true \-v /docker/rocketmq/data/broker/logs:/root/logs \-v /docker/rocketmq/data/broker/store:/root/store \-v /docker/rocketmq/conf/broker."/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="docker部署RockerMQ"/>
+<meta name="twitter:description" content="安装NameServer 1、拉取镜像 docker pull rocketmqinc/rocketmq 2、创建数据目录 mkdir -p /docker/rocketmq/nameserver/logs /docker/rocketmq/nameserver/store 3、运行 docker run -d \--restart=always \--name rmqnamesrv \--privileged=true \-p 9876:9876 \-v /docker/rocketmq/nameserver/logs:/root/logs \-v /docker/rocketmq/nameserver/store:/root/store \-e &#34;MAX_POSSIBLE_HEAP=100000000&#34; rocketmqinc/rocketmq \sh mqnamesrv 安装broker 1、创建broker.conf配置文件 目录为 /opt/docker/rocketmq/broker.conf
+brokerClusterName = DefaultClusterbrokerName = broker-abrokerId = 0deleteWhen = 04fileReservedTime = 48brokerRole = ASYNC_MASTERflushDiskType = ASYNC_FLUSHbrokerIP1 = 主机的IP 2、启动broker docker run -d \--restart=always \--name rmqbroker \--link rmqnamesrv:namesrv \-p 10911:10911 \-p 10909:10909 \--privileged=true \-v /docker/rocketmq/data/broker/logs:/root/logs \-v /docker/rocketmq/data/broker/store:/root/store \-v /docker/rocketmq/conf/broker."/>
 
     <meta property="og:title" content="docker部署RockerMQ" />
-<meta property="og:description" content="安装NameServer 1、拉取镜像 docker pull rocketmqinc/rocketmq2、创建数据目录 mkdir -p /docker/rocketmq/nameserver/logs /docker/rocketmq/nameserver/store3、运行 docker run -d \--restart=always \--name rmqnamesrv \--privileged=true \-p 9876:9876 \-v /docker/rocketmq/nameserver/logs:/root/logs \-v /docker/rocketmq/nameserver/store:/root/store \-e &quot;MAX_POSSIBLE_HEAP=100000000&quot; rocketmqinc/rocketmq \sh mqnamesrv安装broker 1、创建broker.conf配置文件 目录为 /opt/docker/rocketmq/broker.conf
-brokerClusterName = DefaultClusterbrokerName = broker-abrokerId = 0deleteWhen = 04fileReservedTime = 48brokerRole = ASYNC_MASTERflushDiskType = ASYNC_FLUSHbrokerIP1 = 主机的IP2、启动broker docker run -d \--restart=always \--name rmqbroker \--link rmqnamesrv:namesrv \-p 10911:10911 \-p 10909:10909 \--privileged=true \-v /docker/rocketmq/data/broker/logs:/root/logs \-v /docker/rocketmq/data/broker/store:/root/store \-v /docker/rocketmq/conf/broker." />
+<meta property="og:description" content="安装NameServer 1、拉取镜像 docker pull rocketmqinc/rocketmq 2、创建数据目录 mkdir -p /docker/rocketmq/nameserver/logs /docker/rocketmq/nameserver/store 3、运行 docker run -d \--restart=always \--name rmqnamesrv \--privileged=true \-p 9876:9876 \-v /docker/rocketmq/nameserver/logs:/root/logs \-v /docker/rocketmq/nameserver/store:/root/store \-e &#34;MAX_POSSIBLE_HEAP=100000000&#34; rocketmqinc/rocketmq \sh mqnamesrv 安装broker 1、创建broker.conf配置文件 目录为 /opt/docker/rocketmq/broker.conf
+brokerClusterName = DefaultClusterbrokerName = broker-abrokerId = 0deleteWhen = 04fileReservedTime = 48brokerRole = ASYNC_MASTERflushDiskType = ASYNC_FLUSHbrokerIP1 = 主机的IP 2、启动broker docker run -d \--restart=always \--name rmqbroker \--link rmqnamesrv:namesrv \-p 10911:10911 \-p 10909:10909 \--privileged=true \-v /docker/rocketmq/data/broker/logs:/root/logs \-v /docker/rocketmq/data/broker/store:/root/store \-v /docker/rocketmq/conf/broker." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.hsinyuwang.cn/docker/gsczcj1s/" /><meta property="article:section" content="docker" />
 <meta property="article:published_time" content="2023-03-23T14:39:14+08:00" />
@@ -28,10 +27,9 @@ brokerClusterName = DefaultClusterbrokerName = broker-abrokerId = 0deleteWhen
 
 
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
     
-    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    
+    
   </head>
   <body>
     <header class="app-header">
@@ -100,7 +98,7 @@ brokerClusterName = DefaultClusterbrokerName = broker-abrokerId = 0deleteWhen
 -p 9876:9876  \
 -v /docker/rocketmq/nameserver/logs:/root/logs \
 -v /docker/rocketmq/nameserver/store:/root/store \
--e &quot;MAX_POSSIBLE_HEAP=100000000&quot; rocketmqinc/rocketmq \
+-e &#34;MAX_POSSIBLE_HEAP=100000000&#34; rocketmqinc/rocketmq \
 sh mqnamesrv
 </code></pre><h2 id="安装broker">安装broker</h2>
 <h3 id="1创建brokerconf配置文件">1、创建broker.conf配置文件</h3>
@@ -124,8 +122,8 @@ brokerIP1 = 主机的IP
 -v /docker/rocketmq/data/broker/logs:/root/logs \
 -v /docker/rocketmq/data/broker/store:/root/store \
 -v /docker/rocketmq/conf/broker.conf:/opt/docker/rocketmq/broker.conf \
--e &quot;NAMESRV_ADDR=namesrv:9876&quot; \
--e &quot;MAX_POSSIBLE_HEAP=200000000&quot; rocketmqinc/rocketmq \
+-e &#34;NAMESRV_ADDR=namesrv:9876&#34; \
+-e &#34;MAX_POSSIBLE_HEAP=200000000&#34; rocketmqinc/rocketmq \
 sh mqbroker -c /opt/docker/rocketmq/broker.conf
 </code></pre><h2 id="安装控制台">安装控制台</h2>
 <h3 id="1拉取镜像-1">1、拉取镜像</h3>
@@ -134,7 +132,7 @@ sh mqbroker -c /opt/docker/rocketmq/broker.conf
 <pre tabindex="0"><code>docker run -d \
 --restart=always \
 --name rmqadmin \
--e &quot;JAVA_OPTS=-Drocketmq.namesrv.addr=ip:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false&quot; \
+-e &#34;JAVA_OPTS=-Drocketmq.namesrv.addr=ip:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false&#34; \
 -p 8080:8080 pangliang/rocketmq-console-ng
 </code></pre>
     </div>
@@ -144,17 +142,6 @@ sh mqbroker -c /opt/docker/rocketmq/broker.conf
   </article>
 
     </main>
-    <meting-js
-    id="7628905309"
-    lrc-type="0"
-    server="netease"
-    order="list"
-    type="playlist"
-    fixed="true"
-    list-olded="true"
-    autoplay="true"
-    mutex="true"
-    >
-    </meting-js>
+    
   </body>
 </html>

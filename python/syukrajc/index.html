@@ -5,25 +5,24 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <script src="/iconfont/iconfont.js"></script>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="generator" content="Hugo 0.121.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="hsinyuwang" />
     <meta name="description" content="" />
     <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
 
     
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="CentOS 7部署Django项目（2）"/>
-<meta name="twitter:description" content="一、安装nginx 预先安装额外的依赖 yum -y install pcre-develyum -y install openssl openssl-devel下载 wget http://nginx.org/download/nginx-1.9.9.tar.gz 解压 tar -zxvf nginx-1.9.9.tar.gz安装 进入到解压目录
-./configure --prefix=/usr/local/nginxmake &amp;&amp; make install启动 /usr/local/nginx/sbin/nginx停止服务 /usr/local/nginx/sbin/nginx -s stop重新加载Nginx配置 /usr/local/nginx/sbin/nginx -s reload二、配置 nginx代理uwsgi和静态资源 修改nginx.conf文件
-location / {proxy_pass http://localhost:8000; }location /images {alias /home/username/projectname/images/;}配置完报403错误，需要加权限，在开头加上
-user root;"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="CentOS 7部署Django项目（2）"/>
+<meta name="twitter:description" content="一、安装nginx 预先安装额外的依赖 yum -y install pcre-develyum -y install openssl openssl-devel 下载 wget http://nginx.org/download/nginx-1.9.9.tar.gz 解压 tar -zxvf nginx-1.9.9.tar.gz 安装 进入到解压目录
+./configure --prefix=/usr/local/nginxmake &amp;&amp; make install 启动 /usr/local/nginx/sbin/nginx 停止服务 /usr/local/nginx/sbin/nginx -s stop 重新加载Nginx配置 /usr/local/nginx/sbin/nginx -s reload 二、配置 nginx代理uwsgi和静态资源 修改nginx.conf文件
+location / {proxy_pass http://localhost:8000; }location /images {alias /home/username/projectname/images/;} 配置完报403错误，需要加权限，在开头加上
+user root; "/>
 
     <meta property="og:title" content="CentOS 7部署Django项目（2）" />
-<meta property="og:description" content="一、安装nginx 预先安装额外的依赖 yum -y install pcre-develyum -y install openssl openssl-devel下载 wget http://nginx.org/download/nginx-1.9.9.tar.gz 解压 tar -zxvf nginx-1.9.9.tar.gz安装 进入到解压目录
-./configure --prefix=/usr/local/nginxmake &amp;&amp; make install启动 /usr/local/nginx/sbin/nginx停止服务 /usr/local/nginx/sbin/nginx -s stop重新加载Nginx配置 /usr/local/nginx/sbin/nginx -s reload二、配置 nginx代理uwsgi和静态资源 修改nginx.conf文件
-location / {proxy_pass http://localhost:8000; }location /images {alias /home/username/projectname/images/;}配置完报403错误，需要加权限，在开头加上
-user root;" />
+<meta property="og:description" content="一、安装nginx 预先安装额外的依赖 yum -y install pcre-develyum -y install openssl openssl-devel 下载 wget http://nginx.org/download/nginx-1.9.9.tar.gz 解压 tar -zxvf nginx-1.9.9.tar.gz 安装 进入到解压目录
+./configure --prefix=/usr/local/nginxmake &amp;&amp; make install 启动 /usr/local/nginx/sbin/nginx 停止服务 /usr/local/nginx/sbin/nginx -s stop 重新加载Nginx配置 /usr/local/nginx/sbin/nginx -s reload 二、配置 nginx代理uwsgi和静态资源 修改nginx.conf文件
+location / {proxy_pass http://localhost:8000; }location /images {alias /home/username/projectname/images/;} 配置完报403错误，需要加权限，在开头加上
+user root; " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.hsinyuwang.cn/python/syukrajc/" /><meta property="article:section" content="python" />
 <meta property="article:published_time" content="2020-05-14T08:55:56+08:00" />
@@ -32,10 +31,9 @@ user root;" />
 
 
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
     
-    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    
+    
   </head>
   <body>
     <header class="app-header">
@@ -128,17 +126,6 @@ location /images {
   </article>
 
     </main>
-    <meting-js
-    id="7628905309"
-    lrc-type="0"
-    server="netease"
-    order="list"
-    type="playlist"
-    fixed="true"
-    list-olded="true"
-    autoplay="true"
-    mutex="true"
-    >
-    </meting-js>
+    
   </body>
 </html>

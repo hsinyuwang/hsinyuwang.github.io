@@ -5,25 +5,24 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <script src="/iconfont/iconfont.js"></script>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="generator" content="Hugo 0.121.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="hsinyuwang" />
     <meta name="description" content="" />
     <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
 
     
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="esp8266Linux下开发环境搭建"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="esp8266Linux下开发环境搭建"/>
 <meta name="twitter:description" content="前言：esp8266的开发方式有多种，例如：AT指令版、SDK版、Arduino版、NodeMCU固件和Lua、MicroPython、JS开发esp8266等等。而SDK版的开发成本低，不像AT指令版那样需要外置MCU，所以本教程就采用乐鑫官方的SDk为例进行环境的搭建，此环境需要用到的软件：VirtualBox&#43;Linux&#43;交叉编译工具。（文章过于久远，已不再适用&mdash;&mdash;2021年10月18日）
 一、创建一个工程模板 1、以RTOS版本为例，在乐鑫官网下载SDK
- 链接：https://www.espressif.com/zh-hans/support/download/sdks-demos  点击下载会跳转到Github，选择zip文件
+链接：https://www.espressif.com/zh-hans/support/download/sdks-demos 点击下载会跳转到Github，选择zip文件
 2、下载后解压，在ESP8266_RTOS_SDK-2.0.0文件夹下新建一个app文件夹
 3、将ESP8266_RTOS_SDK-2.0.0\examples\smart_config目录下的所有文件复制到app文件夹下，目录结构如下：
 4、修改app目录下的gen_misc.sh文件，添加如下路径（后面讲为什么是这个路径）
-export SDK_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0export BIN_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0/bin5、因为分离了sdk和project目录，所以编译之前必须先指定一个SDK_PATH和BIN_PATH，修改ESP8266_RTOS_SDK-2.0.0/app目录下的makefile，添加以下内容并保存
-parent_dir:=$(abspath $(shell pwd)/$(lastword $(MAKEFILE_LIST)))parent_dir:=$(shell dirname $(parent_dir))parent_dir:=$(shell dirname $(parent_dir))SDK_PATH= $(parent_dir)BIN_PATH=$(SDK_PATH)/bin这样，一个ESP8266_RTOS_SDK-2.0.0的工程模板就做好了，保存备用。
+export SDK_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0export BIN_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0/bin 5、因为分离了sdk和project目录，所以编译之前必须先指定一个SDK_PATH和BIN_PATH，修改ESP8266_RTOS_SDK-2.0.0/app目录下的makefile，添加以下内容并保存
+parent_dir:=$(abspath $(shell pwd)/$(lastword $(MAKEFILE_LIST)))parent_dir:=$(shell dirname $(parent_dir))parent_dir:=$(shell dirname $(parent_dir))SDK_PATH= $(parent_dir)BIN_PATH=$(SDK_PATH)/bin 这样，一个ESP8266_RTOS_SDK-2.0.0的工程模板就做好了，保存备用。
 二、安装虚拟机和Linux系统 1、乐鑫esp8266论坛提供了Lubuntu系统
- 论坛链接：https://bbs.espressif.com  打开链接，点击Tools
+论坛链接：https://bbs.espressif.com 打开链接，点击Tools
 点击ESP8266 Compilre On Lubuntu
 下载ESP8266_GCC，论坛很贴心，压缩包里同时提供了Virtual Box虚拟机软件
 下载好之后解压ESO8266_GCC.zip并安装Virtual Box软件，然后导入 Lubuntu镜像，配置按默认就好。
@@ -42,14 +41,14 @@ parent_dir:=$(abspath $(shell pwd)/$(lastword $(MAKEFILE_LIST)))parent_dir:=$(s
     <meta property="og:title" content="esp8266Linux下开发环境搭建" />
 <meta property="og:description" content="前言：esp8266的开发方式有多种，例如：AT指令版、SDK版、Arduino版、NodeMCU固件和Lua、MicroPython、JS开发esp8266等等。而SDK版的开发成本低，不像AT指令版那样需要外置MCU，所以本教程就采用乐鑫官方的SDk为例进行环境的搭建，此环境需要用到的软件：VirtualBox&#43;Linux&#43;交叉编译工具。（文章过于久远，已不再适用&mdash;&mdash;2021年10月18日）
 一、创建一个工程模板 1、以RTOS版本为例，在乐鑫官网下载SDK
- 链接：https://www.espressif.com/zh-hans/support/download/sdks-demos  点击下载会跳转到Github，选择zip文件
+链接：https://www.espressif.com/zh-hans/support/download/sdks-demos 点击下载会跳转到Github，选择zip文件
 2、下载后解压，在ESP8266_RTOS_SDK-2.0.0文件夹下新建一个app文件夹
 3、将ESP8266_RTOS_SDK-2.0.0\examples\smart_config目录下的所有文件复制到app文件夹下，目录结构如下：
 4、修改app目录下的gen_misc.sh文件，添加如下路径（后面讲为什么是这个路径）
-export SDK_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0export BIN_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0/bin5、因为分离了sdk和project目录，所以编译之前必须先指定一个SDK_PATH和BIN_PATH，修改ESP8266_RTOS_SDK-2.0.0/app目录下的makefile，添加以下内容并保存
-parent_dir:=$(abspath $(shell pwd)/$(lastword $(MAKEFILE_LIST)))parent_dir:=$(shell dirname $(parent_dir))parent_dir:=$(shell dirname $(parent_dir))SDK_PATH= $(parent_dir)BIN_PATH=$(SDK_PATH)/bin这样，一个ESP8266_RTOS_SDK-2.0.0的工程模板就做好了，保存备用。
+export SDK_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0export BIN_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0/bin 5、因为分离了sdk和project目录，所以编译之前必须先指定一个SDK_PATH和BIN_PATH，修改ESP8266_RTOS_SDK-2.0.0/app目录下的makefile，添加以下内容并保存
+parent_dir:=$(abspath $(shell pwd)/$(lastword $(MAKEFILE_LIST)))parent_dir:=$(shell dirname $(parent_dir))parent_dir:=$(shell dirname $(parent_dir))SDK_PATH= $(parent_dir)BIN_PATH=$(SDK_PATH)/bin 这样，一个ESP8266_RTOS_SDK-2.0.0的工程模板就做好了，保存备用。
 二、安装虚拟机和Linux系统 1、乐鑫esp8266论坛提供了Lubuntu系统
- 论坛链接：https://bbs.espressif.com  打开链接，点击Tools
+论坛链接：https://bbs.espressif.com 打开链接，点击Tools
 点击ESP8266 Compilre On Lubuntu
 下载ESP8266_GCC，论坛很贴心，压缩包里同时提供了Virtual Box虚拟机软件
 下载好之后解压ESO8266_GCC.zip并安装Virtual Box软件，然后导入 Lubuntu镜像，配置按默认就好。
@@ -72,10 +71,9 @@ parent_dir:=$(abspath $(shell pwd)/$(lastword $(MAKEFILE_LIST)))parent_dir:=$(s
 
 
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
     
-    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    
+    
   </head>
   <body>
     <header class="app-header">
@@ -201,17 +199,6 @@ BIN_PATH=$(SDK_PATH)/bin
   </article>
 
     </main>
-    <meting-js
-    id="7628905309"
-    lrc-type="0"
-    server="netease"
-    order="list"
-    type="playlist"
-    fixed="true"
-    list-olded="true"
-    autoplay="true"
-    mutex="true"
-    >
-    </meting-js>
+    
   </body>
 </html>

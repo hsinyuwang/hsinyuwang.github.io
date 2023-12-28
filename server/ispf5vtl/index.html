@@ -5,19 +5,18 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <script src="/iconfont/iconfont.js"></script>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="generator" content="Hugo 0.121.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="hsinyuwang" />
     <meta name="description" content="" />
     <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
 
     
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="CentOS 7 Spring Boot启动脚本"/>
-<meta name="twitter:description" content="#!/bin/bash#这里可替换为你自己的执行程序，其他代码无需更改APP_NAME=包名.jar#使用说明，用来提示输入参数usage() {echo &quot;Usage: sh wss.sh [start|stop|restart|status]&quot;exit 1}#检查程序是否在运行is_exist(){pid=`ps -ef|grep $APP_NAME|grep -v grep|awk &#39;{print $2}&#39; `#如果不存在返回1，存在返回0 if [ -z &quot;${pid}&quot; ]; thenreturn 1elsereturn 0fi}#启动方法start(){is_existif [ $? -eq &quot;0&quot; ]; thenecho &quot;${APP_NAME} is already running. pid=${pid} .&quot;elsenohup java -jar /root/project/websocket/$APP_NAME &gt; /root/project/websocket/websocketserverlog.file 2&gt;&amp;1 &amp;echo &quot;${APP_NAME} start success&quot;fi}#停止方法stop(){is_existif [ $?"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="CentOS 7 Spring Boot启动脚本"/>
+<meta name="twitter:description" content="#!/bin/bash#这里可替换为你自己的执行程序，其他代码无需更改APP_NAME=包名.jar#使用说明，用来提示输入参数usage() {echo &#34;Usage: sh wss.sh [start|stop|restart|status]&#34;exit 1}#检查程序是否在运行is_exist(){pid=`ps -ef|grep $APP_NAME|grep -v grep|awk &#39;{print $2}&#39; `#如果不存在返回1，存在返回0 if [ -z &#34;${pid}&#34; ]; thenreturn 1elsereturn 0fi}#启动方法start(){is_existif [ $? -eq &#34;0&#34; ]; thenecho &#34;${APP_NAME} is already running. pid=${pid} .&#34;elsenohup java -jar /root/project/websocket/$APP_NAME &gt; /root/project/websocket/websocketserverlog.file 2&gt;&amp;1 &amp;echo &#34;${APP_NAME} start success&#34;fi}#停止方法stop(){is_existif [ $?"/>
 
     <meta property="og:title" content="CentOS 7 Spring Boot启动脚本" />
-<meta property="og:description" content="#!/bin/bash#这里可替换为你自己的执行程序，其他代码无需更改APP_NAME=包名.jar#使用说明，用来提示输入参数usage() {echo &quot;Usage: sh wss.sh [start|stop|restart|status]&quot;exit 1}#检查程序是否在运行is_exist(){pid=`ps -ef|grep $APP_NAME|grep -v grep|awk &#39;{print $2}&#39; `#如果不存在返回1，存在返回0 if [ -z &quot;${pid}&quot; ]; thenreturn 1elsereturn 0fi}#启动方法start(){is_existif [ $? -eq &quot;0&quot; ]; thenecho &quot;${APP_NAME} is already running. pid=${pid} .&quot;elsenohup java -jar /root/project/websocket/$APP_NAME &gt; /root/project/websocket/websocketserverlog.file 2&gt;&amp;1 &amp;echo &quot;${APP_NAME} start success&quot;fi}#停止方法stop(){is_existif [ $?" />
+<meta property="og:description" content="#!/bin/bash#这里可替换为你自己的执行程序，其他代码无需更改APP_NAME=包名.jar#使用说明，用来提示输入参数usage() {echo &#34;Usage: sh wss.sh [start|stop|restart|status]&#34;exit 1}#检查程序是否在运行is_exist(){pid=`ps -ef|grep $APP_NAME|grep -v grep|awk &#39;{print $2}&#39; `#如果不存在返回1，存在返回0 if [ -z &#34;${pid}&#34; ]; thenreturn 1elsereturn 0fi}#启动方法start(){is_existif [ $? -eq &#34;0&#34; ]; thenecho &#34;${APP_NAME} is already running. pid=${pid} .&#34;elsenohup java -jar /root/project/websocket/$APP_NAME &gt; /root/project/websocket/websocketserverlog.file 2&gt;&amp;1 &amp;echo &#34;${APP_NAME} start success&#34;fi}#停止方法stop(){is_existif [ $?" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.hsinyuwang.cn/server/ispf5vtl/" /><meta property="article:section" content="server" />
 <meta property="article:published_time" content="2020-09-21T10:11:20+08:00" />
@@ -26,10 +25,9 @@
 
 
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
     
-    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    
+    
   </head>
   <body>
     <header class="app-header">
@@ -91,15 +89,15 @@ APP_NAME=包名.jar
 
 #使用说明，用来提示输入参数
 usage() {
-  echo &quot;Usage: sh wss.sh [start|stop|restart|status]&quot;
+  echo &#34;Usage: sh wss.sh [start|stop|restart|status]&#34;
   exit 1
 }
  
 #检查程序是否在运行
 is_exist(){
-  pid=`ps -ef|grep $APP_NAME|grep -v grep|awk '{print $2}' `
+  pid=`ps -ef|grep $APP_NAME|grep -v grep|awk &#39;{print $2}&#39; `
   #如果不存在返回1，存在返回0     
-  if [ -z &quot;${pid}&quot; ]; then
+  if [ -z &#34;${pid}&#34; ]; then
     return 1
   else
     return 0
@@ -109,31 +107,31 @@ is_exist(){
 #启动方法
 start(){
   is_exist
-    if [ $? -eq &quot;0&quot; ]; then
-      echo &quot;${APP_NAME} is already running. pid=${pid} .&quot;
+    if [ $? -eq &#34;0&#34; ]; then
+      echo &#34;${APP_NAME} is already running. pid=${pid} .&#34;
     else
       nohup java -jar /root/project/websocket/$APP_NAME &gt; /root/project/websocket/websocketserverlog.file 2&gt;&amp;1 &amp;
-      echo &quot;${APP_NAME} start success&quot;
+      echo &#34;${APP_NAME} start success&#34;
     fi
  }
   
 #停止方法
 stop(){
   is_exist
-    if [ $? -eq &quot;0&quot; ]; then
+    if [ $? -eq &#34;0&#34; ]; then
       kill -9 $pid
     else
-      echo &quot;${APP_NAME} is not running&quot;
+      echo &#34;${APP_NAME} is not running&#34;
     fi  
 }
   
 #输出运行状态
 status(){
   is_exist
-    if [ $? -eq &quot;0&quot; ]; then
-      echo &quot;${APP_NAME} is running. Pid is ${pid}&quot;
+    if [ $? -eq &#34;0&#34; ]; then
+      echo &#34;${APP_NAME} is running. Pid is ${pid}&#34;
     else
-      echo &quot;${APP_NAME} is NOT running.&quot;
+      echo &#34;${APP_NAME} is NOT running.&#34;
     fi
 }
   
@@ -144,17 +142,17 @@ restart(){
 }
   
 #根据输入参数，选择执行对应方法，不输入则执行使用说明
-case &quot;$1&quot; in
-  &quot;start&quot;)
+case &#34;$1&#34; in
+  &#34;start&#34;)
     start
     ;;
-  &quot;stop&quot;)
+  &#34;stop&#34;)
     stop
     ;;
-  &quot;status&quot;)
+  &#34;status&#34;)
     status
     ;;
-  &quot;restart&quot;)
+  &#34;restart&#34;)
     restart
     ;;
   *)
@@ -162,8 +160,8 @@ case &quot;$1&quot; in
     ;;
 esac
 </code></pre><p>启动命令</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sh wss.sh start
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sh wss.sh start
+</span></span></code></pre></div>
     </div>
     <div class="post-footer">
       
@@ -171,17 +169,6 @@ esac
   </article>
 
     </main>
-    <meting-js
-    id="7628905309"
-    lrc-type="0"
-    server="netease"
-    order="list"
-    type="playlist"
-    fixed="true"
-    list-olded="true"
-    autoplay="true"
-    mutex="true"
-    >
-    </meting-js>
+    
   </body>
 </html>

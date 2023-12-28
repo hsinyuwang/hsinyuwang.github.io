@@ -6,32 +6,21 @@
     <description>Recent content in Raspberries on Hsinyuwang&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Fri, 30 Jul 2021 15:30:08 +0800</lastBuildDate><atom:link href="https://www.hsinyuwang.cn/raspberry/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Jul 2021 15:30:08 +0800</lastBuildDate>
+    <atom:link href="https://www.hsinyuwang.cn/raspberry/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>树莓派安装docker</title>
       <link>https://www.hsinyuwang.cn/raspberry/sebqcyck/</link>
       <pubDate>Fri, 30 Jul 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/raspberry/sebqcyck/</guid>
-      <description>树莓派最常用的系统为Raspbian，是基于Debian的一套Linux系统。查询docker官网可以看到这样一句提示：
- Raspbian users cannot use this method!
-For Raspbian, installing using the repository is not yet supported. You must instead use the convenience script.
- 所以根据官网建议，我们最好是使用docker官方提供的便捷脚本来一键安装
-$ curl -fsSL https://get.docker.com -o get-docker.sh$ sudo sh get-docker.sh</description>
+      <description>树莓派最常用的系统为Raspbian，是基于Debian的一套Linux系统。查询docker官网可以看到这样一句提示：&#xA;Raspbian users cannot use this method!&#xA;For Raspbian, installing using the repository is not yet supported. You must instead use the convenience script.&#xA;所以根据官网建议，我们最好是使用docker官方提供的便捷脚本来一键安装&#xA;$ curl -fsSL https://get.docker.com -o get-docker.sh&#xD;$ sudo sh get-docker.sh </description>
     </item>
-    
     <item>
       <title>树莓派安装wiringPi</title>
       <link>https://www.hsinyuwang.cn/raspberry/v0nxyspx/</link>
       <pubDate>Thu, 29 Jul 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/raspberry/v0nxyspx/</guid>
-      <description>在执行gpio -v时出现如下错误
-发现系统支持的最高版本为GLIBC_2.23,显然不支持GLIBC_2.28
-解决办法： 进入wiringPI官网找到 http://wiringpi.com/wiringpi-updated-for-the-pi-v3plus/
-修改下载wiringPi的库版本
-cd /tmpwget https://unicorn.drogon.net/wiringpi-2.46-1.debsudo dpkg -i wiringpi-2.46-1.deb</description>
+      <description>在执行gpio -v时出现如下错误&#xA;发现系统支持的最高版本为GLIBC_2.23,显然不支持GLIBC_2.28&#xA;解决办法： 进入wiringPI官网找到 http://wiringpi.com/wiringpi-updated-for-the-pi-v3plus/&#xA;修改下载wiringPi的库版本&#xA;cd /tmp&#xD;wget https://unicorn.drogon.net/wiringpi-2.46-1.deb&#xD;sudo dpkg -i wiringpi-2.46-1.deb </description>
     </item>
-    
   </channel>
 </rss>

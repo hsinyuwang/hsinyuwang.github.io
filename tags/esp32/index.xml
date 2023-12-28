@@ -1,21 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>esp32 on Hsinyuwang&#39;s Blog</title>
-    <link>https://www.hsinyuwang.cn/tags/esp32/</link>
-    <description>Recent content in esp32 on Hsinyuwang&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh</language>
-    <lastBuildDate>Tue, 11 Jan 2022 09:39:42 +0800</lastBuildDate><atom:link href="https://www.hsinyuwang.cn/tags/esp32/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>自制GameBoy游戏机</title>
-      <link>https://www.hsinyuwang.cn/esp32/oh2juknh/</link>
-      <pubDate>Tue, 11 Jan 2022 09:39:42 +0800</pubDate>
-      
-      <guid>https://www.hsinyuwang.cn/esp32/oh2juknh/</guid>
-      <description>一、主要采用的元件  esp32 主控 uda1334 音频解码 pam8403 功率放大器 ch340c usb转串口 pcf8574 IO扩展 2.4寸 320*240屏幕  二、功能  模拟NES GameBoy和GameBoyColor Sega Master System 、Game Gear和Coleco Vision 播放WAV、MP3、OGG 和 FLAC 音频文件  三、成品效果图 四、项目地址 制作过程见下面的视频：bilibili
-.meta-media {position: relative;margin-bottom: 30px;display: flex;width: 100%;height: 0;padding-bottom: 75%;}.video {position: absolute;width: 100%;height: 100%;left: 0;top: 0;} </description>
-    </item>
-    
-  </channel>
-</rss>

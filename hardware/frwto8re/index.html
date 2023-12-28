@@ -1,172 +1,0 @@
-<!doctype html>
-<html lang="zh">
-  <head>
-    <title>T113 tina linux 移植 gpsp 模拟器 | 小新的个人站</title>
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <script src="/iconfont/iconfont.js"></script>
-    <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.88.1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="hsinyuwang" />
-    <meta name="description" content="" />
-    <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
-
-    
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="T113 tina linux 移植 gpsp 模拟器"/>
-<meta name="twitter:description" content="gpsp 依赖 SDL 和 SDL_TTF  SDL 1.2.5 的移植可以看这篇文章 d1s移植sdl1-2-15版本，makefile中需要关掉 directfb 和 tslib  CONFIGURE_ARGS &#43;= \--enable-static=no \--disable-video-directfb \--enable-input-tslib=no \同时在 menuconfig 中也关掉 directfb
- SDL_TTF 可以在 openwrt 的 package 中找到 https://github.com/robbie-cao/openwrt-packages-kyak 直接将 libsdl-ttf 复制到 tina linux 的 package/libs 目录下，这个 makefile 里面是 2.0.9 的版本，可以修改到 2.0.11 ，对应修改 md5sum 为 61e29bd9da8d245bc2471d1b2ce591aa  PKG_NAME:=libsdl-ttfPKG_VERSION:=2.0.11PKG_RELEASE:=2PKG_SOURCE:=SDL_ttf-$(PKG_VERSION).tar.gzPKG_SOURCE_URL:=http://www.libsdl.org/projects/SDL_ttf/release/PKG_MD5SUM:=61e29bd9da8d245bc2471d1b2ce591aaPKG_BUILD_DIR:=$(COMPILE_DIR)/SDL_ttf-$(PKG_VERSION)编译好之后 开始编译 gpsp  修改 CFLAGS 添加头文件路径  -I/home/hsinyuwang/t113/tina-d1-h/out/t113-nezha/staging_dir/target/usr/include/SDL -I/home/hsinyuwang/t113/tina-d1-h/out/t113-nezha/staging_dir/target/usr/include 修改 LDFLAGS 添加库文件路径  -L/home/hsinyuwang/t113/tina-d1-h/out/t113-nezha/staging_dir/target/usr/lib 修改 LIBS 添加需要链接的库文件  -lfreetype -lbz2完整的 makefile"/>
-
-    <meta property="og:title" content="T113 tina linux 移植 gpsp 模拟器" />
-<meta property="og:description" content="gpsp 依赖 SDL 和 SDL_TTF  SDL 1.2.5 的移植可以看这篇文章 d1s移植sdl1-2-15版本，makefile中需要关掉 directfb 和 tslib  CONFIGURE_ARGS &#43;= \--enable-static=no \--disable-video-directfb \--enable-input-tslib=no \同时在 menuconfig 中也关掉 directfb
- SDL_TTF 可以在 openwrt 的 package 中找到 https://github.com/robbie-cao/openwrt-packages-kyak 直接将 libsdl-ttf 复制到 tina linux 的 package/libs 目录下，这个 makefile 里面是 2.0.9 的版本，可以修改到 2.0.11 ，对应修改 md5sum 为 61e29bd9da8d245bc2471d1b2ce591aa  PKG_NAME:=libsdl-ttfPKG_VERSION:=2.0.11PKG_RELEASE:=2PKG_SOURCE:=SDL_ttf-$(PKG_VERSION).tar.gzPKG_SOURCE_URL:=http://www.libsdl.org/projects/SDL_ttf/release/PKG_MD5SUM:=61e29bd9da8d245bc2471d1b2ce591aaPKG_BUILD_DIR:=$(COMPILE_DIR)/SDL_ttf-$(PKG_VERSION)编译好之后 开始编译 gpsp  修改 CFLAGS 添加头文件路径  -I/home/hsinyuwang/t113/tina-d1-h/out/t113-nezha/staging_dir/target/usr/include/SDL -I/home/hsinyuwang/t113/tina-d1-h/out/t113-nezha/staging_dir/target/usr/include 修改 LDFLAGS 添加库文件路径  -L/home/hsinyuwang/t113/tina-d1-h/out/t113-nezha/staging_dir/target/usr/lib 修改 LIBS 添加需要链接的库文件  -lfreetype -lbz2完整的 makefile" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.hsinyuwang.cn/hardware/frwto8re/" /><meta property="article:section" content="hardware" />
-<meta property="article:published_time" content="2023-06-20T11:05:59+08:00" />
-<meta property="article:modified_time" content="2023-06-20T11:05:59+08:00" />
-
-
-
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-  </head>
-  <body>
-    <header class="app-header">
-      <a href="https://www.hsinyuwang.cn"><img class="app-header-avatar" src="/avatar.jpg" alt="hsinyuwang" /></a>
-      <h1>Hsinyuwang&#39;s Blog</h1>
-      <nav class="app-header-menu">
-          <a class="app-header-menu-item" href="/tags/">分类</a>
-      </nav>
-      <p>我的个人博客，有记录有分享</p>
-      <div class="app-header-social">
-        
-          <a href="https://github.com/hsinyuwang" target="_blank" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
-  <title>Github</title>
-  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-</svg></a>
-        
-          <a href="https://space.bilibili.com/284239797" target="_blank" rel="noreferrer noopener">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor"  class="icon">
-  <title>bilibili</title>
-  <use xlink:href="#icon-bilibili"></use>
-</svg>
-</a>
-        
-      </div>
-    </header>
-    <main class="app-container">
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class ="post-title">T113 tina linux 移植 gpsp 模拟器</h1>
-      <div class="post-meta">
-        <div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
-  <title>calendar</title>
-  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
-</svg>
-          Jun 20, 2023
-        </div>
-        <div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
-  <title>clock</title>
-  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
-</svg>
-          1 min read
-        </div>
-        <div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
-  <title>tag</title>
-  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
-</svg>
-              <a class="tag" href="https://www.hsinyuwang.cn/tags/%E7%A1%AC%E4%BB%B6/">硬件</a>
-        </div>
-      </div>
-    </header>
-    <div class="post-content">
-      <h3 id="gpsp-依赖-sdl-和-sdl_ttf">gpsp 依赖 SDL 和 SDL_TTF</h3>
-<ul>
-<li>SDL 1.2.5 的移植可以看这篇文章 <a href="https://bbs.aw-ol.com/topic/3727/d1s%E7%A7%BB%E6%A4%8Dsdl1-2-15%E7%89%88%E6%9C%AC">d1s移植sdl1-2-15版本</a>，makefile中需要关掉 directfb 和 tslib</li>
-</ul>
-<pre tabindex="0"><code>CONFIGURE_ARGS += \
-		--enable-static=no \
-		--disable-video-directfb \
-		--enable-input-tslib=no \
-</code></pre><p>同时在 menuconfig 中也关掉 directfb</p>
-<p><img src="/images/frwto8re/1.png" alt=""></p>
-<ul>
-<li>SDL_TTF 可以在 openwrt 的 package 中找到 <a href="https://github.com/robbie-cao/openwrt-packages-kyak">https://github.com/robbie-cao/openwrt-packages-kyak</a> 直接将 libsdl-ttf 复制到 tina linux 的 package/libs 目录下，这个 makefile 里面是 2.0.9 的版本，可以修改到 2.0.11 ，对应修改 md5sum 为 61e29bd9da8d245bc2471d1b2ce591aa</li>
-</ul>
-<pre tabindex="0"><code>PKG_NAME:=libsdl-ttf
-PKG_VERSION:=2.0.11
-PKG_RELEASE:=2
-
-PKG_SOURCE:=SDL_ttf-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=http://www.libsdl.org/projects/SDL_ttf/release/
-PKG_MD5SUM:=61e29bd9da8d245bc2471d1b2ce591aa
-PKG_BUILD_DIR:=$(COMPILE_DIR)/SDL_ttf-$(PKG_VERSION)
-</code></pre><h3 id="编译好之后-开始编译-gpsp">编译好之后 开始编译 gpsp</h3>
-<ul>
-<li>修改 CFLAGS 添加头文件路径</li>
-</ul>
-<pre tabindex="0"><code>-I/home/hsinyuwang/t113/tina-d1-h/out/t113-nezha/staging_dir/target/usr/include/SDL -I/home/hsinyuwang/t113/tina-d1-h/out/t113-nezha/staging_dir/target/usr/include
-</code></pre><ul>
-<li>修改 LDFLAGS 添加库文件路径</li>
-</ul>
-<pre tabindex="0"><code>-L/home/hsinyuwang/t113/tina-d1-h/out/t113-nezha/staging_dir/target/usr/lib
-</code></pre><ul>
-<li>修改 LIBS 添加需要链接的库文件</li>
-</ul>
-<pre tabindex="0"><code>-lfreetype -lbz2
-</code></pre><p>完整的 makefile</p>
-<pre tabindex="0"><code>TARGET  = gpsp
-CC      = arm-openwrt-linux-gnueabi-gcc-6.4.1
-VPATH   = .. ../arm
-OBJS    = main.o cpu.o memory.o video.o input.o sound.o cheats.o zip.o  arm_stub.o  warm.o cpu_threaded.o video_blend.o sha1.o imageio.o gui_xboy.o #gui.o
-CFLAGS  = -DARM_ARCH -DPC_BUILD -march=armv7-a -mtune=cortex-a7 -mfloat-abi=hard -mfpu=neon -ffast-math -Ofast -I/home/hsinyuwang/t113/tina-d1-h/out/t113-nezha/staging_dir/target/usr/include/SDL -I/home/hsinyuwang/t113/tina-d1-h/out/t113-nezha/staging_dir/target/usr/include
-LDFLAGS = -L/home/hsinyuwang/t113/tina-d1-h/out/t113-nezha/staging_dir/target/usr/lib
-LIBS    = -lSDL -lSDL_ttf -lz -lpng -lfreetype -lbz2
-
-all: $(TARGET)
-
-$(TARGET): $(OBJS)
-	$(CC) $(LDFLAGS) $(OBJS) $(LIBS) -o $(TARGET)
-
-%.o: %.S
-	$(CC) $(CFLAGS) -c -o $@ $&lt;
-
-clean:
-	rm -f *.o $(TARGET)
-</code></pre><p>导入环境变量后编译</p>
-<pre tabindex="0"><code>export PATH=$PATH:/home/hsinyuwang/t113/tina-d1-h/out/t113-nezha/staging_dir/toolchain/bin/
-export STAGING_DIR=/home/hsinyuwang/t113/tina-d1-h/out/t113-nezha/staging_dir/
-</code></pre><p>OK了</p>
-<p><img src="/images/frwto8re/2.png" alt=""></p>
-<p>因为 t113 的屏幕驱动没有调，所以还没办法验证</p>
-<p>完整的 gpsp 代码 <a href="https://github.com/hsinyuwang/gpsp">https://github.com/hsinyuwang/gpsp</a> 切换到 t113 分支</p>
-<p>过程遇到了很多问题，感谢司徒大佬指点！</p>
-
-    </div>
-    <div class="post-footer">
-      
-    </div>
-  </article>
-
-    </main>
-    <meting-js
-    id="7628905309"
-    lrc-type="0"
-    server="netease"
-    order="list"
-    type="playlist"
-    fixed="true"
-    list-olded="true"
-    autoplay="true"
-    mutex="true"
-    >
-    </meting-js>
-  </body>
-</html>

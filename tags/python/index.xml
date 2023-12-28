@@ -6,86 +6,42 @@
     <description>Recent content in Python on Hsinyuwang&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Tue, 28 Sep 2021 15:30:08 +0800</lastBuildDate><atom:link href="https://www.hsinyuwang.cn/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Sep 2021 15:30:08 +0800</lastBuildDate>
+    <atom:link href="https://www.hsinyuwang.cn/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python虚拟环境</title>
       <link>https://www.hsinyuwang.cn/python/zbfxej8c/</link>
       <pubDate>Tue, 28 Sep 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/python/zbfxej8c/</guid>
-      <description>virtualenv 工具
-在 python3.3 之前，只能通过 virtualenv 创建虚拟环境，首先需要安装 virtualenv
-pip install virtualenv安装完后，在当前目录下创建一个名为 myvenv 的虚拟环境
-virtualenv --no-site-packages myvenv参数 --no-site-packages 的意思是创建虚拟环境时，不复制主环境中安装的第三方包，也就是创建一个 “干净的” 虚拟环境
-virtualenv 还有很多参数，用于不同的使用场景，例如:
- -p: 用于指定 Python 解析器，就是安装好的 Python 应用程序，默认为当前环境中的 Python &amp;ndash;no-pip：不需要安装 pip，默认为安装 &amp;ndash;clear：如果创建虚拟环境的目录已经有了其他虚拟环境，清楚重建  venv 模块
-Python3.3 之后，可以用模块 venv 代替 virtualenv 工具，好处是不用单独安装，3.3 及之后的版本，都可以通过安装好的 Python 来创建虚拟环境
-python -m venv myvenv可以在当前目录创建一个名为 myvenv 的虚拟环境
-venv 有些参数，不过相比 virtualenv 少了些，这里简单介绍几个：
- &amp;ndash;without-pip: 不需要安装 pip，默认为安装 &amp;ndash;clear：如果创建虚拟环境的目录已经有了其他虚拟环境，清楚重建  因为 venv 是依附于一个 Python 解析器创建的，所以不需要指定 Python 解释器版本</description>
+      <description>virtualenv 工具&#xA;在 python3.3 之前，只能通过 virtualenv 创建虚拟环境，首先需要安装 virtualenv&#xA;pip install virtualenv 安装完后，在当前目录下创建一个名为 myvenv 的虚拟环境&#xA;virtualenv --no-site-packages myvenv 参数 --no-site-packages 的意思是创建虚拟环境时，不复制主环境中安装的第三方包，也就是创建一个 “干净的” 虚拟环境&#xA;virtualenv 还有很多参数，用于不同的使用场景，例如:&#xA;-p: 用于指定 Python 解析器，就是安装好的 Python 应用程序，默认为当前环境中的 Python &amp;ndash;no-pip：不需要安装 pip，默认为安装 &amp;ndash;clear：如果创建虚拟环境的目录已经有了其他虚拟环境，清楚重建 venv 模块&#xA;Python3.3 之后，可以用模块 venv 代替 virtualenv 工具，好处是不用单独安装，3.3 及之后的版本，都可以通过安装好的 Python 来创建虚拟环境&#xA;python -m venv myvenv 可以在当前目录创建一个名为 myvenv 的虚拟环境&#xA;venv 有些参数，不过相比 virtualenv 少了些，这里简单介绍几个：&#xA;&amp;ndash;without-pip: 不需要安装 pip，默认为安装 &amp;ndash;clear：如果创建虚拟环境的目录已经有了其他虚拟环境，清楚重建 因为 venv 是依附于一个 Python 解析器创建的，所以不需要指定 Python 解释器版本&#xA;激活&#xA;虚拟环境创建好后，需要激活才能在当前命令行中使用，可以理解成将当前命令行环境中 PATH 变量的值替换掉</description>
     </item>
-    
     <item>
       <title>CentOS 7安装matplotlib中文问题</title>
       <link>https://www.hsinyuwang.cn/python/lf6ca41d/</link>
       <pubDate>Fri, 06 Aug 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/python/lf6ca41d/</guid>
-      <description>一、安装
-pip install matplotlib1、安装完成之后终端输入python3, 输入以下命令,获取matplotlibrc文件所在路径,找个地方保存一下,后面会用到
-import matplotlibmatplotlib.matplotlib_fname()2、查看系统中的所有字体，以及可用的中文字体
-import matplotlib.font_manager&amp;gt;&amp;gt;&amp;gt; a = sorted([f.name for f in matplotlib.font_manager.fontManager.ttflist])&amp;gt;&amp;gt;&amp;gt; for i in a:... print(i)3、创建/usr/share/fonts/newfontsdir文件夹
-4、下载字体 ,将下载后的*.ttf文件传入/usr/share/fonts/newfontsdir
-5、进入/usr/share/fonts/newfontsdir文件夹,输入以下命令（如果提示 mkfontscale: command not found，需自行安装 # yum install mkfontscale ，如果提示 fc-cache: command not found，则需要安装# yum install fontconfig ）
-sudo mkfontscalesudo mkfontdirfc-cache -fv 6、输入命令:fc-list 命令查找一下刚才下载的中文字体的font-family
-7、修改matplotlibrc文件,vim 第一步复制的那个路径的地址
-（1）font.family 部分注释去掉,并将font.serif 支持字体加上一个中文字体,这里的中文字体就是上方的fc-list得到的名字,我的是下图红框里面的名字
-（2）修改这里，然后保存退出
-8、还要第一步复制的那个路径的地址,去掉matplotlibrc,在/mpl-data/后面拼接fonts/ttf, 把刚才下载的字体复制一份到这个文件夹,这一步是为了让matplotlib加载我们中文的字体
-9、最后重新加载字体库
-from matplotlib.font_manager import _rebuild_rebuild()10、再次画图可以显示中文了</description>
+      <description>一、安装&#xA;pip install matplotlib 1、安装完成之后终端输入python3, 输入以下命令,获取matplotlibrc文件所在路径,找个地方保存一下,后面会用到&#xA;import matplotlib&#xD;matplotlib.matplotlib_fname() 2、查看系统中的所有字体，以及可用的中文字体&#xA;import matplotlib.font_manager&#xD;&amp;gt;&amp;gt;&amp;gt; a = sorted([f.name for f in matplotlib.font_manager.fontManager.ttflist])&#xD;&amp;gt;&amp;gt;&amp;gt; for i in a:&#xD;... print(i) 3、创建/usr/share/fonts/newfontsdir文件夹&#xA;4、下载字体 ,将下载后的*.ttf文件传入/usr/share/fonts/newfontsdir&#xA;5、进入/usr/share/fonts/newfontsdir文件夹,输入以下命令（如果提示 mkfontscale: command not found，需自行安装 # yum install mkfontscale ，如果提示 fc-cache: command not found，则需要安装# yum install fontconfig ）&#xA;sudo mkfontscale&#xD;sudo mkfontdir&#xD;fc-cache -fv 6、输入命令:fc-list 命令查找一下刚才下载的中文字体的font-family&#xA;7、修改matplotlibrc文件,vim 第一步复制的那个路径的地址&#xA;（1）font.family 部分注释去掉,并将font.serif 支持字体加上一个中文字体,这里的中文字体就是上方的fc-list得到的名字,我的是下图红框里面的名字&#xA;（2）修改这里，然后保存退出&#xA;8、还要第一步复制的那个路径的地址,去掉matplotlibrc,在/mpl-data/后面拼接fonts/ttf, 把刚才下载的字体复制一份到这个文件夹,这一步是为了让matplotlib加载我们中文的字体&#xA;9、最后重新加载字体库&#xA;from matplotlib.font_manager import _rebuild&#xD;_rebuild() 10、再次画图可以显示中文了</description>
     </item>
-    
     <item>
       <title>Python离线安装外部依赖包</title>
       <link>https://www.hsinyuwang.cn/python/vkclhovp/</link>
       <pubDate>Fri, 06 Aug 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/python/vkclhovp/</guid>
-      <description>1、制作requirements.txt
-pip freeze &amp;gt; requirements.txt2、离线下载安装包
-下载单个离线包
-pip download -d your_offline_packages &amp;lt;package_name&amp;gt;批量下载离线包
-pip download -d your_offline_packages -r requirements.txt3、离线安装
-安装单个离线包
-pip install --no-index --find-links=/your_offline_packages/ package_name批量安装离线包
-pip install --no-index --find-links=/your_offline_packages/ -r requirements.txt</description>
+      <description>1、制作requirements.txt&#xA;pip freeze &amp;gt; requirements.txt 2、离线下载安装包&#xA;下载单个离线包&#xA;pip download -d your_offline_packages &amp;lt;package_name&amp;gt; 批量下载离线包&#xA;pip download -d your_offline_packages -r requirements.txt 3、离线安装&#xA;安装单个离线包&#xA;pip install --no-index --find-links=/your_offline_packages/ package_name 批量安装离线包&#xA;pip install --no-index --find-links=/your_offline_packages/ -r requirements.txt </description>
     </item>
-    
     <item>
       <title>CentOS 7部署Django项目（1）</title>
       <link>https://www.hsinyuwang.cn/python/lzv1tax5/</link>
       <pubDate>Thu, 14 May 2020 10:43:45 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/python/lzv1tax5/</guid>
-      <description>一、安装Python 1、安装依赖包 yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gcc* make -y2、下载python安装包 wget https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tgz3、解压python安装包 tar -zxvf Python-3.6.8.tgz4、配置安装路径 切换到解压目录下
-./configure --prefix=/usr/local/python35、编译安装 make &amp;amp;&amp;amp; make install6、配置软连接 ln -s /usr/local/python3/bin/python3 /usr/bin/python3ln -s /usr/local/python3/bin/pip3 /usr/bin/pip3二、安装uwsgi 出现ModuleNotFoundError: No module named &amp;lsquo;_ctypes&amp;rsquo;的错误，需要安装python3-devel
-yum install python3-devel然后再安装uwsgi
-pip3 install uwsgi -i https://pypi.douban.com/simple/三、安装项目所需要的包 1、导出项目的包 pip freeze &amp;gt; requirement.txt2、然后将其导入到Centos7中，并用pip3安装文件中的模块 pip3 install -r requirement.txt -i https://pypi.douban.com/simple/四、运行Django项目 进入到Django项目目录下
-uwsgi --http :8000 --module 项目名.</description>
+      <description>一、安装Python 1、安装依赖包 yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gcc* make -y 2、下载python安装包 wget https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tgz 3、解压python安装包 tar -zxvf Python-3.6.8.tgz 4、配置安装路径 切换到解压目录下&#xA;./configure --prefix=/usr/local/python3 5、编译安装 make &amp;amp;&amp;amp; make install 6、配置软连接 ln -s /usr/local/python3/bin/python3 /usr/bin/python3 ln -s /usr/local/python3/bin/pip3 /usr/bin/pip3 二、安装uwsgi 出现ModuleNotFoundError: No module named &amp;lsquo;_ctypes&amp;rsquo;的错误，需要安装python3-devel&#xA;yum install python3-devel 然后再安装uwsgi&#xA;pip3 install uwsgi -i https://pypi.douban.com/simple/ 三、安装项目所需要的包 1、导出项目的包 pip freeze &amp;gt; requirement.txt 2、然后将其导入到Centos7中，并用pip3安装文件中的模块 pip3 install -r requirement.txt -i https://pypi.douban.com/simple/ 四、运行Django项目 进入到Django项目目录下&#xA;uwsgi --http :8000 --module 项目名.</description>
     </item>
-    
     <item>
       <title>CentOS 7部署Django项目（2）</title>
       <link>https://www.hsinyuwang.cn/python/syukrajc/</link>
       <pubDate>Thu, 14 May 2020 08:55:56 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/python/syukrajc/</guid>
-      <description>一、安装nginx 预先安装额外的依赖 yum -y install pcre-develyum -y install openssl openssl-devel下载 wget http://nginx.org/download/nginx-1.9.9.tar.gz 解压 tar -zxvf nginx-1.9.9.tar.gz安装 进入到解压目录
-./configure --prefix=/usr/local/nginxmake &amp;amp;&amp;amp; make install启动 /usr/local/nginx/sbin/nginx停止服务 /usr/local/nginx/sbin/nginx -s stop重新加载Nginx配置 /usr/local/nginx/sbin/nginx -s reload二、配置 nginx代理uwsgi和静态资源 修改nginx.conf文件
-location / {proxy_pass http://localhost:8000; }location /images {alias /home/username/projectname/images/;}配置完报403错误，需要加权限，在开头加上
-user root;</description>
+      <description>一、安装nginx 预先安装额外的依赖 yum -y install pcre-devel&#xD;yum -y install openssl openssl-devel 下载 wget http://nginx.org/download/nginx-1.9.9.tar.gz 解压 tar -zxvf nginx-1.9.9.tar.gz 安装 进入到解压目录&#xA;./configure --prefix=/usr/local/nginx&#xD;make &amp;amp;&amp;amp; make install 启动 /usr/local/nginx/sbin/nginx 停止服务 /usr/local/nginx/sbin/nginx -s stop 重新加载Nginx配置 /usr/local/nginx/sbin/nginx -s reload 二、配置 nginx代理uwsgi和静态资源 修改nginx.conf文件&#xA;location / {&#xD;proxy_pass http://localhost:8000; }&#xD;location /images {&#xD;alias /home/username/projectname/images/;&#xD;} 配置完报403错误，需要加权限，在开头加上&#xA;user root; </description>
     </item>
-    
   </channel>
 </rss>

@@ -1,155 +1,0 @@
-<!doctype html>
-<html lang="zh">
-  <head>
-    <title>自制GameBoy游戏机 | 小新的个人站</title>
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <script src="/iconfont/iconfont.js"></script>
-    <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.88.1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="hsinyuwang" />
-    <meta name="description" content="" />
-    <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
-
-    
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="自制GameBoy游戏机"/>
-<meta name="twitter:description" content="一、主要采用的元件  esp32 主控 uda1334 音频解码 pam8403 功率放大器 ch340c usb转串口 pcf8574 IO扩展 2.4寸 320*240屏幕  二、功能  模拟NES GameBoy和GameBoyColor Sega Master System 、Game Gear和Coleco Vision 播放WAV、MP3、OGG 和 FLAC 音频文件  三、成品效果图 四、项目地址 制作过程见下面的视频：bilibili
-.meta-media {position: relative;margin-bottom: 30px;display: flex;width: 100%;height: 0;padding-bottom: 75%;}.video {position: absolute;width: 100%;height: 100%;left: 0;top: 0;} "/>
-
-    <meta property="og:title" content="自制GameBoy游戏机" />
-<meta property="og:description" content="一、主要采用的元件  esp32 主控 uda1334 音频解码 pam8403 功率放大器 ch340c usb转串口 pcf8574 IO扩展 2.4寸 320*240屏幕  二、功能  模拟NES GameBoy和GameBoyColor Sega Master System 、Game Gear和Coleco Vision 播放WAV、MP3、OGG 和 FLAC 音频文件  三、成品效果图 四、项目地址 制作过程见下面的视频：bilibili
-.meta-media {position: relative;margin-bottom: 30px;display: flex;width: 100%;height: 0;padding-bottom: 75%;}.video {position: absolute;width: 100%;height: 100%;left: 0;top: 0;} " />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.hsinyuwang.cn/esp32/oh2juknh/" /><meta property="article:section" content="esp32" />
-<meta property="article:published_time" content="2022-01-11T09:39:42+08:00" />
-<meta property="article:modified_time" content="2022-01-11T09:39:42+08:00" />
-
-
-
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-  </head>
-  <body>
-    <header class="app-header">
-      <a href="https://www.hsinyuwang.cn"><img class="app-header-avatar" src="/avatar.jpg" alt="hsinyuwang" /></a>
-      <h1>Hsinyuwang&#39;s Blog</h1>
-      <nav class="app-header-menu">
-          <a class="app-header-menu-item" href="/tags/">分类</a>
-      </nav>
-      <p>我的个人博客，有记录有分享</p>
-      <div class="app-header-social">
-        
-          <a href="https://github.com/hsinyuwang" target="_blank" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
-  <title>Github</title>
-  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-</svg></a>
-        
-          <a href="https://space.bilibili.com/284239797" target="_blank" rel="noreferrer noopener">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor"  class="icon">
-  <title>bilibili</title>
-  <use xlink:href="#icon-bilibili"></use>
-</svg>
-</a>
-        
-      </div>
-    </header>
-    <main class="app-container">
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class ="post-title">自制GameBoy游戏机</h1>
-      <div class="post-meta">
-        <div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
-  <title>calendar</title>
-  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
-</svg>
-          Jan 11, 2022
-        </div>
-        <div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
-  <title>clock</title>
-  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
-</svg>
-          1 min read
-        </div>
-        <div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
-  <title>tag</title>
-  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
-</svg>
-              <a class="tag" href="https://www.hsinyuwang.cn/tags/esp32/">esp32</a>
-        </div>
-      </div>
-    </header>
-    <div class="post-content">
-      <h2 id="一主要采用的元件">一、主要采用的元件</h2>
-<ul>
-<li>esp32 主控</li>
-<li>uda1334 音频解码</li>
-<li>pam8403 功率放大器</li>
-<li>ch340c usb转串口</li>
-<li>pcf8574 IO扩展</li>
-<li>2.4寸 320*240屏幕</li>
-</ul>
-<h2 id="二功能">二、功能</h2>
-<ul>
-<li>模拟NES</li>
-<li>GameBoy和GameBoyColor</li>
-<li>Sega Master System 、Game Gear和Coleco Vision</li>
-<li>播放WAV、MP3、OGG 和 FLAC 音频文件</li>
-</ul>
-<h2 id="三成品效果图">三、成品效果图</h2>
-<p><img src="/images/oh2juknh/1.png" alt=""></p>
-<h2 id="四项目地址">四、项目地址</h2>
-<p>制作过程见下面的视频：<a href="https://www.bilibili.com/video/BV1FL41157vK">bilibili</a></p>
-<style>
-    .meta-media {
-        position: relative;
-        margin-bottom: 30px;
-        display: flex;
-        width: 100%;
-        height: 0;
-        padding-bottom: 75%;
-    }
-
-    .video {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-    }
-</style>
-<div class="meta-media">
-    <iframe src="//player.bilibili.com/player.html?bvid=BV1FL41157vK&page=1"
-        frameborder="no" scrolling="yes" allowfullscreen="allowfullscreen" high_quality="1" framespacing="1"
-        class="video">
-    </iframe>
-</div>
-
-    </div>
-    <div class="post-footer">
-      
-    </div>
-  </article>
-
-    </main>
-    <meting-js
-    id="7628905309"
-    lrc-type="0"
-    server="netease"
-    order="list"
-    type="playlist"
-    fixed="true"
-    list-olded="true"
-    autoplay="true"
-    mutex="true"
-    >
-    </meting-js>
-  </body>
-</html>

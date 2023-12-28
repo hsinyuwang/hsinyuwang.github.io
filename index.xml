@@ -6,689 +6,266 @@
     <description>Recent content on Hsinyuwang&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Thu, 29 Jun 2023 09:54:27 +0800</lastBuildDate><atom:link href="https://www.hsinyuwang.cn/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>基于Linux自制GBA游戏机</title>
-      <link>https://www.hsinyuwang.cn/hardware/czzqwqqv/</link>
-      <pubDate>Sat, 10 Dec 2022 20:54:06 +0800</pubDate>
-      
-      <guid>https://www.hsinyuwang.cn/hardware/czzqwqqv/</guid>
-      <description>开源地址 https://github.com/hsinyuwang/X-Boy
-视频介绍 https://www.bilibili.com/video/BV1JP4y1X7Uz
-.meta-media {position: relative;margin-bottom: 30px;display: flex;width: 100%;height: 0;padding-bottom: 75%;}.video {position: absolute;width: 100%;height: 100%;left: 0;top: 0;} 图片展示
-以下内容为镜像的构建过程，你也可以直接使用我制作好的镜像
- 百度网盘
-链接：https://pan.baidu.com/s/1ftacGCXHLy-AFabczBg3yg
-提取码：9bp8
- X-Boy 系统镜像构建全流程指南
- ubuntu 系统安装  下载镜像 换源  备份源列表 修改 sources.list 文件 更改为清华镜像源 更新并升级 安装依赖库     安装交叉编译工具链  安装编译器  新建 tool 文件夹并进入 下载交叉编译链 创建文件夹并解压 配置环境变量 安装其他库 验证是否安装成功     uboot 编译  获取 uboot 修改 include/configs/sun8i.</description>
-    </item>
-    
-    <item>
-      <title>T113 tina linux 适配 ili9488 屏幕 i80 16bit</title>
-      <link>https://www.hsinyuwang.cn/hardware/imqrpx8l/</link>
-      <pubDate>Thu, 29 Jun 2023 09:54:27 +0800</pubDate>
-      
-      <guid>https://www.hsinyuwang.cn/hardware/imqrpx8l/</guid>
-      <description>前言 在上一篇文章已经搞定了 T113 tina linux 移植 gpsp 模拟器 接下来适配屏幕驱动。 因为 GBA 原生分辨率是 240x160，所以屏幕选用的是 480x320 的 ili9488，正好可以整数倍缩放。
-初始化屏幕 先从 tina linux 自带的驱动中 copy 一份 st7789v_cpu 的代码，然后对照 ili9488 屏幕厂商提供的初始化代码做修改
-完整代码
-/** drivers/video/fbdev/sunxi/disp2/disp/lcd/ili9488_cpu.c** Copyright (c) 2007-2018 Allwinnertech Co., Ltd.* Author: zhengxiaobin &amp;lt;zhengxiaobin@allwinnertech.com&amp;gt;** This software is licensed under the terms of the GNU General Public* License version 2, as published by the Free Software Foundation, and* may be copied, distributed, and modified under those terms.</description>
-    </item>
-    
-    <item>
-      <title>T113 tina linux 移植 gpsp 模拟器</title>
-      <link>https://www.hsinyuwang.cn/hardware/frwto8re/</link>
-      <pubDate>Tue, 20 Jun 2023 11:05:59 +0800</pubDate>
-      
-      <guid>https://www.hsinyuwang.cn/hardware/frwto8re/</guid>
-      <description>gpsp 依赖 SDL 和 SDL_TTF  SDL 1.2.5 的移植可以看这篇文章 d1s移植sdl1-2-15版本，makefile中需要关掉 directfb 和 tslib  CONFIGURE_ARGS += \--enable-static=no \--disable-video-directfb \--enable-input-tslib=no \同时在 menuconfig 中也关掉 directfb
- SDL_TTF 可以在 openwrt 的 package 中找到 https://github.com/robbie-cao/openwrt-packages-kyak 直接将 libsdl-ttf 复制到 tina linux 的 package/libs 目录下，这个 makefile 里面是 2.0.9 的版本，可以修改到 2.0.11 ，对应修改 md5sum 为 61e29bd9da8d245bc2471d1b2ce591aa  PKG_NAME:=libsdl-ttfPKG_VERSION:=2.0.11PKG_RELEASE:=2PKG_SOURCE:=SDL_ttf-$(PKG_VERSION).tar.gzPKG_SOURCE_URL:=http://www.libsdl.org/projects/SDL_ttf/release/PKG_MD5SUM:=61e29bd9da8d245bc2471d1b2ce591aaPKG_BUILD_DIR:=$(COMPILE_DIR)/SDL_ttf-$(PKG_VERSION)编译好之后 开始编译 gpsp  修改 CFLAGS 添加头文件路径  -I/home/hsinyuwang/t113/tina-d1-h/out/t113-nezha/staging_dir/target/usr/include/SDL -I/home/hsinyuwang/t113/tina-d1-h/out/t113-nezha/staging_dir/target/usr/include 修改 LDFLAGS 添加库文件路径  -L/home/hsinyuwang/t113/tina-d1-h/out/t113-nezha/staging_dir/target/usr/lib 修改 LIBS 添加需要链接的库文件  -lfreetype -lbz2完整的 makefile</description>
-    </item>
-    
+    <lastBuildDate>Thu, 23 Mar 2023 15:00:11 +0800</lastBuildDate>
+    <atom:link href="https://www.hsinyuwang.cn/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>docker部署Minio</title>
       <link>https://www.hsinyuwang.cn/docker/k3gsfd9w/</link>
       <pubDate>Thu, 23 Mar 2023 15:00:11 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/docker/k3gsfd9w/</guid>
-      <description>1、创建目录 mkdir -p /docker/minio/data /docker/minio/config2、拉取镜像 docker pull minio/minio3、运行容器 docker run -p 9000:9000 -p 9090:9090 \--name minio \-d --restart=always \-e &amp;quot;MINIO_ACCESS_KEY=admin&amp;quot; \-e &amp;quot;MINIO_SECRET_KEY=admin123456&amp;quot; \-v /docker/minio/data:/data \-v /docker/minio/config:/root/.minio \minio/minio server /data --console-address &amp;quot;:9090&amp;quot; -address &amp;quot;:9000&amp;quot;4、访问地址 http://ip:9090</description>
+      <description>1、创建目录 mkdir -p /docker/minio/data /docker/minio/config 2、拉取镜像 docker pull minio/minio 3、运行容器 docker run -p 9000:9000 -p 9090:9090 \&#xD;--name minio \&#xD;-d --restart=always \&#xD;-e &amp;#34;MINIO_ACCESS_KEY=admin&amp;#34; \&#xD;-e &amp;#34;MINIO_SECRET_KEY=admin123456&amp;#34; \&#xD;-v /docker/minio/data:/data \&#xD;-v /docker/minio/config:/root/.minio \&#xD;minio/minio server /data --console-address &amp;#34;:9090&amp;#34; -address &amp;#34;:9000&amp;#34; 4、访问地址 http://ip:9090 </description>
     </item>
-    
     <item>
       <title>docker部署RockerMQ</title>
       <link>https://www.hsinyuwang.cn/docker/gsczcj1s/</link>
       <pubDate>Thu, 23 Mar 2023 14:39:14 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/docker/gsczcj1s/</guid>
-      <description>安装NameServer 1、拉取镜像 docker pull rocketmqinc/rocketmq2、创建数据目录 mkdir -p /docker/rocketmq/nameserver/logs /docker/rocketmq/nameserver/store3、运行 docker run -d \--restart=always \--name rmqnamesrv \--privileged=true \-p 9876:9876 \-v /docker/rocketmq/nameserver/logs:/root/logs \-v /docker/rocketmq/nameserver/store:/root/store \-e &amp;quot;MAX_POSSIBLE_HEAP=100000000&amp;quot; rocketmqinc/rocketmq \sh mqnamesrv安装broker 1、创建broker.conf配置文件 目录为 /opt/docker/rocketmq/broker.conf
-brokerClusterName = DefaultClusterbrokerName = broker-abrokerId = 0deleteWhen = 04fileReservedTime = 48brokerRole = ASYNC_MASTERflushDiskType = ASYNC_FLUSHbrokerIP1 = 主机的IP2、启动broker docker run -d \--restart=always \--name rmqbroker \--link rmqnamesrv:namesrv \-p 10911:10911 \-p 10909:10909 \--privileged=true \-v /docker/rocketmq/data/broker/logs:/root/logs \-v /docker/rocketmq/data/broker/store:/root/store \-v /docker/rocketmq/conf/broker.</description>
+      <description>安装NameServer 1、拉取镜像 docker pull rocketmqinc/rocketmq 2、创建数据目录 mkdir -p /docker/rocketmq/nameserver/logs /docker/rocketmq/nameserver/store 3、运行 docker run -d \&#xD;--restart=always \&#xD;--name rmqnamesrv \&#xD;--privileged=true \&#xD;-p 9876:9876 \&#xD;-v /docker/rocketmq/nameserver/logs:/root/logs \&#xD;-v /docker/rocketmq/nameserver/store:/root/store \&#xD;-e &amp;#34;MAX_POSSIBLE_HEAP=100000000&amp;#34; rocketmqinc/rocketmq \&#xD;sh mqnamesrv 安装broker 1、创建broker.conf配置文件 目录为 /opt/docker/rocketmq/broker.conf&#xA;brokerClusterName = DefaultCluster&#xD;brokerName = broker-a&#xD;brokerId = 0&#xD;deleteWhen = 04&#xD;fileReservedTime = 48&#xD;brokerRole = ASYNC_MASTER&#xD;flushDiskType = ASYNC_FLUSH&#xD;brokerIP1 = 主机的IP 2、启动broker docker run -d \&#xD;--restart=always \&#xD;--name rmqbroker \&#xD;--link rmqnamesrv:namesrv \&#xD;-p 10911:10911 \&#xD;-p 10909:10909 \&#xD;--privileged=true \&#xD;-v /docker/rocketmq/data/broker/logs:/root/logs \&#xD;-v /docker/rocketmq/data/broker/store:/root/store \&#xD;-v /docker/rocketmq/conf/broker.</description>
     </item>
-    
-    <item>
-      <title>自制linux小电脑</title>
-      <link>https://www.hsinyuwang.cn/hardware/q3g0cbos/</link>
-      <pubDate>Mon, 01 Aug 2022 10:29:02 +0800</pubDate>
-      
-      <guid>https://www.hsinyuwang.cn/hardware/q3g0cbos/</guid>
-      <description>简介  主控采用全志V3S，单核Cortex-A7，64MB内存 板子带有rj45网口、耳机、麦克风、tf卡槽、USB、40pin RGB屏幕接口 4.3寸800x480分辨率屏幕 外壳为亚克力（见设计图Shell，导出DXF文件可以在某宝定制切割），M2.5螺丝固定  演示视频 https://www.bilibili.com/video/BV19r4y1M7cf
-.meta-media {position: relative;margin-bottom: 30px;display: flex;width: 100%;height: 0;padding-bottom: 75%;}.video {position: absolute;width: 100%;height: 100%;left: 0;top: 0;} 项目地址 https://github.com/hsinyuwang/Allwinner-V3s-Computer
-实物图 </description>
-    </item>
-    
-    <item>
-      <title>基于Netty和json格式的自定义协议物联网云平台</title>
-      <link>https://www.hsinyuwang.cn/backend/uar9bqpe/</link>
-      <pubDate>Mon, 01 Aug 2022 10:04:04 +0800</pubDate>
-      
-      <guid>https://www.hsinyuwang.cn/backend/uar9bqpe/</guid>
-      <description>🍊项目简介 基于Netty和json格式的自定义协议物联网云平台（目前实现了基本的数据传输流程和设备接入的管理，平台代码全部开源，可以二次开发，并提供一个温湿度计的硬件接入示例，全套的解决方案，欢迎Star⭐️）
-项目仓库地址：Github
-项目演示视频：bilibili
-.meta-media {position: relative;margin-bottom: 30px;display: flex;width: 100%;height: 0;padding-bottom: 75%;}.video {position: absolute;width: 100%;height: 100%;left: 0;top: 0;} 🍒目录结构  cloud 平台后端，采用Spring Boot、JWT、MyBatis、Netty cloud-ui 平台前端，采用Vue、Element-ui、Axios、Echarts framework 旋转太空人主题温湿度计硬件代码，采用乐鑫官方ESP-IDF框架（IDF版本v4.3.2） hardware 旋转太空人主题温湿度计原理图和Gerber、BOM  🍓如何使用 🍚后端部分 导入 cloud 目录到idea，配置好jdk和maven，修改redis和mysql配置；将picoideal.sql导入到mysql数据库。
-🍜 前端部分 安装node.js，进入到 cloud-ui 目录，然后运行
-npm run serve🍨硬件代码 安装乐鑫 ESP-IDF 并配置好环境（我是用 vscode 和 Espressif IDF 插件开发的）</description>
-    </item>
-    
-    <item>
-      <title>自制GameBoy游戏机</title>
-      <link>https://www.hsinyuwang.cn/esp32/oh2juknh/</link>
-      <pubDate>Tue, 11 Jan 2022 09:39:42 +0800</pubDate>
-      
-      <guid>https://www.hsinyuwang.cn/esp32/oh2juknh/</guid>
-      <description>一、主要采用的元件  esp32 主控 uda1334 音频解码 pam8403 功率放大器 ch340c usb转串口 pcf8574 IO扩展 2.4寸 320*240屏幕  二、功能  模拟NES GameBoy和GameBoyColor Sega Master System 、Game Gear和Coleco Vision 播放WAV、MP3、OGG 和 FLAC 音频文件  三、成品效果图 四、项目地址 制作过程见下面的视频：bilibili
-.meta-media {position: relative;margin-bottom: 30px;display: flex;width: 100%;height: 0;padding-bottom: 75%;}.video {position: absolute;width: 100%;height: 100%;left: 0;top: 0;} </description>
-    </item>
-    
     <item>
       <title>浅谈黑苹果系统安装</title>
       <link>https://www.hsinyuwang.cn/hackintosh/irrodsyl/</link>
       <pubDate>Sat, 18 Dec 2021 21:01:00 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/hackintosh/irrodsyl/</guid>
-      <description>一、概述 目前比较推荐的黑苹果引导方式是使用OpenCore，相较于Clover，OpenCore能够支持更多版本的macOS、更快的启动速度、更好的稳定性、安全性等优点。在安装之前，大家可能会有所顾虑，比如：黑苹果支持哪些硬件、怎么获取macOS安装镜像、安装时遇到问题如何解决等。那么这些问题，其实OpenCore安装指南都已做了详细的解答，结合这篇指南对于几个重要的问题谈一下自己心得。
-二、先决条件  时间和耐心：如果有重要的工作，先不要干这件事，另外不要熬夜，熬夜的那点时间可能根本不够用； 有基本的命令行知识：能够通过命令访问目录或者删除文件等操作，否则安装时对于某些问题的处理会很困难； 熟悉自己的硬件：比如CPU、GPU、硬盘、网卡等； 已安装好Windows系统：准备好U盘，并且电脑已经安装好Windows系统（Windows10）。  三、安装思路 首先就是确认自己的电脑能不能安装，对于CPU而言，大多数英特尔的CPU都支持，而AMD的CPU虽然也能够安装，但并不推荐，因为在白苹果上没有采用过AMD的CPU，而且有些软件不能够正常使用，出现崩溃等问题。如果想体验最新的macOS12，GPU则推荐AMD的显卡或者英特尔核显，而英伟达的显卡最高只支持到macOS11，当然这里只是做简单的概述，并不是一棒打死，不同的系列或型号支持的版本也是不一样的。无线网卡则推荐博通，以上具体的支持列表可以查看硬件限制。
-确认所有硬件都支持了，就可以进行下一步了，制作SSDT，对DSDT进行修正，那么什么是DSDT和SSDT？这些是固件中存在的表格，概述了硬件设备，如USB控制器、CPU线程、嵌入式控制器、系统时钟等。可以将DSDT（差分系统描述表）视为包含大部分信息的主体，而SSDT（辅助系统描述表）则传递较小的信息位。您可以将DSDT视为建筑蓝图，其中SSDT是概述项目额外细节的便签。对应教程ACPI入门，找到对应的CPU架构，获取SSDT。
-上面也是相对复杂的一步，接下来就是收集Kexts和固件驱动程序，下载macOS恢复镜像并制作启动盘。
-现在已经有了所有的 Kexts(.kext)、SSDTs(.aml) 和固件驱动程序 (.efi)，需要将这些文件配置到config.plist文件中。
-四、故障排除 详见教程一般故障排除。
-我这里遇到的问题是HDMI外接显示器紫屏，macOS系统默认DP接口输出，所以这里推荐使用DP接口，当然出现紫屏也有相应的解决办法。
-解决方案：
- 下载脚本patch-edid.rb 打开终端，cd到桌面，然后使用ruby命令再将脚本拖入终端回车； 桌面会生成显示器的edid文件； 右键点击访达，输入：/System/Library/Displays/Contents/Resources/Overrides/ 将生成的文件拖入该文件夹重启即可。  Mac 10.15注意事项
- Mac OS 10.15系统版本开启了SIP系统完整性保护功能，系统文件夹是只有读权限的，无法将edid文件拖入系统文件夹,需要在恢复模式关闭SIP后再对系统文件读写。通过开机时按住 cmd+R 进入恢复模式。如果是黑苹果，在OpenCore引导界面，进入Recovery（恢复）模式。
- 在屏幕最上方的工具栏找到实用工具，打开终端，输入
-csrutil disable然后确认是否已经禁用
-csrutil status禁用系统防护（SIP）后，重启系统，打开终端，sudo su 并输入密码进入全局模式，然后输入
-sudo mount -o rw / sudo cp -r &#39;将桌面上的edid拖入终端&#39; /System/Library/Displays/Contents/Resources/Overrides/解决问题后，再次重启进入恢复模式，打开终端，输入
-csrutil enable五、最终效果 同时也附上我制作好的两个EFI引导程序，一个是Thinkpad-E470笔记本，另一个是ASUS-P8H61台式机。</description>
+      <description>一、概述 目前比较推荐的黑苹果引导方式是使用OpenCore，相较于Clover，OpenCore能够支持更多版本的macOS、更快的启动速度、更好的稳定性、安全性等优点。在安装之前，大家可能会有所顾虑，比如：黑苹果支持哪些硬件、怎么获取macOS安装镜像、安装时遇到问题如何解决等。那么这些问题，其实OpenCore安装指南都已做了详细的解答，结合这篇指南对于几个重要的问题谈一下自己心得。&#xA;二、先决条件 时间和耐心：如果有重要的工作，先不要干这件事，另外不要熬夜，熬夜的那点时间可能根本不够用； 有基本的命令行知识：能够通过命令访问目录或者删除文件等操作，否则安装时对于某些问题的处理会很困难； 熟悉自己的硬件：比如CPU、GPU、硬盘、网卡等； 已安装好Windows系统：准备好U盘，并且电脑已经安装好Windows系统（Windows10）。 三、安装思路 首先就是确认自己的电脑能不能安装，对于CPU而言，大多数英特尔的CPU都支持，而AMD的CPU虽然也能够安装，但并不推荐，因为在白苹果上没有采用过AMD的CPU，而且有些软件不能够正常使用，出现崩溃等问题。如果想体验最新的macOS12，GPU则推荐AMD的显卡或者英特尔核显，而英伟达的显卡最高只支持到macOS11，当然这里只是做简单的概述，并不是一棒打死，不同的系列或型号支持的版本也是不一样的。无线网卡则推荐博通，以上具体的支持列表可以查看硬件限制。&#xA;确认所有硬件都支持了，就可以进行下一步了，制作SSDT，对DSDT进行修正，那么什么是DSDT和SSDT？这些是固件中存在的表格，概述了硬件设备，如USB控制器、CPU线程、嵌入式控制器、系统时钟等。可以将DSDT（差分系统描述表）视为包含大部分信息的主体，而SSDT（辅助系统描述表）则传递较小的信息位。您可以将DSDT视为建筑蓝图，其中SSDT是概述项目额外细节的便签。对应教程ACPI入门，找到对应的CPU架构，获取SSDT。&#xA;上面也是相对复杂的一步，接下来就是收集Kexts和固件驱动程序，下载macOS恢复镜像并制作启动盘。&#xA;现在已经有了所有的 Kexts(.kext)、SSDTs(.aml) 和固件驱动程序 (.efi)，需要将这些文件配置到config.plist文件中。&#xA;四、故障排除 详见教程一般故障排除。&#xA;我这里遇到的问题是HDMI外接显示器紫屏，macOS系统默认DP接口输出，所以这里推荐使用DP接口，当然出现紫屏也有相应的解决办法。&#xA;解决方案：&#xA;下载脚本patch-edid.rb 打开终端，cd到桌面，然后使用ruby命令再将脚本拖入终端回车； 桌面会生成显示器的edid文件； 右键点击访达，输入：/System/Library/Displays/Contents/Resources/Overrides/ 将生成的文件拖入该文件夹重启即可。 Mac 10.15注意事项&#xA;Mac OS 10.15系统版本开启了SIP系统完整性保护功能，系统文件夹是只有读权限的，无法将edid文件拖入系统文件夹,需要在恢复模式关闭SIP后再对系统文件读写。通过开机时按住 cmd+R 进入恢复模式。如果是黑苹果，在OpenCore引导界面，进入Recovery（恢复）模式。&#xA;在屏幕最上方的工具栏找到实用工具，打开终端，输入&#xA;csrutil disable 然后确认是否已经禁用&#xA;csrutil status 禁用系统防护（SIP）后，重启系统，打开终端，sudo su 并输入密码进入全局模式，然后输入&#xA;sudo mount -o rw / sudo cp -r &amp;#39;将桌面上的edid拖入终端&amp;#39; /System/Library/Displays/Contents/Resources/Overrides/ 解决问题后，再次重启进入恢复模式，打开终端，输入&#xA;csrutil enable 五、最终效果 同时也附上我制作好的两个EFI引导程序，一个是Thinkpad-E470笔记本，另一个是ASUS-P8H61台式机。</description>
     </item>
-    
     <item>
       <title>搭建docker私有镜像站</title>
       <link>https://www.hsinyuwang.cn/docker/2rls5bbe/</link>
       <pubDate>Thu, 21 Oct 2021 17:10:40 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/docker/2rls5bbe/</guid>
-      <description>在本地（局域网）搭建一个私有镜像站，搭建好之后，我们可以将镜像提交到私有仓库中，避免镜像被暴露的风险。
-一、服务器部署 下载镜像
-docker pull registry运行registry容器
-docker run -itd -v /data/registry:/var/lib/registry -p 5000:5000 --restart=always --name registry registry:latest参数说明：
- -itd：在容器中打开一个伪终端进行交互操作，并在后台运行 -v：把宿主机的/data/registry目录绑定到容器/var/lib/registry目录(这个目录是registry容器中存放镜像文件的目录)，来实现数据的持久化 -p：映射端口，访问宿主机的5000端口就访问到registry容器的服务了 &amp;ndash;restart=always：这是重启的策略，假如这个容器异常退出会自动重启容器 &amp;ndash;name registry：创建容器命名为registry registry:latest：这个是刚才pull下来的镜像  二、用户端docker部署 修改镜像源，添加如下内容，并重启docker服务
-vim /etc/docker/daemon.json{ &amp;#34;registry-mirror&amp;#34;: [&amp;#34;https://registry.docker-cn.com&amp;#34;], &amp;#34;insecure-registries&amp;#34;: [&amp;#34;192.168.43.249:5000&amp;#34;] } 上传镜像到服务器
-docker push 192.168.43.249:5000/image:tag从服务器下载镜像
-docker pull 192.168.43.249:5000/image:tag</description>
+      <description>在本地（局域网）搭建一个私有镜像站，搭建好之后，我们可以将镜像提交到私有仓库中，避免镜像被暴露的风险。&#xA;一、服务器部署 下载镜像&#xA;docker pull registry 运行registry容器&#xA;docker run -itd -v /data/registry:/var/lib/registry -p 5000:5000 --restart=always --name registry registry:latest 参数说明：&#xA;-itd：在容器中打开一个伪终端进行交互操作，并在后台运行 -v：把宿主机的/data/registry目录绑定到容器/var/lib/registry目录(这个目录是registry容器中存放镜像文件的目录)，来实现数据的持久化 -p：映射端口，访问宿主机的5000端口就访问到registry容器的服务了 &amp;ndash;restart=always：这是重启的策略，假如这个容器异常退出会自动重启容器 &amp;ndash;name registry：创建容器命名为registry registry:latest：这个是刚才pull下来的镜像 二、用户端docker部署 修改镜像源，添加如下内容，并重启docker服务&#xA;vim /etc/docker/daemon.json { &amp;#34;registry-mirror&amp;#34;: [&amp;#34;https://registry.docker-cn.com&amp;#34;], &amp;#34;insecure-registries&amp;#34;: [&amp;#34;192.168.43.249:5000&amp;#34;] } 上传镜像到服务器&#xA;docker push 192.168.43.249:5000/image:tag 从服务器下载镜像&#xA;docker pull 192.168.43.249:5000/image:tag </description>
     </item>
-    
     <item>
       <title>Spring Boot拦截器配置</title>
       <link>https://www.hsinyuwang.cn/backend/lttvxhkk/</link>
       <pubDate>Sat, 16 Oct 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/backend/lttvxhkk/</guid>
-      <description>1、启用拦截器配置
-import org.springframework.context.annotation.Configuration; import org.springframework.web.servlet.config.annotation.InterceptorRegistry; import org.springframework.web.servlet.config.annotation.WebMvcConfigurer; import com.easiweb.core.interceptor.RequestInterceptor; @Configuration public class InterceptorConfig implements WebMvcConfigurer { public void addInterceptors(InterceptorRegistry registry) { registry.addInterceptor(new RequestInterceptor()).addPathPatterns(&amp;#34;/**&amp;#34;); } } 2、在拦截器里做请求校验
-import java.io.IOException; import javax.servlet.http.HttpServletRequest; import javax.servlet.http.HttpServletResponse; import org.springframework.stereotype.Component; import org.springframework.web.servlet.HandlerInterceptor; import org.springframework.web.servlet.ModelAndView; import com.easiweb.core.utils.Result; import com.fasterxml.jackson.databind.ObjectMapper; @Component public class RequestInterceptor implements HandlerInterceptor { @Override public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception { String token = request.getHeader(&amp;#34;token&amp;#34;); if (token == null) { // 根据业务编写逻辑 	getResponse(response, Result.</description>
+      <description>1、启用拦截器配置&#xA;import org.springframework.context.annotation.Configuration; import org.springframework.web.servlet.config.annotation.InterceptorRegistry; import org.springframework.web.servlet.config.annotation.WebMvcConfigurer; import com.easiweb.core.interceptor.RequestInterceptor; @Configuration public class InterceptorConfig implements WebMvcConfigurer { public void addInterceptors(InterceptorRegistry registry) { registry.addInterceptor(new RequestInterceptor()).addPathPatterns(&amp;#34;/**&amp;#34;); } } 2、在拦截器里做请求校验&#xA;import java.io.IOException; import javax.servlet.http.HttpServletRequest; import javax.servlet.http.HttpServletResponse; import org.springframework.stereotype.Component; import org.springframework.web.servlet.HandlerInterceptor; import org.springframework.web.servlet.ModelAndView; import com.easiweb.core.utils.Result; import com.fasterxml.jackson.databind.ObjectMapper; @Component public class RequestInterceptor implements HandlerInterceptor { @Override public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception { String token = request.getHeader(&amp;#34;token&amp;#34;); if (token == null) { // 根据业务编写逻辑 getResponse(response, Result.</description>
     </item>
-    
     <item>
       <title>Python虚拟环境</title>
       <link>https://www.hsinyuwang.cn/python/zbfxej8c/</link>
       <pubDate>Tue, 28 Sep 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/python/zbfxej8c/</guid>
-      <description>virtualenv 工具
-在 python3.3 之前，只能通过 virtualenv 创建虚拟环境，首先需要安装 virtualenv
-pip install virtualenv安装完后，在当前目录下创建一个名为 myvenv 的虚拟环境
-virtualenv --no-site-packages myvenv参数 --no-site-packages 的意思是创建虚拟环境时，不复制主环境中安装的第三方包，也就是创建一个 “干净的” 虚拟环境
-virtualenv 还有很多参数，用于不同的使用场景，例如:
- -p: 用于指定 Python 解析器，就是安装好的 Python 应用程序，默认为当前环境中的 Python &amp;ndash;no-pip：不需要安装 pip，默认为安装 &amp;ndash;clear：如果创建虚拟环境的目录已经有了其他虚拟环境，清楚重建  venv 模块
-Python3.3 之后，可以用模块 venv 代替 virtualenv 工具，好处是不用单独安装，3.3 及之后的版本，都可以通过安装好的 Python 来创建虚拟环境
-python -m venv myvenv可以在当前目录创建一个名为 myvenv 的虚拟环境
-venv 有些参数，不过相比 virtualenv 少了些，这里简单介绍几个：
- &amp;ndash;without-pip: 不需要安装 pip，默认为安装 &amp;ndash;clear：如果创建虚拟环境的目录已经有了其他虚拟环境，清楚重建  因为 venv 是依附于一个 Python 解析器创建的，所以不需要指定 Python 解释器版本</description>
+      <description>virtualenv 工具&#xA;在 python3.3 之前，只能通过 virtualenv 创建虚拟环境，首先需要安装 virtualenv&#xA;pip install virtualenv 安装完后，在当前目录下创建一个名为 myvenv 的虚拟环境&#xA;virtualenv --no-site-packages myvenv 参数 --no-site-packages 的意思是创建虚拟环境时，不复制主环境中安装的第三方包，也就是创建一个 “干净的” 虚拟环境&#xA;virtualenv 还有很多参数，用于不同的使用场景，例如:&#xA;-p: 用于指定 Python 解析器，就是安装好的 Python 应用程序，默认为当前环境中的 Python &amp;ndash;no-pip：不需要安装 pip，默认为安装 &amp;ndash;clear：如果创建虚拟环境的目录已经有了其他虚拟环境，清楚重建 venv 模块&#xA;Python3.3 之后，可以用模块 venv 代替 virtualenv 工具，好处是不用单独安装，3.3 及之后的版本，都可以通过安装好的 Python 来创建虚拟环境&#xA;python -m venv myvenv 可以在当前目录创建一个名为 myvenv 的虚拟环境&#xA;venv 有些参数，不过相比 virtualenv 少了些，这里简单介绍几个：&#xA;&amp;ndash;without-pip: 不需要安装 pip，默认为安装 &amp;ndash;clear：如果创建虚拟环境的目录已经有了其他虚拟环境，清楚重建 因为 venv 是依附于一个 Python 解析器创建的，所以不需要指定 Python 解释器版本&#xA;激活&#xA;虚拟环境创建好后，需要激活才能在当前命令行中使用，可以理解成将当前命令行环境中 PATH 变量的值替换掉</description>
     </item>
-    
     <item>
       <title>docker本地镜像的导出导入</title>
       <link>https://www.hsinyuwang.cn/docker/ix7y3wpi/</link>
       <pubDate>Fri, 10 Sep 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/docker/ix7y3wpi/</guid>
-      <description>有时我们需要将一台电脑上的镜像复制到另一台电脑上使用，除了可以借助仓库外，还可以直接将镜像保存成一个文件，再拷贝到另一台电脑上导入使用。
-对于镜像的导出和导入，Docker 提供了两种方案，下面分别进行介绍。
-一、使用 export 和 import
-1、查看本机的容器
-这两个命令是通过容器来导入、导出镜像。首先我们使用 docker ps -a 命令查看本机所有的容器。
-2、导出镜像
-（1）使用 docker export 命令根据容器 ID 将镜像导出成一个文件。
-docker export 容器id &amp;gt; xxx.tar（2）上面命令执行后，可以看到文件已经保存到当前的 docker 终端目录下。
-3、导入镜像
-（1）使用 docker import 命令则可将这个镜像文件导入进来。
-docker import - 镜像名称 &amp;lt; xxx.tar（2）执行 docker images 命令可以看到镜像确实已经导入进来了。
-二、使用 save 和 load
-1、查看本机的容器
-这两个命令是通过镜像来保存、加载镜像文件的。首先我们使用 docker images 命令查看本机所有的镜像。
-2、保存镜像
-（1）下面使用 docker save 命令根据 ID 将镜像保存成一个文件。
-docker save 镜像id &amp;gt; xxx.tar（2）我们还可以同时将多个 image 打包成一个文件，比如下面将镜像库中的 postgres 和 mongo 打包：</description>
+      <description>有时我们需要将一台电脑上的镜像复制到另一台电脑上使用，除了可以借助仓库外，还可以直接将镜像保存成一个文件，再拷贝到另一台电脑上导入使用。&#xA;对于镜像的导出和导入，Docker 提供了两种方案，下面分别进行介绍。&#xA;一、使用 export 和 import&#xA;1、查看本机的容器&#xA;这两个命令是通过容器来导入、导出镜像。首先我们使用 docker ps -a 命令查看本机所有的容器。&#xA;2、导出镜像&#xA;（1）使用 docker export 命令根据容器 ID 将镜像导出成一个文件。&#xA;docker export 容器id &amp;gt; xxx.tar （2）上面命令执行后，可以看到文件已经保存到当前的 docker 终端目录下。&#xA;3、导入镜像&#xA;（1）使用 docker import 命令则可将这个镜像文件导入进来。&#xA;docker import - 镜像名称 &amp;lt; xxx.tar （2）执行 docker images 命令可以看到镜像确实已经导入进来了。&#xA;二、使用 save 和 load&#xA;1、查看本机的容器&#xA;这两个命令是通过镜像来保存、加载镜像文件的。首先我们使用 docker images 命令查看本机所有的镜像。&#xA;2、保存镜像&#xA;（1）下面使用 docker save 命令根据 ID 将镜像保存成一个文件。&#xA;docker save 镜像id &amp;gt; xxx.tar （2）我们还可以同时将多个 image 打包成一个文件，比如下面将镜像库中的 postgres 和 mongo 打包：</description>
     </item>
-    
     <item>
       <title>CentOS 7修改SSH端口</title>
       <link>https://www.hsinyuwang.cn/server/fgr2pqu1/</link>
       <pubDate>Fri, 06 Aug 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/server/fgr2pqu1/</guid>
-      <description>一、修改ssh配置文件sshd_config
-vim /etc/ssh/sshd_config二、防火墙放行
-firewall-cmd --zone=public --add-port=8022/tcp --permanentfirewall-cmd --reload三、向SELinux中添加修改的SSH端口
-先安装SELinux的管理工具 semanage (如果已经安装了就直接到下一步) ：
-yum provides semanage安装运行semanage所需依赖工具包 policycoreutils-python：
-yum -y install policycoreutils-python查询当前 ssh 服务端口：
-semanage port -l | grep ssh向 SELinux 中添加 ssh 端口：
-semanage port -a -t ssh_port_t -p tcp 8022重启 ssh 服务：
-systemctl restart sshd.service测试成功后，将原来的22端口注释掉即可</description>
+      <description>一、修改ssh配置文件sshd_config&#xA;vim /etc/ssh/sshd_config 二、防火墙放行&#xA;firewall-cmd --zone=public --add-port=8022/tcp --permanent&#xD;firewall-cmd --reload 三、向SELinux中添加修改的SSH端口&#xA;先安装SELinux的管理工具 semanage (如果已经安装了就直接到下一步) ：&#xA;yum provides semanage 安装运行semanage所需依赖工具包 policycoreutils-python：&#xA;yum -y install policycoreutils-python 查询当前 ssh 服务端口：&#xA;semanage port -l | grep ssh 向 SELinux 中添加 ssh 端口：&#xA;semanage port -a -t ssh_port_t -p tcp 8022 重启 ssh 服务：&#xA;systemctl restart sshd.service 测试成功后，将原来的22端口注释掉即可</description>
     </item>
-    
     <item>
       <title>CentOS 7安装frps配置自启动</title>
       <link>https://www.hsinyuwang.cn/server/5skjfaf6/</link>
       <pubDate>Fri, 06 Aug 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/server/5skjfaf6/</guid>
-      <description>1和2二选一
-1、脚本安装frps
-cd /tmpwget --no-check-certificate https://raw.githubusercontent.com/clangcn/onekey-install-shell/master/frps/install-frps.sh -O ./install-frps.shchmod 777 install-frps.sh./install-frps.sh install2、程序包安装
-（1）下载frp程序文件
-https://github.com/fatedier/frp/releases（2）解压文件
-下载后解压到自己的目录，我这里解压到/usr/local/frp:
-（3）添加systemd配置文件：
-vim /etc/systemd/system/frps.service文件内容如下：
-[Unit]Description=FRP Server Daemon[Service]Type=simpleExecStartPre=-/sbin/setcap cap_net_bind_service=+ep /usr/local/frp/frpsExecStart=/usr/local/frp/frps -c /usr/local/frp/frps.iniRestart=alwaysRestartSec=20sUser=nobodyPermissionsStartOnly=true[Install]WantedBy=multi-user.targetExecStart的内容请根据自己frp安装目录修改。
-（4）设置开机启动
-systemctl daemon-reloadsystemctl enable frp（5）启动 frp
-systemctl start frp（6）查看frp是否启动
-ps aux | grep frp看到这里就说明启动成功了。</description>
+      <description>1和2二选一&#xA;1、脚本安装frps&#xA;cd /tmp&#xD;wget --no-check-certificate https://raw.githubusercontent.com/clangcn/onekey-install-shell/master/frps/install-frps.sh -O ./install-frps.sh&#xD;chmod 777 install-frps.sh&#xD;./install-frps.sh install 2、程序包安装&#xA;（1）下载frp程序文件&#xA;https://github.com/fatedier/frp/releases （2）解压文件&#xA;下载后解压到自己的目录，我这里解压到/usr/local/frp:&#xA;（3）添加systemd配置文件：&#xA;vim /etc/systemd/system/frps.service 文件内容如下：&#xA;[Unit]&#xD;Description=FRP Server Daemon&#xD;[Service]&#xD;Type=simple&#xD;ExecStartPre=-/sbin/setcap cap_net_bind_service=+ep /usr/local/frp/frps&#xD;ExecStart=/usr/local/frp/frps -c /usr/local/frp/frps.ini&#xD;Restart=always&#xD;RestartSec=20s&#xD;User=nobody&#xD;PermissionsStartOnly=true&#xD;[Install]&#xD;WantedBy=multi-user.target ExecStart的内容请根据自己frp安装目录修改。&#xA;（4）设置开机启动&#xA;systemctl daemon-reload&#xD;systemctl enable frp （5）启动 frp&#xA;systemctl start frp （6）查看frp是否启动&#xA;ps aux | grep frp 看到这里就说明启动成功了。</description>
     </item>
-    
     <item>
       <title>CentOS 7安装matplotlib中文问题</title>
       <link>https://www.hsinyuwang.cn/python/lf6ca41d/</link>
       <pubDate>Fri, 06 Aug 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/python/lf6ca41d/</guid>
-      <description>一、安装
-pip install matplotlib1、安装完成之后终端输入python3, 输入以下命令,获取matplotlibrc文件所在路径,找个地方保存一下,后面会用到
-import matplotlibmatplotlib.matplotlib_fname()2、查看系统中的所有字体，以及可用的中文字体
-import matplotlib.font_manager&amp;gt;&amp;gt;&amp;gt; a = sorted([f.name for f in matplotlib.font_manager.fontManager.ttflist])&amp;gt;&amp;gt;&amp;gt; for i in a:... print(i)3、创建/usr/share/fonts/newfontsdir文件夹
-4、下载字体 ,将下载后的*.ttf文件传入/usr/share/fonts/newfontsdir
-5、进入/usr/share/fonts/newfontsdir文件夹,输入以下命令（如果提示 mkfontscale: command not found，需自行安装 # yum install mkfontscale ，如果提示 fc-cache: command not found，则需要安装# yum install fontconfig ）
-sudo mkfontscalesudo mkfontdirfc-cache -fv 6、输入命令:fc-list 命令查找一下刚才下载的中文字体的font-family
-7、修改matplotlibrc文件,vim 第一步复制的那个路径的地址
-（1）font.family 部分注释去掉,并将font.serif 支持字体加上一个中文字体,这里的中文字体就是上方的fc-list得到的名字,我的是下图红框里面的名字
-（2）修改这里，然后保存退出
-8、还要第一步复制的那个路径的地址,去掉matplotlibrc,在/mpl-data/后面拼接fonts/ttf, 把刚才下载的字体复制一份到这个文件夹,这一步是为了让matplotlib加载我们中文的字体
-9、最后重新加载字体库
-from matplotlib.font_manager import _rebuild_rebuild()10、再次画图可以显示中文了</description>
+      <description>一、安装&#xA;pip install matplotlib 1、安装完成之后终端输入python3, 输入以下命令,获取matplotlibrc文件所在路径,找个地方保存一下,后面会用到&#xA;import matplotlib&#xD;matplotlib.matplotlib_fname() 2、查看系统中的所有字体，以及可用的中文字体&#xA;import matplotlib.font_manager&#xD;&amp;gt;&amp;gt;&amp;gt; a = sorted([f.name for f in matplotlib.font_manager.fontManager.ttflist])&#xD;&amp;gt;&amp;gt;&amp;gt; for i in a:&#xD;... print(i) 3、创建/usr/share/fonts/newfontsdir文件夹&#xA;4、下载字体 ,将下载后的*.ttf文件传入/usr/share/fonts/newfontsdir&#xA;5、进入/usr/share/fonts/newfontsdir文件夹,输入以下命令（如果提示 mkfontscale: command not found，需自行安装 # yum install mkfontscale ，如果提示 fc-cache: command not found，则需要安装# yum install fontconfig ）&#xA;sudo mkfontscale&#xD;sudo mkfontdir&#xD;fc-cache -fv 6、输入命令:fc-list 命令查找一下刚才下载的中文字体的font-family&#xA;7、修改matplotlibrc文件,vim 第一步复制的那个路径的地址&#xA;（1）font.family 部分注释去掉,并将font.serif 支持字体加上一个中文字体,这里的中文字体就是上方的fc-list得到的名字,我的是下图红框里面的名字&#xA;（2）修改这里，然后保存退出&#xA;8、还要第一步复制的那个路径的地址,去掉matplotlibrc,在/mpl-data/后面拼接fonts/ttf, 把刚才下载的字体复制一份到这个文件夹,这一步是为了让matplotlib加载我们中文的字体&#xA;9、最后重新加载字体库&#xA;from matplotlib.font_manager import _rebuild&#xD;_rebuild() 10、再次画图可以显示中文了</description>
     </item>
-    
     <item>
       <title>docker-compose常用命令</title>
       <link>https://www.hsinyuwang.cn/docker/i4rpkuhx/</link>
       <pubDate>Fri, 06 Aug 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/docker/i4rpkuhx/</guid>
-      <description>docker-compose常用命令
-docker-compose up -d nginx 构建建启动nignx容器
-docker-compose exec nginx bash 登录到nginx容器中
-docker-compose down 删除所有nginx容器,镜像
-docker-compose ps 显示所有容器
-docker-compose restart nginx 重新启动nginx容器
-docker-compose run &amp;ndash;no-deps &amp;ndash;rm php-fpm php -v 在php-fpm中不启动关联容器，并容器执行php -v 执行完成后删除容器
-docker-compose build nginx 构建镜像 。
-docker-compose build &amp;ndash;no-cache nginx 不带缓存的构建。
-docker-compose logs nginx 查看nginx的日志
-docker-compose logs -f nginx 查看nginx的实时日志
-docker-compose config -q 验证（docker-compose.yml）文件配置，当配置正确时，不输出任何内容，当文件配置错误，输出错误信息。
-docker-compose events &amp;ndash;json nginx 以json的形式输出nginx的docker日志
-docker-compose pause nginx 暂停nignx容器
-docker-compose unpause nginx 恢复ningx容器
-docker-compose rm nginx 删除容器（删除前必须关闭容器）</description>
+      <description>docker-compose常用命令&#xA;docker-compose up -d nginx 构建建启动nignx容器&#xA;docker-compose exec nginx bash 登录到nginx容器中&#xA;docker-compose down 删除所有nginx容器,镜像&#xA;docker-compose ps 显示所有容器&#xA;docker-compose restart nginx 重新启动nginx容器&#xA;docker-compose run &amp;ndash;no-deps &amp;ndash;rm php-fpm php -v 在php-fpm中不启动关联容器，并容器执行php -v 执行完成后删除容器&#xA;docker-compose build nginx 构建镜像 。&#xA;docker-compose build &amp;ndash;no-cache nginx 不带缓存的构建。&#xA;docker-compose logs nginx 查看nginx的日志&#xA;docker-compose logs -f nginx 查看nginx的实时日志&#xA;docker-compose config -q 验证（docker-compose.yml）文件配置，当配置正确时，不输出任何内容，当文件配置错误，输出错误信息。&#xA;docker-compose events &amp;ndash;json nginx 以json的形式输出nginx的docker日志&#xA;docker-compose pause nginx 暂停nignx容器&#xA;docker-compose unpause nginx 恢复ningx容器&#xA;docker-compose rm nginx 删除容器（删除前必须关闭容器）</description>
     </item>
-    
     <item>
       <title>Python离线安装外部依赖包</title>
       <link>https://www.hsinyuwang.cn/python/vkclhovp/</link>
       <pubDate>Fri, 06 Aug 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/python/vkclhovp/</guid>
-      <description>1、制作requirements.txt
-pip freeze &amp;gt; requirements.txt2、离线下载安装包
-下载单个离线包
-pip download -d your_offline_packages &amp;lt;package_name&amp;gt;批量下载离线包
-pip download -d your_offline_packages -r requirements.txt3、离线安装
-安装单个离线包
-pip install --no-index --find-links=/your_offline_packages/ package_name批量安装离线包
-pip install --no-index --find-links=/your_offline_packages/ -r requirements.txt</description>
+      <description>1、制作requirements.txt&#xA;pip freeze &amp;gt; requirements.txt 2、离线下载安装包&#xA;下载单个离线包&#xA;pip download -d your_offline_packages &amp;lt;package_name&amp;gt; 批量下载离线包&#xA;pip download -d your_offline_packages -r requirements.txt 3、离线安装&#xA;安装单个离线包&#xA;pip install --no-index --find-links=/your_offline_packages/ package_name 批量安装离线包&#xA;pip install --no-index --find-links=/your_offline_packages/ -r requirements.txt </description>
     </item>
-    
     <item>
       <title>斐讯K2更换32M Flash</title>
       <link>https://www.hsinyuwang.cn/router/5v9hv26h/</link>
       <pubDate>Sun, 01 Aug 2021 10:22:14 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/router/5v9hv26h/</guid>
-      <description>一、拆掉原厂flash 在更换之前先刷入breed，提取EEPROM固件，因为里面包含了WiFi射频参数和MAC地址，一机一码。注意：刷机需谨慎，一定要提前备份。
-1、备份固件 进入breed控制台，选择“备份固件”进行备份，将EEPROM固件下载到电脑，顺带看一下斐讯K2原厂的flash型号为兆易创新的GD25Q64 8MB。
-2、拆机 备份完成后就可以拆机了，找到flash芯片，用热风枪将其吹下，没有热风枪也可以用电烙铁堆两坨焊锡拆下。
-二、更换32M flash 这里使用的是华邦的W25Q256 32MB芯片，虽然芯片大小、引脚数量和原厂的不一样，但都是可以用的。
-1、先刷breed 在焊接之前，先用编程器刷入breed，也就是bootloader，否则空芯片无法启动。
-打开软件，点击自动，刷入breed的bin文件。
-2、焊接 斐讯K2的PCB上可以焊接两种封装的flash，这就是为什么芯片大小不一样却可以用的原因。在焊接时，需要注意芯片摆放位置，将图中左上角的圆点与芯片上的圆点对应即可。
-3、查看更换结果 开机，进入breed，这里已经显示为华邦W25Q256 32MB的flash了。
-三、恢复EEPROM和路由器固件 1、刷入EEPROM 未刷入EEPROM之前，MAC地址全是FF。
-这里我们先点击“固件更新”并选择之前备份好的eeprom.bin文件，进行刷入。
-刷入之后，MAC地址就都回来了。
-2、刷入路由器固件 路由器的固件可以选择，华硕padavan、潘多拉PandoraBox、openwrt等。刷入方式同EEPROM，选择“固件”，并勾选“自动重启”即可。</description>
+      <description>一、拆掉原厂flash 在更换之前先刷入breed，提取EEPROM固件，因为里面包含了WiFi射频参数和MAC地址，一机一码。注意：刷机需谨慎，一定要提前备份。&#xA;1、备份固件 进入breed控制台，选择“备份固件”进行备份，将EEPROM固件下载到电脑，顺带看一下斐讯K2原厂的flash型号为兆易创新的GD25Q64 8MB。&#xA;2、拆机 备份完成后就可以拆机了，找到flash芯片，用热风枪将其吹下，没有热风枪也可以用电烙铁堆两坨焊锡拆下。&#xA;二、更换32M flash 这里使用的是华邦的W25Q256 32MB芯片，虽然芯片大小、引脚数量和原厂的不一样，但都是可以用的。&#xA;1、先刷breed 在焊接之前，先用编程器刷入breed，也就是bootloader，否则空芯片无法启动。&#xA;打开软件，点击自动，刷入breed的bin文件。&#xA;2、焊接 斐讯K2的PCB上可以焊接两种封装的flash，这就是为什么芯片大小不一样却可以用的原因。在焊接时，需要注意芯片摆放位置，将图中左上角的圆点与芯片上的圆点对应即可。&#xA;3、查看更换结果 开机，进入breed，这里已经显示为华邦W25Q256 32MB的flash了。&#xA;三、恢复EEPROM和路由器固件 1、刷入EEPROM 未刷入EEPROM之前，MAC地址全是FF。&#xA;这里我们先点击“固件更新”并选择之前备份好的eeprom.bin文件，进行刷入。&#xA;刷入之后，MAC地址就都回来了。&#xA;2、刷入路由器固件 路由器的固件可以选择，华硕padavan、潘多拉PandoraBox、openwrt等。刷入方式同EEPROM，选择“固件”，并勾选“自动重启”即可。</description>
     </item>
-    
     <item>
       <title>树莓派安装docker</title>
       <link>https://www.hsinyuwang.cn/raspberry/sebqcyck/</link>
       <pubDate>Fri, 30 Jul 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/raspberry/sebqcyck/</guid>
-      <description>树莓派最常用的系统为Raspbian，是基于Debian的一套Linux系统。查询docker官网可以看到这样一句提示：
- Raspbian users cannot use this method!
-For Raspbian, installing using the repository is not yet supported. You must instead use the convenience script.
- 所以根据官网建议，我们最好是使用docker官方提供的便捷脚本来一键安装
-$ curl -fsSL https://get.docker.com -o get-docker.sh$ sudo sh get-docker.sh</description>
+      <description>树莓派最常用的系统为Raspbian，是基于Debian的一套Linux系统。查询docker官网可以看到这样一句提示：&#xA;Raspbian users cannot use this method!&#xA;For Raspbian, installing using the repository is not yet supported. You must instead use the convenience script.&#xA;所以根据官网建议，我们最好是使用docker官方提供的便捷脚本来一键安装&#xA;$ curl -fsSL https://get.docker.com -o get-docker.sh&#xD;$ sudo sh get-docker.sh </description>
     </item>
-    
     <item>
       <title>Ajax请求统一异常处理</title>
       <link>https://www.hsinyuwang.cn/frontend/2krvyctb/</link>
       <pubDate>Thu, 29 Jul 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/frontend/2krvyctb/</guid>
-      <description>通过jQuery提供的ajaxSetup方法，我们可以拦截页面上所有的Ajax请求响应（包括post、get）。这样我们可以对这些Ajax请求响应做统一的处理。比如判断sesion是否失效，失效的话就跳转到登录页。
-//全局的ajax访问，处理ajax请求时异常 $.ajaxSetup({ contentType: &amp;#34;application/json;charset=utf-8&amp;#34;, complete: function (XMLHttpRequest, textStatus) { //通过XMLHttpRequest取得响应结果  var res = XMLHttpRequest.responseText; try { var jsonData = JSON.parse(res); if (jsonData.code == 500) { // 异常  } else if (jsonData.code == 30001) { } else if (jsonData.code == 30002) { } else { //正常情况就不统一处理了  } } catch (e) { } } }); </description>
+      <description>通过jQuery提供的ajaxSetup方法，我们可以拦截页面上所有的Ajax请求响应（包括post、get）。这样我们可以对这些Ajax请求响应做统一的处理。比如判断sesion是否失效，失效的话就跳转到登录页。&#xA;//全局的ajax访问，处理ajax请求时异常 $.ajaxSetup({ contentType: &amp;#34;application/json;charset=utf-8&amp;#34;, complete: function (XMLHttpRequest, textStatus) { //通过XMLHttpRequest取得响应结果 var res = XMLHttpRequest.responseText; try { var jsonData = JSON.parse(res); if (jsonData.code == 500) { // 异常 } else if (jsonData.code == 30001) { } else if (jsonData.code == 30002) { } else { //正常情况就不统一处理了 } } catch (e) { } } }); </description>
     </item>
-    
     <item>
       <title>树莓派安装wiringPi</title>
       <link>https://www.hsinyuwang.cn/raspberry/v0nxyspx/</link>
       <pubDate>Thu, 29 Jul 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/raspberry/v0nxyspx/</guid>
-      <description>在执行gpio -v时出现如下错误
-发现系统支持的最高版本为GLIBC_2.23,显然不支持GLIBC_2.28
-解决办法： 进入wiringPI官网找到 http://wiringpi.com/wiringpi-updated-for-the-pi-v3plus/
-修改下载wiringPi的库版本
-cd /tmpwget https://unicorn.drogon.net/wiringpi-2.46-1.debsudo dpkg -i wiringpi-2.46-1.deb</description>
+      <description>在执行gpio -v时出现如下错误&#xA;发现系统支持的最高版本为GLIBC_2.23,显然不支持GLIBC_2.28&#xA;解决办法： 进入wiringPI官网找到 http://wiringpi.com/wiringpi-updated-for-the-pi-v3plus/&#xA;修改下载wiringPi的库版本&#xA;cd /tmp&#xD;wget https://unicorn.drogon.net/wiringpi-2.46-1.deb&#xD;sudo dpkg -i wiringpi-2.46-1.deb </description>
     </item>
-    
     <item>
       <title>CentOS 7安装docker</title>
       <link>https://www.hsinyuwang.cn/docker/895biq0n/</link>
       <pubDate>Mon, 07 Jun 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/docker/895biq0n/</guid>
-      <description>一、安装docker
-1、Docker 要求 CentOS 系统的内核版本高于 3.10 ，查看本页面的前提条件来验证你的CentOS 版本是否支持 Docker 。
-通过 uname -r 命令查看你当前的内核版本
- $ uname -r2、使用 root 权限登录 Centos。确保 yum 包更新到最新。
-$ sudo yum update3、卸载旧版本(如果安装过旧版本的话)
-$ sudo yum remove docker docker-common docker-selinux docker-engine4、安装需要的软件包， yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的
-$ sudo yum install -y yum-utils device-mapper-persistent-data lvm25、设置yum源
-$ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo6、可以查看所有仓库中所有docker版本，并选择特定版本安装
-$ yum list docker-ce --showduplicates | sort -r7、安装docker
-$ sudo yum install docker-ce #由于repo中默认只开启stable仓库，故这里安装的是最新稳定版17.12.0$ sudo yum install &amp;lt;FQPN&amp;gt; # 例如：sudo yum install docker-ce-17.</description>
+      <description>一、安装docker&#xA;1、Docker 要求 CentOS 系统的内核版本高于 3.10 ，查看本页面的前提条件来验证你的CentOS 版本是否支持 Docker 。&#xA;通过 uname -r 命令查看你当前的内核版本&#xA;$ uname -r 2、使用 root 权限登录 Centos。确保 yum 包更新到最新。&#xA;$ sudo yum update 3、卸载旧版本(如果安装过旧版本的话)&#xA;$ sudo yum remove docker docker-common docker-selinux docker-engine 4、安装需要的软件包， yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的&#xA;$ sudo yum install -y yum-utils device-mapper-persistent-data lvm2 5、设置yum源&#xA;$ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo 6、可以查看所有仓库中所有docker版本，并选择特定版本安装&#xA;$ yum list docker-ce --showduplicates | sort -r 7、安装docker&#xA;$ sudo yum install docker-ce #由于repo中默认只开启stable仓库，故这里安装的是最新稳定版17.12.0&#xD;$ sudo yum install &amp;lt;FQPN&amp;gt; # 例如：sudo yum install docker-ce-17.</description>
     </item>
-    
     <item>
       <title>CentOS 7安装docker-compose</title>
       <link>https://www.hsinyuwang.cn/docker/5nx4vvn1/</link>
       <pubDate>Mon, 07 Jun 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/docker/5nx4vvn1/</guid>
-      <description> centos 7中python-pip模块不存在，是因为像centos这类衍生的发行版，源跟新滞后，或者不存在。即使使用yum去search python-pip也找不到软件包。
-  为了使用安装滞后或源中不存在的安装包，需要安装扩展源EPEL。扩展源EPEL(http://fedoraproject.org/wiki/EPEL) 是由 Fedora 社区打造，为 RHEL 及衍生发行版如 CentOS、Scientific Linux 等提供高质量软件包的项目。
- 安装扩展源 yum -y install epel-release安装python-pip模块 yum install python-pip此时执行 docker-compose version 命令可能会出现命令不存在的问题，需要进行安装
-cd /usr/local/bin/wget https://github.com/docker/compose/releases/download/1.14.0-rc2/docker-compose-Linux-x86_64rename docker-compose-Linux-x86_64 docker-compose docker-compose-Linux-x86_64chmod +x /usr/local/bin/docker-compose</description>
+      <description> centos 7中python-pip模块不存在，是因为像centos这类衍生的发行版，源跟新滞后，或者不存在。即使使用yum去search python-pip也找不到软件包。&#xA;为了使用安装滞后或源中不存在的安装包，需要安装扩展源EPEL。扩展源EPEL(http://fedoraproject.org/wiki/EPEL) 是由 Fedora 社区打造，为 RHEL 及衍生发行版如 CentOS、Scientific Linux 等提供高质量软件包的项目。&#xA;安装扩展源 yum -y install epel-release 安装python-pip模块 yum install python-pip 此时执行 docker-compose version 命令可能会出现命令不存在的问题，需要进行安装&#xA;cd /usr/local/bin/&#xD;wget https://github.com/docker/compose/releases/download/1.14.0-rc2/docker-compose-Linux-x86_64&#xD;rename docker-compose-Linux-x86_64 docker-compose docker-compose-Linux-x86_64&#xD;chmod +x /usr/local/bin/docker-compose </description>
     </item>
-    
     <item>
       <title>logging level级别</title>
       <link>https://www.hsinyuwang.cn/backend/ixlo7m8y/</link>
       <pubDate>Sun, 09 May 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/backend/ixlo7m8y/</guid>
-      <description>日志记录器(Logger)是日志处理的核心组件。log4j具有5种正常级别(Level)。
-  static Level DEBUG：指出细粒度信息事件对调试应用程序是非常有帮助的,一般认为比较重要的方法执行需要详细查看运行情况的则开启debug。
-  static Level INFO：表明消息在粗粒度级别上突出强调应用程序的运行过程，只需要了解该方法是否运行的可以使用INFO
-  static Level WARN：表明会出现潜在错误的情形。
-  static Level ERROR：指出虽然发生错误事件，但仍然不影响系统的继续运行。一般异常处理等情况都需要ERROR
-  static Level FATAL：指出每个严重的错误事件将会导致应用程序的退出。
-  另外，还有两个可用的特别的日志记录级别:
- static Level ALL：是最低等级的，用于打开所有日志记录。 static Level OFF：是最高等级的，用于关闭所有日志记录。   日志记录器（Logger）的行为是分等级的： 分为OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL或者您定义的级别。Log4j建议只使用四个级别，优先级 从高到低分别是 ERROR、WARN、INFO、DEBUG。 通过在这里定义的级别，您可以控制到应用程序中相应级别的日志信息的开关。比如在这里定义了INFO级别， 则应用程序中所有DEBUG级别的日志信息将不被打印出来。
- 优先级高的将被打印出来。项目上生产环境时候建议把debug的日志级别重新调为warn或者更高，避免产生大量日志。</description>
+      <description>日志记录器(Logger)是日志处理的核心组件。log4j具有5种正常级别(Level)。&#xA;static Level DEBUG：指出细粒度信息事件对调试应用程序是非常有帮助的,一般认为比较重要的方法执行需要详细查看运行情况的则开启debug。&#xA;static Level INFO：表明消息在粗粒度级别上突出强调应用程序的运行过程，只需要了解该方法是否运行的可以使用INFO&#xA;static Level WARN：表明会出现潜在错误的情形。&#xA;static Level ERROR：指出虽然发生错误事件，但仍然不影响系统的继续运行。一般异常处理等情况都需要ERROR&#xA;static Level FATAL：指出每个严重的错误事件将会导致应用程序的退出。&#xA;另外，还有两个可用的特别的日志记录级别:&#xA;static Level ALL：是最低等级的，用于打开所有日志记录。 static Level OFF：是最高等级的，用于关闭所有日志记录。 日志记录器（Logger）的行为是分等级的： 分为OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL或者您定义的级别。Log4j建议只使用四个级别，优先级 从高到低分别是 ERROR、WARN、INFO、DEBUG。 通过在这里定义的级别，您可以控制到应用程序中相应级别的日志信息的开关。比如在这里定义了INFO级别， 则应用程序中所有DEBUG级别的日志信息将不被打印出来。&#xA;优先级高的将被打印出来。项目上生产环境时候建议把debug的日志级别重新调为warn或者更高，避免产生大量日志。</description>
     </item>
-    
     <item>
       <title>css解决fixed布局不会出现滚动条</title>
       <link>https://www.hsinyuwang.cn/frontend/pomabnfs/</link>
       <pubDate>Fri, 07 May 2021 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/frontend/pomabnfs/</guid>
-      <description>如果我们布局的是后是fixed并且想要高度为100%的时候，我们一般会这样设置：
-div { display:fixed; height:100%; overflow:scroll; } 但是这样并不会出现滚动条，正确的做法应该设置top和bottom为0：
-.fixed-content { top: 0; bottom:0; position:fixed; overflow-y:scroll; overflow-x:hidden; } </description>
+      <description>如果我们布局的是后是fixed并且想要高度为100%的时候，我们一般会这样设置：&#xA;div { display:fixed; height:100%; overflow:scroll; } 但是这样并不会出现滚动条，正确的做法应该设置top和bottom为0：&#xA;.fixed-content { top: 0; bottom:0; position:fixed; overflow-y:scroll; overflow-x:hidden; } </description>
     </item>
-    
     <item>
       <title>微信小程序request请求方法简单封装</title>
       <link>https://www.hsinyuwang.cn/wechat/jz9wmtl1/</link>
       <pubDate>Mon, 16 Nov 2020 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/wechat/jz9wmtl1/</guid>
-      <description>在request请求的时候，通常会遇到前一个请求没有结束，就发起了一个新的请求，这个时候就要把先前同样的请求取消掉，也就是使用abort() 方法取消请求。下面的代码是对微信小程序的request请求简单的封装。
-/** * GET请求 * @param url 请求地址 * @param param 参数 * @return {Promise} 返回值Promise对象 */ var get = function (url, param) { // 请求之前，先前之前的请求取消掉  if (param.requestTaskKey &amp;amp;&amp;amp; getApp().requestTasks[param.requestTaskKey]) { try { //getApp() 获取全局app对象内容  getApp().requestTasks[param.requestTaskKey].abort() } catch (e) { console.error(e) } } // 使用Promise封装request方法，实现异步操作队列化  var promise = new Promise(function (resolve, reject) { let requestTask = wx.request({ url: url, data: param, success: function (res) { resolve(res.data); }, fail: function (res) { // 异常响  reject() if (res.</description>
+      <description>在request请求的时候，通常会遇到前一个请求没有结束，就发起了一个新的请求，这个时候就要把先前同样的请求取消掉，也就是使用abort() 方法取消请求。下面的代码是对微信小程序的request请求简单的封装。&#xA;/** * GET请求 * @param url 请求地址 * @param param 参数 * @return {Promise} 返回值Promise对象 */ var get = function (url, param) { // 请求之前，先前之前的请求取消掉 if (param.requestTaskKey &amp;amp;&amp;amp; getApp().requestTasks[param.requestTaskKey]) { try { //getApp() 获取全局app对象内容 getApp().requestTasks[param.requestTaskKey].abort() } catch (e) { console.error(e) } } // 使用Promise封装request方法，实现异步操作队列化 var promise = new Promise(function (resolve, reject) { let requestTask = wx.request({ url: url, data: param, success: function (res) { resolve(res.data); }, fail: function (res) { // 异常响 reject() if (res.</description>
     </item>
-    
     <item>
       <title>CentOS 7密码错误设置锁定账号</title>
       <link>https://www.hsinyuwang.cn/server/cf4wsq4g/</link>
       <pubDate>Sat, 14 Nov 2020 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/server/cf4wsq4g/</guid>
-      <description>1、限制用户远程登录
-在#%PAM-1.0的下面，即第二行，添加内容，一定要写在前面，如果写在后面，虽然用户被锁定，但是只要用户输入正确的密码，还是可以登录的！
-vim /etc/pam.d/sshd#%PAM-1.0 auth required pam_tally2.so deny=3 unlock_time=300 even_deny_root root_unlock_time=10参数解释
-even_deny_root 也限制root用户；
-deny 设置普通用户和root用户连续错误登陆的最大次数，超过最大次数，则锁定该用户；
-unlock_time 设定普通用户锁定后，多少时间后解锁，单位是秒；
-root_unlock_time 设定root用户锁定后，多少时间后解锁，单位是秒；
-此处使用的是 pam_tally2 模块，如果不支持 pam_tally2 可以使用 pam_tally 模块。另外，不同的pam版本，设置可能有所不同，具体使用方法，可以参照相关模块的使用规则。
-2、限制用户从tty登录
-在#%PAM-1.0的下面，即第二行，添加内容，一定要写在前面，如果写在后面，虽然用户被锁定，但是只要用户输入正确的密码，还是可以登录的！
-vim /etc/pam.d/login#%PAM-1.0 auth required pam_tally2.so deny=3 lock_time=300 even_deny_root root_unlock_time=10同样是增加在第2行！
-3、查看用户登录失败次数
-cd /etc/pam.d/pam_tally2 --user root4、解锁指定用户
-pam_tally2 -r -u root</description>
+      <description>1、限制用户远程登录&#xA;在#%PAM-1.0的下面，即第二行，添加内容，一定要写在前面，如果写在后面，虽然用户被锁定，但是只要用户输入正确的密码，还是可以登录的！&#xA;vim /etc/pam.d/sshd #%PAM-1.0 auth required pam_tally2.so deny=3 unlock_time=300 even_deny_root root_unlock_time=10 参数解释&#xA;even_deny_root 也限制root用户；&#xA;deny 设置普通用户和root用户连续错误登陆的最大次数，超过最大次数，则锁定该用户；&#xA;unlock_time 设定普通用户锁定后，多少时间后解锁，单位是秒；&#xA;root_unlock_time 设定root用户锁定后，多少时间后解锁，单位是秒；&#xA;此处使用的是 pam_tally2 模块，如果不支持 pam_tally2 可以使用 pam_tally 模块。另外，不同的pam版本，设置可能有所不同，具体使用方法，可以参照相关模块的使用规则。&#xA;2、限制用户从tty登录&#xA;在#%PAM-1.0的下面，即第二行，添加内容，一定要写在前面，如果写在后面，虽然用户被锁定，但是只要用户输入正确的密码，还是可以登录的！&#xA;vim /etc/pam.d/login #%PAM-1.0 auth required pam_tally2.so deny=3 lock_time=300 even_deny_root root_unlock_time=10 同样是增加在第2行！&#xA;3、查看用户登录失败次数&#xA;cd /etc/pam.d/&#xD;pam_tally2 --user root 4、解锁指定用户&#xA;pam_tally2 -r -u root </description>
     </item>
-    
     <item>
       <title>CentOS 7开放及查看端口</title>
       <link>https://www.hsinyuwang.cn/server/26iciptk/</link>
       <pubDate>Wed, 14 Oct 2020 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/server/26iciptk/</guid>
-      <description>1、开放端口
-firewall-cmd --zone=public --add-port=5672/tcp --permanent # 开放5672端口firewall-cmd --zone=public --remove-port=5672/tcp --permanent #关闭5672端口firewall-cmd --reload # 配置立即生效2、查看防火墙所有开放的端口
-firewall-cmd --zone=public --list-ports3、关闭防火墙
-systemctl stop firewalld.service4、查看防火墙状态
-firewall-cmd --state5、查看监听的端口
-netstat -lnpt6、检查端口被哪个进程占用
-netstat -lnpt |grep 56727、查看进程的详细信息
-ps 68328、中止进程
-kill -9 6832</description>
+      <description>1、开放端口&#xA;firewall-cmd --zone=public --add-port=5672/tcp --permanent # 开放5672端口&#xD;firewall-cmd --zone=public --remove-port=5672/tcp --permanent #关闭5672端口&#xD;firewall-cmd --reload # 配置立即生效 2、查看防火墙所有开放的端口&#xA;firewall-cmd --zone=public --list-ports 3、关闭防火墙&#xA;systemctl stop firewalld.service 4、查看防火墙状态&#xA;firewall-cmd --state 5、查看监听的端口&#xA;netstat -lnpt 6、检查端口被哪个进程占用&#xA;netstat -lnpt |grep 5672 7、查看进程的详细信息&#xA;ps 6832 8、中止进程&#xA;kill -9 6832 </description>
     </item>
-    
     <item>
       <title>CentOS 7允许、禁止ping</title>
       <link>https://www.hsinyuwang.cn/server/iczegbgn/</link>
       <pubDate>Wed, 07 Oct 2020 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/server/iczegbgn/</guid>
-      <description>一、临时生效
-1、允许ping
-echo 0 &amp;gt;/proc/sys/net/ipv4/icmp_echo_ignore_all 2、禁止ping
-echo 1 &amp;gt;/proc/sys/net/ipv4/icmp_echo_ignore_all 二、永久生效
-修改文件：/etc/sysctl.conf
-1、允许ping
-增加一行：
-vim /etc/sysctl.confnet.ipv4.icmp_echo_ignore_all=02、禁止ping
-增加一行：
-vim /etc/sysctl.confnet.ipv4.icmp_echo_ignore_all=1修改后使用以下命令使之生效：
-sysctl -p</description>
+      <description>一、临时生效&#xA;1、允许ping&#xA;echo 0 &amp;gt;/proc/sys/net/ipv4/icmp_echo_ignore_all 2、禁止ping&#xA;echo 1 &amp;gt;/proc/sys/net/ipv4/icmp_echo_ignore_all 二、永久生效&#xA;修改文件：/etc/sysctl.conf&#xA;1、允许ping&#xA;增加一行：&#xA;vim /etc/sysctl.conf&#xD;net.ipv4.icmp_echo_ignore_all=0 2、禁止ping&#xA;增加一行：&#xA;vim /etc/sysctl.conf&#xD;net.ipv4.icmp_echo_ignore_all=1 修改后使用以下命令使之生效：&#xA;sysctl -p </description>
     </item>
-    
     <item>
       <title>Linux设置定时任务</title>
       <link>https://www.hsinyuwang.cn/server/vtxpza4k/</link>
       <pubDate>Tue, 22 Sep 2020 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/server/vtxpza4k/</guid>
-      <description>常用命令
-## 编辑定时任务crontab -e## 显示定时任务crontab -l查看执行的日志
-cat /var/log/cron基本格式为
-* * * * * commond 前面的五个星号分别表示 分 时 日 月 周，commond表示你要操作的命令
-分（1-59）（或/1表示每分钟）
-时（1-23）（0表示0点）
-日（1-31）
-月（1-12）
-周（1-6）（0表示周日）
-   字段 允许值 允许的特殊字符     秒 0-59 - * /   分 0-59 - * /   小时 0-23 - * /   日期 1-31 - * ? / L W C   月份 1-12 或者 JAN-DEC - * /   星期 1-7 或者 SUN-SAT - * ?</description>
+      <description>常用命令&#xA;## 编辑定时任务&#xD;crontab -e&#xD;## 显示定时任务&#xD;crontab -l 查看执行的日志&#xA;cat /var/log/cron 基本格式为&#xA;* * * * * commond 前面的五个星号分别表示 分 时 日 月 周，commond表示你要操作的命令&#xA;分（1-59）（或/1表示每分钟）&#xA;时（1-23）（0表示0点）&#xA;日（1-31）&#xA;月（1-12）&#xA;周（1-6）（0表示周日）&#xA;字段 允许值 允许的特殊字符 秒 0-59 - * / 分 0-59 - * / 小时 0-23 - * / 日期 1-31 - * ? / L W C 月份 1-12 或者 JAN-DEC - * / 星期 1-7 或者 SUN-SAT - * ?</description>
     </item>
-    
     <item>
       <title>CentOS 7 Spring Boot启动脚本</title>
       <link>https://www.hsinyuwang.cn/server/ispf5vtl/</link>
       <pubDate>Mon, 21 Sep 2020 10:11:20 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/server/ispf5vtl/</guid>
-      <description>#!/bin/bash#这里可替换为你自己的执行程序，其他代码无需更改APP_NAME=包名.jar#使用说明，用来提示输入参数usage() {echo &amp;quot;Usage: sh wss.sh [start|stop|restart|status]&amp;quot;exit 1}#检查程序是否在运行is_exist(){pid=`ps -ef|grep $APP_NAME|grep -v grep|awk &#39;{print $2}&#39; `#如果不存在返回1，存在返回0 if [ -z &amp;quot;${pid}&amp;quot; ]; thenreturn 1elsereturn 0fi}#启动方法start(){is_existif [ $? -eq &amp;quot;0&amp;quot; ]; thenecho &amp;quot;${APP_NAME} is already running. pid=${pid} .&amp;quot;elsenohup java -jar /root/project/websocket/$APP_NAME &amp;gt; /root/project/websocket/websocketserverlog.file 2&amp;gt;&amp;amp;1 &amp;amp;echo &amp;quot;${APP_NAME} start success&amp;quot;fi}#停止方法stop(){is_existif [ $?</description>
+      <description>#!/bin/bash&#xD;#这里可替换为你自己的执行程序，其他代码无需更改&#xD;APP_NAME=包名.jar&#xD;#使用说明，用来提示输入参数&#xD;usage() {&#xD;echo &amp;#34;Usage: sh wss.sh [start|stop|restart|status]&amp;#34;&#xD;exit 1&#xD;}&#xD;#检查程序是否在运行&#xD;is_exist(){&#xD;pid=`ps -ef|grep $APP_NAME|grep -v grep|awk &amp;#39;{print $2}&amp;#39; `&#xD;#如果不存在返回1，存在返回0 if [ -z &amp;#34;${pid}&amp;#34; ]; then&#xD;return 1&#xD;else&#xD;return 0&#xD;fi&#xD;}&#xD;#启动方法&#xD;start(){&#xD;is_exist&#xD;if [ $? -eq &amp;#34;0&amp;#34; ]; then&#xD;echo &amp;#34;${APP_NAME} is already running. pid=${pid} .&amp;#34;&#xD;else&#xD;nohup java -jar /root/project/websocket/$APP_NAME &amp;gt; /root/project/websocket/websocketserverlog.file 2&amp;gt;&amp;amp;1 &amp;amp;&#xD;echo &amp;#34;${APP_NAME} start success&amp;#34;&#xD;fi&#xD;}&#xD;#停止方法&#xD;stop(){&#xD;is_exist&#xD;if [ $?</description>
     </item>
-    
     <item>
       <title>解决ARP报错</title>
       <link>https://www.hsinyuwang.cn/server/5ifkuus4/</link>
       <pubDate>Mon, 21 Sep 2020 10:11:20 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/server/5ifkuus4/</guid>
-      <description>报错信息：
- The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib
- 什么是APR？ APR(Apache portable Run-time libraries，Apache可移植运行库)的目的如其名称一样，主要为上层的应用程序提供一个可以跨越多操作系统平台使用的底层支持接口库。在早期 的Apache版本中，应用程序本身必须能够处理各种具体操作系统平台的细节，并针对不同的平台调用不同的处理函数。
-随着Apache的进一步开发，Apache组织决定将这些通用的函数独立出来并发展成为一个新的项目。这样，APR的开发就从Apache中独立出来，Apache仅仅是使用 APR而已。
-APR使得平台细节的处理进行下移。对于应用程序而言，它们根本就不需要考虑具体的平台，不管是Unix、Linux还是Window，应用程序执行的接口基本都是统一一致的。因此对于APR而言，可移植性和统一的上层接口是其考虑的一个重点。而APR最早的目的并不是如此，它最早只是希望将Apache中用到的所有代码合并为一个通用的代码库，然而这不是一个正确的策略，因此后来APR改变了其目标。有的时候使用公共代码并不是一件好事，比如如何将一个请求映射到线程或者进程是平台相关的，因此仅仅一个公共的代码库并不能完成这种区分。APR的目标则是希望安全合并所有的能够合并的代码而不需要牺牲性能。
-APR的最早的一个目标就是为所有的平台(不是部分)提供一个公共的统一操作函数接口，这是一个非常了不起的目的，当然也是不现实的一个目标。我们不可能支持所有平台的所有特征，因此APR目前只能为大多数平台提供所有的APR特性支持，包括Win32、OS/2、BeOS、Darwin、Linux等等。为了能够实现这个目标，APR开发者必须为那些不能运行于所有平台的特性创建了一系列的特征宏(FEATURE MACROS)以在各个平台之间区分这些特征。这些特征宏定义非常简单，通常用APR_HAS_FEATURE参数设置：
-如果某个平台具有这个特性，则该宏必须设置为true，比如Linux和window都具有内存映射文件，同时APR提供了内存映射文件的操作接口，因此在这两个平台上，APR_HAS_MMAP宏必须设置，同时ap_mmap_*函数应该将磁盘文件映射为内存并返回适当的状态码。如果你的操作系统并不支持内存映射，那么APR_HAS_MMAP必须设置为0，而且所有的ap_mmap_*函数也可以不需要定义。第二步就是对于那些在程序中使用了不支持的函数必须提出警告。
-解决方法 1、安装apr 首先安装依赖
-yum install openssl-develyum install apr-devel然后安装apr，下载链接为https://downloads.apache.org//apr/apr-1.7.0.tar.gz
-源码方式安装
-tar zxvf apr-1.7.0.tar.gzcd apr-1.7.0 ./configure make &amp;amp;&amp;amp; make installapr 默认安装在 /usr/local/apr
-或者
-yum install apr2、然后安装apr-util 下载链接为https://archive.apache.org/dist/apr/apr-util-1.6.1.tar.bz2
-源码方式安装
-tar -jxvf apr-util-1.6.1.tar.bz2 cd apr-util-1.</description>
+      <description>报错信息：&#xA;The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib&#xA;什么是APR？ APR(Apache portable Run-time libraries，Apache可移植运行库)的目的如其名称一样，主要为上层的应用程序提供一个可以跨越多操作系统平台使用的底层支持接口库。在早期 的Apache版本中，应用程序本身必须能够处理各种具体操作系统平台的细节，并针对不同的平台调用不同的处理函数。&#xA;随着Apache的进一步开发，Apache组织决定将这些通用的函数独立出来并发展成为一个新的项目。这样，APR的开发就从Apache中独立出来，Apache仅仅是使用 APR而已。&#xA;APR使得平台细节的处理进行下移。对于应用程序而言，它们根本就不需要考虑具体的平台，不管是Unix、Linux还是Window，应用程序执行的接口基本都是统一一致的。因此对于APR而言，可移植性和统一的上层接口是其考虑的一个重点。而APR最早的目的并不是如此，它最早只是希望将Apache中用到的所有代码合并为一个通用的代码库，然而这不是一个正确的策略，因此后来APR改变了其目标。有的时候使用公共代码并不是一件好事，比如如何将一个请求映射到线程或者进程是平台相关的，因此仅仅一个公共的代码库并不能完成这种区分。APR的目标则是希望安全合并所有的能够合并的代码而不需要牺牲性能。&#xA;APR的最早的一个目标就是为所有的平台(不是部分)提供一个公共的统一操作函数接口，这是一个非常了不起的目的，当然也是不现实的一个目标。我们不可能支持所有平台的所有特征，因此APR目前只能为大多数平台提供所有的APR特性支持，包括Win32、OS/2、BeOS、Darwin、Linux等等。为了能够实现这个目标，APR开发者必须为那些不能运行于所有平台的特性创建了一系列的特征宏(FEATURE MACROS)以在各个平台之间区分这些特征。这些特征宏定义非常简单，通常用APR_HAS_FEATURE参数设置：&#xA;如果某个平台具有这个特性，则该宏必须设置为true，比如Linux和window都具有内存映射文件，同时APR提供了内存映射文件的操作接口，因此在这两个平台上，APR_HAS_MMAP宏必须设置，同时ap_mmap_*函数应该将磁盘文件映射为内存并返回适当的状态码。如果你的操作系统并不支持内存映射，那么APR_HAS_MMAP必须设置为0，而且所有的ap_mmap_*函数也可以不需要定义。第二步就是对于那些在程序中使用了不支持的函数必须提出警告。&#xA;解决方法 1、安装apr 首先安装依赖&#xA;yum install openssl-devel&#xD;yum install apr-devel 然后安装apr，下载链接为https://downloads.apache.org//apr/apr-1.7.0.tar.gz&#xA;源码方式安装&#xA;tar zxvf apr-1.7.0.tar.gz&#xD;cd apr-1.7.0 ./configure make &amp;amp;&amp;amp; make install apr 默认安装在 /usr/local/apr&#xA;或者&#xA;yum install apr 2、然后安装apr-util 下载链接为https://archive.apache.org/dist/apr/apr-util-1.6.1.tar.bz2&#xA;源码方式安装&#xA;tar -jxvf apr-util-1.6.1.tar.bz2 cd apr-util-1.6.1 .</description>
     </item>
-    
     <item>
       <title>CentOS 7漏洞修复</title>
       <link>https://www.hsinyuwang.cn/server/937kgb5r/</link>
       <pubDate>Thu, 11 Jun 2020 08:55:56 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/server/937kgb5r/</guid>
-      <description>首先查看可升级系统软件
-yum check-update然后更新所有可升级的系统软件
-yum upgrade 阿里云ECS提示RHSA-2017:3263: curl security update 1、更新ca-bundle 首先备份一下
-cp /etc/pki/tls/certs/ca-bundle.crt /etc/pki/tls/certs/ca-bundle.crt.bak更新并替换
-curl http://curl.haxx.se/ca/cacert.pem -o /etc/pki/tls/certs/ca-bundle.crt2、新增 repo 源 打开vim创建一个新文件
-vim /etc/yum.repos.d/city-fan-for-curl.repo向其中添加内容
-[CityFanforCurl]name=City Fan Repobaseurl=http://www.city-fan.org/ftp/contrib/yum-repo/rhel7/x86_64/enabled=0gpgcheck=0:wq退出3、更新curl yum update curl --enablerepo=CityFanforCurl -y4、重启 reboot</description>
+      <description>首先查看可升级系统软件&#xA;yum check-update 然后更新所有可升级的系统软件&#xA;yum upgrade 阿里云ECS提示RHSA-2017:3263: curl security update 1、更新ca-bundle 首先备份一下&#xA;cp /etc/pki/tls/certs/ca-bundle.crt /etc/pki/tls/certs/ca-bundle.crt.bak 更新并替换&#xA;curl http://curl.haxx.se/ca/cacert.pem -o /etc/pki/tls/certs/ca-bundle.crt 2、新增 repo 源 打开vim创建一个新文件&#xA;vim /etc/yum.repos.d/city-fan-for-curl.repo 向其中添加内容&#xA;[CityFanforCurl]&#xD;name=City Fan Repo&#xD;baseurl=http://www.city-fan.org/ftp/contrib/yum-repo/rhel7/x86_64/&#xD;enabled=0&#xD;gpgcheck=0 :wq退出 3、更新curl yum update curl --enablerepo=CityFanforCurl -y 4、重启 reboot </description>
     </item>
-    
     <item>
       <title>SpringBoot统一返回结果</title>
       <link>https://www.hsinyuwang.cn/backend/ofvwk2w7/</link>
       <pubDate>Mon, 08 Jun 2020 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/backend/ofvwk2w7/</guid>
-      <description>实现统一返回非常简单，只需要三个功能
-ResponseData&amp;lt;T&amp;gt; ResponseDataUtils ResultEnum1、ResponseData
-public class ResponseData&amp;lt;T&amp;gt; implements Serializable { private String code; private String msg; private T data; public ResponseData(String code, String msg, T data) { this.code = code; this.msg = msg; this.data = data; } public ResponseData(String code, String msg) { this.code = code; this.msg = msg; } public ResponseData(ResultEnums resultEnums) { this.code = resultEnums.getCode(); this.msg = resultEnums.getMsg(); } public ResponseData(ResultEnums resultEnums, T data) { this.code = resultEnums.</description>
+      <description>实现统一返回非常简单，只需要三个功能&#xA;ResponseData&amp;lt;T&amp;gt; ResponseDataUtils ResultEnum 1、ResponseData&#xA;public class ResponseData&amp;lt;T&amp;gt; implements Serializable { private String code; private String msg; private T data; public ResponseData(String code, String msg, T data) { this.code = code; this.msg = msg; this.data = data; } public ResponseData(String code, String msg) { this.code = code; this.msg = msg; } public ResponseData(ResultEnums resultEnums) { this.code = resultEnums.getCode(); this.msg = resultEnums.getMsg(); } public ResponseData(ResultEnums resultEnums, T data) { this.code = resultEnums.</description>
     </item>
-    
     <item>
       <title>CentOS 7部署Django项目（1）</title>
       <link>https://www.hsinyuwang.cn/python/lzv1tax5/</link>
       <pubDate>Thu, 14 May 2020 10:43:45 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/python/lzv1tax5/</guid>
-      <description>一、安装Python 1、安装依赖包 yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gcc* make -y2、下载python安装包 wget https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tgz3、解压python安装包 tar -zxvf Python-3.6.8.tgz4、配置安装路径 切换到解压目录下
-./configure --prefix=/usr/local/python35、编译安装 make &amp;amp;&amp;amp; make install6、配置软连接 ln -s /usr/local/python3/bin/python3 /usr/bin/python3ln -s /usr/local/python3/bin/pip3 /usr/bin/pip3二、安装uwsgi 出现ModuleNotFoundError: No module named &amp;lsquo;_ctypes&amp;rsquo;的错误，需要安装python3-devel
-yum install python3-devel然后再安装uwsgi
-pip3 install uwsgi -i https://pypi.douban.com/simple/三、安装项目所需要的包 1、导出项目的包 pip freeze &amp;gt; requirement.txt2、然后将其导入到Centos7中，并用pip3安装文件中的模块 pip3 install -r requirement.txt -i https://pypi.douban.com/simple/四、运行Django项目 进入到Django项目目录下
-uwsgi --http :8000 --module 项目名.</description>
+      <description>一、安装Python 1、安装依赖包 yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gcc* make -y 2、下载python安装包 wget https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tgz 3、解压python安装包 tar -zxvf Python-3.6.8.tgz 4、配置安装路径 切换到解压目录下&#xA;./configure --prefix=/usr/local/python3 5、编译安装 make &amp;amp;&amp;amp; make install 6、配置软连接 ln -s /usr/local/python3/bin/python3 /usr/bin/python3 ln -s /usr/local/python3/bin/pip3 /usr/bin/pip3 二、安装uwsgi 出现ModuleNotFoundError: No module named &amp;lsquo;_ctypes&amp;rsquo;的错误，需要安装python3-devel&#xA;yum install python3-devel 然后再安装uwsgi&#xA;pip3 install uwsgi -i https://pypi.douban.com/simple/ 三、安装项目所需要的包 1、导出项目的包 pip freeze &amp;gt; requirement.txt 2、然后将其导入到Centos7中，并用pip3安装文件中的模块 pip3 install -r requirement.txt -i https://pypi.douban.com/simple/ 四、运行Django项目 进入到Django项目目录下&#xA;uwsgi --http :8000 --module 项目名.</description>
     </item>
-    
     <item>
       <title>CentOS 7部署Django项目（2）</title>
       <link>https://www.hsinyuwang.cn/python/syukrajc/</link>
       <pubDate>Thu, 14 May 2020 08:55:56 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/python/syukrajc/</guid>
-      <description>一、安装nginx 预先安装额外的依赖 yum -y install pcre-develyum -y install openssl openssl-devel下载 wget http://nginx.org/download/nginx-1.9.9.tar.gz 解压 tar -zxvf nginx-1.9.9.tar.gz安装 进入到解压目录
-./configure --prefix=/usr/local/nginxmake &amp;amp;&amp;amp; make install启动 /usr/local/nginx/sbin/nginx停止服务 /usr/local/nginx/sbin/nginx -s stop重新加载Nginx配置 /usr/local/nginx/sbin/nginx -s reload二、配置 nginx代理uwsgi和静态资源 修改nginx.conf文件
-location / {proxy_pass http://localhost:8000; }location /images {alias /home/username/projectname/images/;}配置完报403错误，需要加权限，在开头加上
-user root;</description>
+      <description>一、安装nginx 预先安装额外的依赖 yum -y install pcre-devel&#xD;yum -y install openssl openssl-devel 下载 wget http://nginx.org/download/nginx-1.9.9.tar.gz 解压 tar -zxvf nginx-1.9.9.tar.gz 安装 进入到解压目录&#xA;./configure --prefix=/usr/local/nginx&#xD;make &amp;amp;&amp;amp; make install 启动 /usr/local/nginx/sbin/nginx 停止服务 /usr/local/nginx/sbin/nginx -s stop 重新加载Nginx配置 /usr/local/nginx/sbin/nginx -s reload 二、配置 nginx代理uwsgi和静态资源 修改nginx.conf文件&#xA;location / {&#xD;proxy_pass http://localhost:8000; }&#xD;location /images {&#xD;alias /home/username/projectname/images/;&#xD;} 配置完报403错误，需要加权限，在开头加上&#xA;user root; </description>
     </item>
-    
     <item>
       <title>CentOS 7添加新用户并授权</title>
       <link>https://www.hsinyuwang.cn/server/f2c3eags/</link>
       <pubDate>Thu, 30 Apr 2020 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/server/f2c3eags/</guid>
-      <description>1、添加新用户
-（1）创建新用户
-adduser [用户名]（2）修改新用户的密码
-passwd [用户名]2、授权
-（1）添加sudoers文件可写权限
-chmod -v u+w /etc/sudoers（2）修改sudoers文件
-vim /etc/sudoers在sudoers文件中找到如下位置并添加如下内容：
-[用户名] ALL=(ALL) ALL（如需新用户使用sudo时不用输密码，把最后一个ALL改为NOPASSWD:ALL即可）（3）收回sudoers文件可写权限
-chmod -v u-w /etc/sudoers</description>
+      <description>1、添加新用户&#xA;（1）创建新用户&#xA;adduser [用户名] （2）修改新用户的密码&#xA;passwd [用户名] 2、授权&#xA;（1）添加sudoers文件可写权限&#xA;chmod -v u+w /etc/sudoers （2）修改sudoers文件&#xA;vim /etc/sudoers 在sudoers文件中找到如下位置并添加如下内容：&#xA;[用户名] ALL=(ALL) ALL（如需新用户使用sudo时不用输密码，把最后一个ALL改为NOPASSWD:ALL即可） （3）收回sudoers文件可写权限&#xA;chmod -v u-w /etc/sudoers </description>
     </item>
-    
     <item>
       <title>tomcat 8005端口未启动</title>
       <link>https://www.hsinyuwang.cn/server/zj61vvgx/</link>
       <pubDate>Thu, 16 Apr 2020 10:20:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/server/zj61vvgx/</guid>
-      <description>8005端口未启动，无法关闭tomcat tomcat启动的时候看不出异常，关闭的时候回报错类似
-Jul 17, 2015 9:47:54 AM org.apache.catalina.startup.Catalina stopServer SEVERE: Could not contact localhost:8005. Tomcat may not be running. Jul 17, 2015 9:47:54 AM org.apache.catalina.startup.Catalina stopServer SEVERE: Catalina.stop: Java.NET.ConnectException: Connection timed out at java.net.PlainSocketImpl.socketConnect(Native Method) at java.Net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333) at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195) at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182) at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366) at java.net.Socket.connect(Socket.java:525) at java.net.Socket.connect(Socket.java:475) at java.net.Socket.(Socket.java:372) at java.net.Socket.(Socket.java:186) at org.apache.catalina.startup.Catalina.stopServer(Catalina.java:498) at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39) at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25) at java.lang.reflect.Method.invoke(Method.java:597) at org.apache.catalina.startup.Bootstrap.stopServer(Bootstrap.java:370) at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:457)即为8005端口未运行，使用命令netstat -ant 发现 没有找到8005端口，解决办法：</description>
+      <description>8005端口未启动，无法关闭tomcat tomcat启动的时候看不出异常，关闭的时候回报错类似&#xA;Jul 17, 2015 9:47:54 AM org.apache.catalina.startup.Catalina stopServer SEVERE: Could not contact localhost:8005. Tomcat may not be running. Jul 17, 2015 9:47:54 AM org.apache.catalina.startup.Catalina stopServer SEVERE: Catalina.stop: Java.NET.ConnectException: Connection timed out at java.net.PlainSocketImpl.socketConnect(Native Method) at java.Net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333) at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195) at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182) at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366) at java.net.Socket.connect(Socket.java:525) at java.net.Socket.connect(Socket.java:475) at java.net.Socket.(Socket.java:372) at java.net.Socket.(Socket.java:186) at org.apache.catalina.startup.Catalina.stopServer(Catalina.java:498) at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39) at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25) at java.lang.reflect.Method.invoke(Method.java:597) at org.apache.catalina.startup.Bootstrap.stopServer(Bootstrap.java:370) at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:457) 即为8005端口未运行，使用命令netstat -ant 发现 没有找到8005端口，解决办法：</description>
     </item>
-    
     <item>
       <title>CentOS 7更换yum源</title>
       <link>https://www.hsinyuwang.cn/server/9jslvvrt/</link>
       <pubDate>Sun, 12 Apr 2020 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/server/9jslvvrt/</guid>
-      <description>一、备份当前源
-cd /etc/yum.repos.d/cp CentOS-Base.repo CentOS-Base-repo.bak二、使用wget下载阿里yum源repo文件
-wget http://mirrors.aliyun.com/repo/Centos-7.repo三、清理旧包
-yum clean all四、把下载下来阿里云repo文件设置成为默认源
-mv Centos-7.repo CentOS-Base.repo五、生成阿里云yum源缓存并更新yum源
-yum makecacheyum update</description>
+      <description>一、备份当前源&#xA;cd /etc/yum.repos.d/&#xD;cp CentOS-Base.repo CentOS-Base-repo.bak 二、使用wget下载阿里yum源repo文件&#xA;wget http://mirrors.aliyun.com/repo/Centos-7.repo 三、清理旧包&#xA;yum clean all 四、把下载下来阿里云repo文件设置成为默认源&#xA;mv Centos-7.repo CentOS-Base.repo 五、生成阿里云yum源缓存并更新yum源&#xA;yum makecache&#xD;yum update </description>
     </item>
-    
     <item>
       <title>px、pt、rem、em、rpx区别</title>
       <link>https://www.hsinyuwang.cn/frontend/v17jpx42/</link>
       <pubDate>Sun, 20 Oct 2019 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/frontend/v17jpx42/</guid>
-      <description>1、px像素（CSS像素）
-px是相对长度。
-CSS 像素（CSS Pixel）: 又称为虚拟像素、设备独立像素或逻辑像素，也可以理解为直觉像素。CSS 像素是 Web 编程的概念，指的是 CSS 样式代码中使用的逻辑像素。比如 iPhone 6 的 CSS 像素数为 375 x 667px。
-虚拟像素，可以理解为“直觉”像素，CSS和JS使用的抽象单位，浏览器内的一切长度都是以CSS像素为单位的，CSS像素的单位是px。
-在CSS规范中，长度单位可以分为两类，绝对(absolute)单位以及相对(relative)单位。px是一个相对单位，相对的是设备像素(device pixel)。
-在同样一个设备上，每1个CSS像素所代表的物理像素是可以变化的(即CSS像素的第一方面的相对性); 在不同的设备之间，每1个CSS像素所代表的物理像素是可以变化的(即CSS像素的第二方面的相对性);
-px实际是pixel（像素）的缩写，它是图像显示的基本单元，既不是一个确定的物理量，也不是一个点或者小方块，而是一个抽象概念。
-举个例子来理解css像素的相对性
-假设我们用PC浏览器打开一个页面，浏览器此时的宽度为800px，页面上同时有一个400px宽的块级元素容器。很明显此时块状容器应该占页面的一半。
-但如果我们把页面放大（通过“Ctrl键”加上“+号键”），放大为200%，也就是原来的两倍。此时块状容器则横向占满了整个浏览器。
-吊诡的是此时我们既没有调整浏览器窗口大小，也没有改变块状元素的css宽度，但是它看上去却变大了一倍——这是因为我们把CSS像素放大为了原来的两倍。
-CSS像素与屏幕像素1：1同样大小时：
-CSS像素(黑色边框)开始被拉伸，此时1个CSS像素大于1个屏幕像素
-也就是说默认情况下一个CSS像素应该是等于一个物理像素的宽度的，但是浏览器的放大操作让一个CSS像素等于了两个设备像素宽度。在后面你会看到更复杂的情况，在高PPI的设备上，CSS像素甚至在默认状态下就相当于多个物理像素的尺寸。
-从上面的例子可以看出，CSS像素从来都只是一个相对值。
-2、物理像素（pt）
-pt（point，磅）：是一个物理长度单位，指的是72分之一英寸。
-设备像素（物理像素），顾名思义，显示屏是由一个个物理像素点组成的，通过控制每个像素点的颜色，使屏幕显示出不同的图像，屏幕从工厂出来那天起，它上面的物理像素点就固定不变了，单位pt。
-pt在css单位中属于真正的绝对单位，1pt = 1/72(inch),inch及英寸，而1英寸等于2.54厘米。
-不同的设备，其图像基本单位是不同的，比如显示器的点距，可以认为是显示器的物理像素。现在的液晶显示器的点距一般在0.25mm到0.29mm之间。而打印机的墨点，也可以认为是打印机的物理像素，300DPI就是0.085mm，600DPI就是0.042mm。
-注意，我们通常所说的显示器分辨率，其实是指桌面设定的分辨率，而不是显示器的物理分辨率。只不过现在液晶显示器成为主流，由于液晶的显示原理与CRT不同，只有在桌面分辨率与物理分辨率一致的情况下，显示效果最佳，所以现在我们的桌面分辨率几乎总是与显示器的物理分辨率一致了。
-3、CSS像素（px）和物理像素（pt）
-CSS 像素（CSS Pixel）: 又称为虚拟像素、设备独立像素或逻辑像素，也可以理解为直觉像素。CSS 像素是 Web 编程的概念，指的是 CSS 样式代码中使用的逻辑像素。比如 iPhone 6 的 CSS 像素数为 375 x 667px。
-设备像素（Device Pixels）: 又称为物理像素。指设备能控制显示的最小物理单位，意指显示器上一个个的点。从屏幕在工厂生产出的那天起，它上面设备像素点就固定不变了。比如 iPhone 6 的分辨率为 750 x 1334px
-设备像素比（DevicePixelRatio）:DPR = 设备像素 / CSS 像素</description>
+      <description>1、px像素（CSS像素）&#xA;px是相对长度。&#xA;CSS 像素（CSS Pixel）: 又称为虚拟像素、设备独立像素或逻辑像素，也可以理解为直觉像素。CSS 像素是 Web 编程的概念，指的是 CSS 样式代码中使用的逻辑像素。比如 iPhone 6 的 CSS 像素数为 375 x 667px。&#xA;虚拟像素，可以理解为“直觉”像素，CSS和JS使用的抽象单位，浏览器内的一切长度都是以CSS像素为单位的，CSS像素的单位是px。&#xA;在CSS规范中，长度单位可以分为两类，绝对(absolute)单位以及相对(relative)单位。px是一个相对单位，相对的是设备像素(device pixel)。&#xA;在同样一个设备上，每1个CSS像素所代表的物理像素是可以变化的(即CSS像素的第一方面的相对性); 在不同的设备之间，每1个CSS像素所代表的物理像素是可以变化的(即CSS像素的第二方面的相对性);&#xA;px实际是pixel（像素）的缩写，它是图像显示的基本单元，既不是一个确定的物理量，也不是一个点或者小方块，而是一个抽象概念。&#xA;举个例子来理解css像素的相对性&#xA;假设我们用PC浏览器打开一个页面，浏览器此时的宽度为800px，页面上同时有一个400px宽的块级元素容器。很明显此时块状容器应该占页面的一半。&#xA;但如果我们把页面放大（通过“Ctrl键”加上“+号键”），放大为200%，也就是原来的两倍。此时块状容器则横向占满了整个浏览器。&#xA;吊诡的是此时我们既没有调整浏览器窗口大小，也没有改变块状元素的css宽度，但是它看上去却变大了一倍——这是因为我们把CSS像素放大为了原来的两倍。&#xA;CSS像素与屏幕像素1：1同样大小时：&#xA;CSS像素(黑色边框)开始被拉伸，此时1个CSS像素大于1个屏幕像素&#xA;也就是说默认情况下一个CSS像素应该是等于一个物理像素的宽度的，但是浏览器的放大操作让一个CSS像素等于了两个设备像素宽度。在后面你会看到更复杂的情况，在高PPI的设备上，CSS像素甚至在默认状态下就相当于多个物理像素的尺寸。&#xA;从上面的例子可以看出，CSS像素从来都只是一个相对值。&#xA;2、物理像素（pt）&#xA;pt（point，磅）：是一个物理长度单位，指的是72分之一英寸。&#xA;设备像素（物理像素），顾名思义，显示屏是由一个个物理像素点组成的，通过控制每个像素点的颜色，使屏幕显示出不同的图像，屏幕从工厂出来那天起，它上面的物理像素点就固定不变了，单位pt。&#xA;pt在css单位中属于真正的绝对单位，1pt = 1/72(inch),inch及英寸，而1英寸等于2.54厘米。&#xA;不同的设备，其图像基本单位是不同的，比如显示器的点距，可以认为是显示器的物理像素。现在的液晶显示器的点距一般在0.25mm到0.29mm之间。而打印机的墨点，也可以认为是打印机的物理像素，300DPI就是0.085mm，600DPI就是0.042mm。&#xA;注意，我们通常所说的显示器分辨率，其实是指桌面设定的分辨率，而不是显示器的物理分辨率。只不过现在液晶显示器成为主流，由于液晶的显示原理与CRT不同，只有在桌面分辨率与物理分辨率一致的情况下，显示效果最佳，所以现在我们的桌面分辨率几乎总是与显示器的物理分辨率一致了。&#xA;3、CSS像素（px）和物理像素（pt）&#xA;CSS 像素（CSS Pixel）: 又称为虚拟像素、设备独立像素或逻辑像素，也可以理解为直觉像素。CSS 像素是 Web 编程的概念，指的是 CSS 样式代码中使用的逻辑像素。比如 iPhone 6 的 CSS 像素数为 375 x 667px。&#xA;设备像素（Device Pixels）: 又称为物理像素。指设备能控制显示的最小物理单位，意指显示器上一个个的点。从屏幕在工厂生产出的那天起，它上面设备像素点就固定不变了。比如 iPhone 6 的分辨率为 750 x 1334px&#xA;设备像素比（DevicePixelRatio）:DPR = 设备像素 / CSS 像素</description>
     </item>
-    
     <item>
       <title>esp8266Linux下开发环境搭建</title>
       <link>https://www.hsinyuwang.cn/esp8266/lgpyq9gi/</link>
       <pubDate>Wed, 05 Jun 2019 07:12:26 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/esp8266/lgpyq9gi/</guid>
-      <description>前言：esp8266的开发方式有多种，例如：AT指令版、SDK版、Arduino版、NodeMCU固件和Lua、MicroPython、JS开发esp8266等等。而SDK版的开发成本低，不像AT指令版那样需要外置MCU，所以本教程就采用乐鑫官方的SDk为例进行环境的搭建，此环境需要用到的软件：VirtualBox+Linux+交叉编译工具。（文章过于久远，已不再适用&amp;mdash;&amp;mdash;2021年10月18日）
-一、创建一个工程模板 1、以RTOS版本为例，在乐鑫官网下载SDK
- 链接：https://www.espressif.com/zh-hans/support/download/sdks-demos  点击下载会跳转到Github，选择zip文件
-2、下载后解压，在ESP8266_RTOS_SDK-2.0.0文件夹下新建一个app文件夹
-3、将ESP8266_RTOS_SDK-2.0.0\examples\smart_config目录下的所有文件复制到app文件夹下，目录结构如下：
-4、修改app目录下的gen_misc.sh文件，添加如下路径（后面讲为什么是这个路径）
-export SDK_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0export BIN_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0/bin5、因为分离了sdk和project目录，所以编译之前必须先指定一个SDK_PATH和BIN_PATH，修改ESP8266_RTOS_SDK-2.0.0/app目录下的makefile，添加以下内容并保存
-parent_dir:=$(abspath $(shell pwd)/$(lastword $(MAKEFILE_LIST)))parent_dir:=$(shell dirname $(parent_dir))parent_dir:=$(shell dirname $(parent_dir))SDK_PATH= $(parent_dir)BIN_PATH=$(SDK_PATH)/bin这样，一个ESP8266_RTOS_SDK-2.0.0的工程模板就做好了，保存备用。
-二、安装虚拟机和Linux系统 1、乐鑫esp8266论坛提供了Lubuntu系统
- 论坛链接：https://bbs.espressif.com  打开链接，点击Tools
-点击ESP8266 Compilre On Lubuntu
-下载ESP8266_GCC，论坛很贴心，压缩包里同时提供了Virtual Box虚拟机软件
-下载好之后解压ESO8266_GCC.zip并安装Virtual Box软件，然后导入 Lubuntu镜像，配置按默认就好。
-2、在D盘目录下新建一个VM文件夹，VM文件夹下新建名为Share的共享文件夹 之后，启动虚拟机
-3、打开终端，输入ls查看文件，输入./mount.sh挂载共享目录
-为了验证是否挂载成功，可新建一个文件验证一下
-同时在windows文件夹下看是否成功新建了这个文件
-如图，说明文件挂载成功，那么就打通了Windows和Linux文件的交互障碍。
-4、终端中输入pwd命令查看当前所在路径
-没错！这个路径也就是上面修改SDK的路径，这时，我们在Windows环境下把之前修改好的工程模板复制到Share文件夹就好了！ 之后输入ls查看
-恭喜！到这里，我们的任务就快完成了。
-三、编译工程文件 1、进入到ESP8266_RTOS_SDK-2.0.0/app目录下
-2、输入./gen_misc.sh执行，并根据提示和你的esp8266模块型号进行配置之后等待编译完成
-到这里，一个Linux下的编译环境就搭建好了，user1.4096.new.4.bin的文件输出在D:\VM\Share\ESP8266_RTOS_SDK-2.0.0\bin\upgrade目录下。</description>
+      <description>前言：esp8266的开发方式有多种，例如：AT指令版、SDK版、Arduino版、NodeMCU固件和Lua、MicroPython、JS开发esp8266等等。而SDK版的开发成本低，不像AT指令版那样需要外置MCU，所以本教程就采用乐鑫官方的SDk为例进行环境的搭建，此环境需要用到的软件：VirtualBox+Linux+交叉编译工具。（文章过于久远，已不再适用&amp;mdash;&amp;mdash;2021年10月18日）&#xA;一、创建一个工程模板 1、以RTOS版本为例，在乐鑫官网下载SDK&#xA;链接：https://www.espressif.com/zh-hans/support/download/sdks-demos 点击下载会跳转到Github，选择zip文件&#xA;2、下载后解压，在ESP8266_RTOS_SDK-2.0.0文件夹下新建一个app文件夹&#xA;3、将ESP8266_RTOS_SDK-2.0.0\examples\smart_config目录下的所有文件复制到app文件夹下，目录结构如下：&#xA;4、修改app目录下的gen_misc.sh文件，添加如下路径（后面讲为什么是这个路径）&#xA;export SDK_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0&#xD;export BIN_PATH=$/home/esp8266/Share/ESP8266_RTOS_SDK-2.0.0/bin 5、因为分离了sdk和project目录，所以编译之前必须先指定一个SDK_PATH和BIN_PATH，修改ESP8266_RTOS_SDK-2.0.0/app目录下的makefile，添加以下内容并保存&#xA;parent_dir:=$(abspath $(shell pwd)/$(lastword $(MAKEFILE_LIST)))&#xD;parent_dir:=$(shell dirname $(parent_dir))&#xD;parent_dir:=$(shell dirname $(parent_dir))&#xD;SDK_PATH= $(parent_dir)&#xD;BIN_PATH=$(SDK_PATH)/bin 这样，一个ESP8266_RTOS_SDK-2.0.0的工程模板就做好了，保存备用。&#xA;二、安装虚拟机和Linux系统 1、乐鑫esp8266论坛提供了Lubuntu系统&#xA;论坛链接：https://bbs.espressif.com 打开链接，点击Tools&#xA;点击ESP8266 Compilre On Lubuntu&#xA;下载ESP8266_GCC，论坛很贴心，压缩包里同时提供了Virtual Box虚拟机软件&#xA;下载好之后解压ESO8266_GCC.zip并安装Virtual Box软件，然后导入 Lubuntu镜像，配置按默认就好。&#xA;2、在D盘目录下新建一个VM文件夹，VM文件夹下新建名为Share的共享文件夹 之后，启动虚拟机&#xA;3、打开终端，输入ls查看文件，输入./mount.sh挂载共享目录&#xA;为了验证是否挂载成功，可新建一个文件验证一下&#xA;同时在windows文件夹下看是否成功新建了这个文件&#xA;如图，说明文件挂载成功，那么就打通了Windows和Linux文件的交互障碍。&#xA;4、终端中输入pwd命令查看当前所在路径&#xA;没错！这个路径也就是上面修改SDK的路径，这时，我们在Windows环境下把之前修改好的工程模板复制到Share文件夹就好了！ 之后输入ls查看&#xA;恭喜！到这里，我们的任务就快完成了。&#xA;三、编译工程文件 1、进入到ESP8266_RTOS_SDK-2.0.0/app目录下&#xA;2、输入./gen_misc.sh执行，并根据提示和你的esp8266模块型号进行配置之后等待编译完成&#xA;到这里，一个Linux下的编译环境就搭建好了，user1.4096.new.4.bin的文件输出在D:\VM\Share\ESP8266_RTOS_SDK-2.0.0\bin\upgrade目录下。</description>
     </item>
-    
     <item>
       <title>微信小程序如何使用iconfont</title>
       <link>https://www.hsinyuwang.cn/wechat/cmpn3jwr/</link>
       <pubDate>Wed, 05 Jun 2019 07:12:26 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/wechat/cmpn3jwr/</guid>
-      <description>一、选择iconfont样式 1、阿里巴巴矢量图标库  链接：https://www.iconfont.cn/  2、选择想要的样式，并加入购物车 3、将购物车中的图标添加至项目 4、在项目中点击font class并生成代码 5、选中链接，右键跳转至该链接，复制全部代码 二、微信小程序 1、在小程序中新建icon目录，并在目录下新建icon.wxss文件 2、将刚才的代码复制到icon.wxss文件中 3、在需要引入图标的地方编写如下代码 &amp;lt;!--index.wxml--&amp;gt;&amp;lt;view&amp;gt;&amp;lt;text class=&amp;quot;iconfont icon-wode&amp;quot;&amp;gt;&amp;lt;/text&amp;gt;&amp;lt;/view&amp;gt;4、在对应的wxss文件中引入icon.wxss /**index.wxss**/@import &#39;/icon/icon.wxss&#39;5、最终效果 6、注意，text组件的类名要与icon.wxss中的类名一致 </description>
+      <description>一、选择iconfont样式 1、阿里巴巴矢量图标库 链接：https://www.iconfont.cn/ 2、选择想要的样式，并加入购物车 3、将购物车中的图标添加至项目 4、在项目中点击font class并生成代码 5、选中链接，右键跳转至该链接，复制全部代码 二、微信小程序 1、在小程序中新建icon目录，并在目录下新建icon.wxss文件 2、将刚才的代码复制到icon.wxss文件中 3、在需要引入图标的地方编写如下代码 &amp;lt;!--index.wxml--&amp;gt;&#xD;&amp;lt;view&amp;gt;&#xD;&amp;lt;text class=&amp;#34;iconfont icon-wode&amp;#34;&amp;gt;&amp;lt;/text&amp;gt;&#xD;&amp;lt;/view&amp;gt; 4、在对应的wxss文件中引入icon.wxss /**index.wxss**/&#xD;@import &amp;#39;/icon/icon.wxss&amp;#39; 5、最终效果 6、注意，text组件的类名要与icon.wxss中的类名一致 </description>
     </item>
-    
   </channel>
 </rss>

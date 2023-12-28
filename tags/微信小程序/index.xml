@@ -6,25 +6,21 @@
     <description>Recent content in 微信小程序 on Hsinyuwang&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 16 Nov 2020 15:30:08 +0800</lastBuildDate><atom:link href="https://www.hsinyuwang.cn/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Nov 2020 15:30:08 +0800</lastBuildDate>
+    <atom:link href="https://www.hsinyuwang.cn/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>微信小程序request请求方法简单封装</title>
       <link>https://www.hsinyuwang.cn/wechat/jz9wmtl1/</link>
       <pubDate>Mon, 16 Nov 2020 15:30:08 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/wechat/jz9wmtl1/</guid>
-      <description>在request请求的时候，通常会遇到前一个请求没有结束，就发起了一个新的请求，这个时候就要把先前同样的请求取消掉，也就是使用abort() 方法取消请求。下面的代码是对微信小程序的request请求简单的封装。
-/** * GET请求 * @param url 请求地址 * @param param 参数 * @return {Promise} 返回值Promise对象 */ var get = function (url, param) { // 请求之前，先前之前的请求取消掉  if (param.requestTaskKey &amp;amp;&amp;amp; getApp().requestTasks[param.requestTaskKey]) { try { //getApp() 获取全局app对象内容  getApp().requestTasks[param.requestTaskKey].abort() } catch (e) { console.error(e) } } // 使用Promise封装request方法，实现异步操作队列化  var promise = new Promise(function (resolve, reject) { let requestTask = wx.request({ url: url, data: param, success: function (res) { resolve(res.data); }, fail: function (res) { // 异常响  reject() if (res.</description>
+      <description>在request请求的时候，通常会遇到前一个请求没有结束，就发起了一个新的请求，这个时候就要把先前同样的请求取消掉，也就是使用abort() 方法取消请求。下面的代码是对微信小程序的request请求简单的封装。&#xA;/** * GET请求 * @param url 请求地址 * @param param 参数 * @return {Promise} 返回值Promise对象 */ var get = function (url, param) { // 请求之前，先前之前的请求取消掉 if (param.requestTaskKey &amp;amp;&amp;amp; getApp().requestTasks[param.requestTaskKey]) { try { //getApp() 获取全局app对象内容 getApp().requestTasks[param.requestTaskKey].abort() } catch (e) { console.error(e) } } // 使用Promise封装request方法，实现异步操作队列化 var promise = new Promise(function (resolve, reject) { let requestTask = wx.request({ url: url, data: param, success: function (res) { resolve(res.data); }, fail: function (res) { // 异常响 reject() if (res.</description>
     </item>
-    
     <item>
       <title>微信小程序如何使用iconfont</title>
       <link>https://www.hsinyuwang.cn/wechat/cmpn3jwr/</link>
       <pubDate>Wed, 05 Jun 2019 07:12:26 +0800</pubDate>
-      
       <guid>https://www.hsinyuwang.cn/wechat/cmpn3jwr/</guid>
-      <description>一、选择iconfont样式 1、阿里巴巴矢量图标库  链接：https://www.iconfont.cn/  2、选择想要的样式，并加入购物车 3、将购物车中的图标添加至项目 4、在项目中点击font class并生成代码 5、选中链接，右键跳转至该链接，复制全部代码 二、微信小程序 1、在小程序中新建icon目录，并在目录下新建icon.wxss文件 2、将刚才的代码复制到icon.wxss文件中 3、在需要引入图标的地方编写如下代码 &amp;lt;!--index.wxml--&amp;gt;&amp;lt;view&amp;gt;&amp;lt;text class=&amp;quot;iconfont icon-wode&amp;quot;&amp;gt;&amp;lt;/text&amp;gt;&amp;lt;/view&amp;gt;4、在对应的wxss文件中引入icon.wxss /**index.wxss**/@import &#39;/icon/icon.wxss&#39;5、最终效果 6、注意，text组件的类名要与icon.wxss中的类名一致 </description>
+      <description>一、选择iconfont样式 1、阿里巴巴矢量图标库 链接：https://www.iconfont.cn/ 2、选择想要的样式，并加入购物车 3、将购物车中的图标添加至项目 4、在项目中点击font class并生成代码 5、选中链接，右键跳转至该链接，复制全部代码 二、微信小程序 1、在小程序中新建icon目录，并在目录下新建icon.wxss文件 2、将刚才的代码复制到icon.wxss文件中 3、在需要引入图标的地方编写如下代码 &amp;lt;!--index.wxml--&amp;gt;&#xD;&amp;lt;view&amp;gt;&#xD;&amp;lt;text class=&amp;#34;iconfont icon-wode&amp;#34;&amp;gt;&amp;lt;/text&amp;gt;&#xD;&amp;lt;/view&amp;gt; 4、在对应的wxss文件中引入icon.wxss /**index.wxss**/&#xD;@import &amp;#39;/icon/icon.wxss&amp;#39; 5、最终效果 6、注意，text组件的类名要与icon.wxss中的类名一致 </description>
     </item>
-    
   </channel>
 </rss>

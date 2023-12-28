@@ -1,180 +1,0 @@
-<!doctype html>
-<html lang="zh">
-  <head>
-    <title>基于Netty和json格式的自定义协议物联网云平台 | 小新的个人站</title>
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <script src="/iconfont/iconfont.js"></script>
-    <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.88.1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="hsinyuwang" />
-    <meta name="description" content="" />
-    <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
-
-    
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="基于Netty和json格式的自定义协议物联网云平台"/>
-<meta name="twitter:description" content="🍊项目简介 基于Netty和json格式的自定义协议物联网云平台（目前实现了基本的数据传输流程和设备接入的管理，平台代码全部开源，可以二次开发，并提供一个温湿度计的硬件接入示例，全套的解决方案，欢迎Star⭐️）
-项目仓库地址：Github
-项目演示视频：bilibili
-.meta-media {position: relative;margin-bottom: 30px;display: flex;width: 100%;height: 0;padding-bottom: 75%;}.video {position: absolute;width: 100%;height: 100%;left: 0;top: 0;} 🍒目录结构  cloud 平台后端，采用Spring Boot、JWT、MyBatis、Netty cloud-ui 平台前端，采用Vue、Element-ui、Axios、Echarts framework 旋转太空人主题温湿度计硬件代码，采用乐鑫官方ESP-IDF框架（IDF版本v4.3.2） hardware 旋转太空人主题温湿度计原理图和Gerber、BOM  🍓如何使用 🍚后端部分 导入 cloud 目录到idea，配置好jdk和maven，修改redis和mysql配置；将picoideal.sql导入到mysql数据库。
-🍜 前端部分 安装node.js，进入到 cloud-ui 目录，然后运行
-npm run serve🍨硬件代码 安装乐鑫 ESP-IDF 并配置好环境（我是用 vscode 和 Espressif IDF 插件开发的）"/>
-
-    <meta property="og:title" content="基于Netty和json格式的自定义协议物联网云平台" />
-<meta property="og:description" content="🍊项目简介 基于Netty和json格式的自定义协议物联网云平台（目前实现了基本的数据传输流程和设备接入的管理，平台代码全部开源，可以二次开发，并提供一个温湿度计的硬件接入示例，全套的解决方案，欢迎Star⭐️）
-项目仓库地址：Github
-项目演示视频：bilibili
-.meta-media {position: relative;margin-bottom: 30px;display: flex;width: 100%;height: 0;padding-bottom: 75%;}.video {position: absolute;width: 100%;height: 100%;left: 0;top: 0;} 🍒目录结构  cloud 平台后端，采用Spring Boot、JWT、MyBatis、Netty cloud-ui 平台前端，采用Vue、Element-ui、Axios、Echarts framework 旋转太空人主题温湿度计硬件代码，采用乐鑫官方ESP-IDF框架（IDF版本v4.3.2） hardware 旋转太空人主题温湿度计原理图和Gerber、BOM  🍓如何使用 🍚后端部分 导入 cloud 目录到idea，配置好jdk和maven，修改redis和mysql配置；将picoideal.sql导入到mysql数据库。
-🍜 前端部分 安装node.js，进入到 cloud-ui 目录，然后运行
-npm run serve🍨硬件代码 安装乐鑫 ESP-IDF 并配置好环境（我是用 vscode 和 Espressif IDF 插件开发的）" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.hsinyuwang.cn/backend/uar9bqpe/" /><meta property="article:section" content="backend" />
-<meta property="article:published_time" content="2022-08-01T10:04:04+08:00" />
-<meta property="article:modified_time" content="2022-08-01T10:04:04+08:00" />
-
-
-
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-  </head>
-  <body>
-    <header class="app-header">
-      <a href="https://www.hsinyuwang.cn"><img class="app-header-avatar" src="/avatar.jpg" alt="hsinyuwang" /></a>
-      <h1>Hsinyuwang&#39;s Blog</h1>
-      <nav class="app-header-menu">
-          <a class="app-header-menu-item" href="/tags/">分类</a>
-      </nav>
-      <p>我的个人博客，有记录有分享</p>
-      <div class="app-header-social">
-        
-          <a href="https://github.com/hsinyuwang" target="_blank" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
-  <title>Github</title>
-  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-</svg></a>
-        
-          <a href="https://space.bilibili.com/284239797" target="_blank" rel="noreferrer noopener">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor"  class="icon">
-  <title>bilibili</title>
-  <use xlink:href="#icon-bilibili"></use>
-</svg>
-</a>
-        
-      </div>
-    </header>
-    <main class="app-container">
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class ="post-title">基于Netty和json格式的自定义协议物联网云平台</h1>
-      <div class="post-meta">
-        <div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
-  <title>calendar</title>
-  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
-</svg>
-          Aug 1, 2022
-        </div>
-        <div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
-  <title>clock</title>
-  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
-</svg>
-          1 min read
-        </div>
-        <div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
-  <title>tag</title>
-  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
-</svg>
-              <a class="tag" href="https://www.hsinyuwang.cn/tags/%E5%90%8E%E7%AB%AF/">后端</a>
-        </div>
-      </div>
-    </header>
-    <div class="post-content">
-      <h2 id="项目简介">🍊项目简介</h2>
-<p>基于Netty和json格式的自定义协议物联网云平台（目前实现了基本的数据传输流程和设备接入的管理，平台代码全部开源，可以二次开发，并提供一个温湿度计的硬件接入示例，全套的解决方案，欢迎Star⭐️）</p>
-<p>项目仓库地址：<a href="https://github.com/hsinyuwang/PicoIdeal">Github</a></p>
-<p>项目演示视频：<a href="https://www.bilibili.com/video/BV1mr4y1x7e1">bilibili</a></p>
-<style>
-    .meta-media {
-        position: relative;
-        margin-bottom: 30px;
-        display: flex;
-        width: 100%;
-        height: 0;
-        padding-bottom: 75%;
-    }
-
-    .video {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-    }
-</style>
-<div class="meta-media">
-    <iframe src="//player.bilibili.com/player.html?bvid=BV1mr4y1x7e1&page=1"
-        frameborder="no" scrolling="yes" allowfullscreen="allowfullscreen" high_quality="1" framespacing="1"
-        class="video">
-    </iframe>
-</div>
-<h2 id="目录结构">🍒目录结构</h2>
-<ul>
-<li>cloud 平台后端，采用Spring Boot、JWT、MyBatis、Netty</li>
-<li>cloud-ui 平台前端，采用Vue、Element-ui、Axios、Echarts</li>
-<li>framework 旋转太空人主题温湿度计硬件代码，采用乐鑫官方ESP-IDF框架（IDF版本v4.3.2）</li>
-<li>hardware 旋转太空人主题温湿度计原理图和Gerber、BOM</li>
-</ul>
-<h2 id="如何使用">🍓如何使用</h2>
-<h3 id="后端部分">🍚后端部分</h3>
-<p>导入 cloud 目录到idea，配置好jdk和maven，修改redis和mysql配置；将picoideal.sql导入到mysql数据库。</p>
-<h3 id="-前端部分">🍜 前端部分</h3>
-<p>安装node.js，进入到 cloud-ui 目录，然后运行</p>
-<pre tabindex="0"><code>npm run serve
-</code></pre><h3 id="硬件代码">🍨硬件代码</h3>
-<p>安装乐鑫 ESP-IDF 并配置好环境（我是用 vscode 和 Espressif IDF 插件开发的）</p>
-<h3 id="硬件原理图和pcb">🍧硬件原理图和PCB</h3>
-<p>使用 Gerber 和 BOM 生产 PCB 并焊接元器件，Shell.dxf 为外壳文件，可用于激光切割 2mm 厚度的亚克力</p>
-<h3 id="接入认证">🍹接入认证</h3>
-<p>客户端与云平台建立连接后，发送的第一条数据为认证数据，格式如下</p>
-<pre tabindex="0"><code>{&quot;deviceSn&quot;:10112345678,&quot;devicePwd&quot;:&quot;abcdefghijkl&quot;}
-</code></pre><p>deviceSn 和 devicePwd 需要在先在云平台创建，如果 deviceSn 不存在或 devicePwd 不正确，则云平台主动关闭连接，正确则客户端按照自定义的json格式协议向云平台发送数据</p>
-<h2 id="系统结构图">🍍系统结构图</h2>
-<p><img src="/images/uar9bqpe/9.png" alt=""></p>
-<h2 id="平台截图">🍇平台截图</h2>
-<p><img src="/images/uar9bqpe/1.png" alt=""></p>
-<p><img src="/images/uar9bqpe/2.png" alt=""></p>
-<p><img src="/images/uar9bqpe/3.png" alt=""></p>
-<p><img src="/images/uar9bqpe/4.png" alt=""></p>
-<p><img src="/images/uar9bqpe/5.png" alt=""></p>
-<p><img src="/images/uar9bqpe/6.png" alt=""></p>
-<h2 id="硬件成品图">🍅硬件成品图</h2>
-<p><img src="/images/uar9bqpe/7.jpg" alt=""></p>
-<p><img src="/images/uar9bqpe/8.jpg" alt=""></p>
-
-    </div>
-    <div class="post-footer">
-      
-    </div>
-  </article>
-
-    </main>
-    <meting-js
-    id="7628905309"
-    lrc-type="0"
-    server="netease"
-    order="list"
-    type="playlist"
-    fixed="true"
-    list-olded="true"
-    autoplay="true"
-    mutex="true"
-    >
-    </meting-js>
-  </body>
-</html>

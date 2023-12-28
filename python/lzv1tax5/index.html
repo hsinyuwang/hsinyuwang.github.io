@@ -5,26 +5,25 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <script src="/iconfont/iconfont.js"></script>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="generator" content="Hugo 0.121.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="hsinyuwang" />
     <meta name="description" content="" />
     <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
 
     
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="CentOS 7部署Django项目（1）"/>
-<meta name="twitter:description" content="一、安装Python 1、安装依赖包 yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gcc* make -y2、下载python安装包 wget https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tgz3、解压python安装包 tar -zxvf Python-3.6.8.tgz4、配置安装路径 切换到解压目录下
-./configure --prefix=/usr/local/python35、编译安装 make &amp;&amp; make install6、配置软连接 ln -s /usr/local/python3/bin/python3 /usr/bin/python3ln -s /usr/local/python3/bin/pip3 /usr/bin/pip3二、安装uwsgi 出现ModuleNotFoundError: No module named &lsquo;_ctypes&rsquo;的错误，需要安装python3-devel
-yum install python3-devel然后再安装uwsgi
-pip3 install uwsgi -i https://pypi.douban.com/simple/三、安装项目所需要的包 1、导出项目的包 pip freeze &gt; requirement.txt2、然后将其导入到Centos7中，并用pip3安装文件中的模块 pip3 install -r requirement.txt -i https://pypi.douban.com/simple/四、运行Django项目 进入到Django项目目录下
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="CentOS 7部署Django项目（1）"/>
+<meta name="twitter:description" content="一、安装Python 1、安装依赖包 yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gcc* make -y 2、下载python安装包 wget https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tgz 3、解压python安装包 tar -zxvf Python-3.6.8.tgz 4、配置安装路径 切换到解压目录下
+./configure --prefix=/usr/local/python3 5、编译安装 make &amp;&amp; make install 6、配置软连接 ln -s /usr/local/python3/bin/python3 /usr/bin/python3 ln -s /usr/local/python3/bin/pip3 /usr/bin/pip3 二、安装uwsgi 出现ModuleNotFoundError: No module named &lsquo;_ctypes&rsquo;的错误，需要安装python3-devel
+yum install python3-devel 然后再安装uwsgi
+pip3 install uwsgi -i https://pypi.douban.com/simple/ 三、安装项目所需要的包 1、导出项目的包 pip freeze &gt; requirement.txt 2、然后将其导入到Centos7中，并用pip3安装文件中的模块 pip3 install -r requirement.txt -i https://pypi.douban.com/simple/ 四、运行Django项目 进入到Django项目目录下
 uwsgi --http :8000 --module 项目名."/>
 
     <meta property="og:title" content="CentOS 7部署Django项目（1）" />
-<meta property="og:description" content="一、安装Python 1、安装依赖包 yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gcc* make -y2、下载python安装包 wget https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tgz3、解压python安装包 tar -zxvf Python-3.6.8.tgz4、配置安装路径 切换到解压目录下
-./configure --prefix=/usr/local/python35、编译安装 make &amp;&amp; make install6、配置软连接 ln -s /usr/local/python3/bin/python3 /usr/bin/python3ln -s /usr/local/python3/bin/pip3 /usr/bin/pip3二、安装uwsgi 出现ModuleNotFoundError: No module named &lsquo;_ctypes&rsquo;的错误，需要安装python3-devel
-yum install python3-devel然后再安装uwsgi
-pip3 install uwsgi -i https://pypi.douban.com/simple/三、安装项目所需要的包 1、导出项目的包 pip freeze &gt; requirement.txt2、然后将其导入到Centos7中，并用pip3安装文件中的模块 pip3 install -r requirement.txt -i https://pypi.douban.com/simple/四、运行Django项目 进入到Django项目目录下
+<meta property="og:description" content="一、安装Python 1、安装依赖包 yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gcc* make -y 2、下载python安装包 wget https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tgz 3、解压python安装包 tar -zxvf Python-3.6.8.tgz 4、配置安装路径 切换到解压目录下
+./configure --prefix=/usr/local/python3 5、编译安装 make &amp;&amp; make install 6、配置软连接 ln -s /usr/local/python3/bin/python3 /usr/bin/python3 ln -s /usr/local/python3/bin/pip3 /usr/bin/pip3 二、安装uwsgi 出现ModuleNotFoundError: No module named &lsquo;_ctypes&rsquo;的错误，需要安装python3-devel
+yum install python3-devel 然后再安装uwsgi
+pip3 install uwsgi -i https://pypi.douban.com/simple/ 三、安装项目所需要的包 1、导出项目的包 pip freeze &gt; requirement.txt 2、然后将其导入到Centos7中，并用pip3安装文件中的模块 pip3 install -r requirement.txt -i https://pypi.douban.com/simple/ 四、运行Django项目 进入到Django项目目录下
 uwsgi --http :8000 --module 项目名." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.hsinyuwang.cn/python/lzv1tax5/" /><meta property="article:section" content="python" />
@@ -34,10 +33,9 @@ uwsgi --http :8000 --module 项目名." />
 
 
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
     
-    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    
+    
   </head>
   <body>
     <header class="app-header">
@@ -166,17 +164,6 @@ http-timeout = 600
   </article>
 
     </main>
-    <meting-js
-    id="7628905309"
-    lrc-type="0"
-    server="netease"
-    order="list"
-    type="playlist"
-    fixed="true"
-    list-olded="true"
-    autoplay="true"
-    mutex="true"
-    >
-    </meting-js>
+    
   </body>
 </html>

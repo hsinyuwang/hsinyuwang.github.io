@@ -5,37 +5,40 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <script src="/iconfont/iconfont.js"></script>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="generator" content="Hugo 0.121.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="hsinyuwang" />
     <meta name="description" content="" />
     <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
 
     
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Python虚拟环境"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Python虚拟环境"/>
 <meta name="twitter:description" content="virtualenv 工具
 在 python3.3 之前，只能通过 virtualenv 创建虚拟环境，首先需要安装 virtualenv
-pip install virtualenv安装完后，在当前目录下创建一个名为 myvenv 的虚拟环境
-virtualenv --no-site-packages myvenv参数 --no-site-packages 的意思是创建虚拟环境时，不复制主环境中安装的第三方包，也就是创建一个 “干净的” 虚拟环境
+pip install virtualenv 安装完后，在当前目录下创建一个名为 myvenv 的虚拟环境
+virtualenv --no-site-packages myvenv 参数 --no-site-packages 的意思是创建虚拟环境时，不复制主环境中安装的第三方包，也就是创建一个 “干净的” 虚拟环境
 virtualenv 还有很多参数，用于不同的使用场景，例如:
- -p: 用于指定 Python 解析器，就是安装好的 Python 应用程序，默认为当前环境中的 Python &ndash;no-pip：不需要安装 pip，默认为安装 &ndash;clear：如果创建虚拟环境的目录已经有了其他虚拟环境，清楚重建  venv 模块
+-p: 用于指定 Python 解析器，就是安装好的 Python 应用程序，默认为当前环境中的 Python &ndash;no-pip：不需要安装 pip，默认为安装 &ndash;clear：如果创建虚拟环境的目录已经有了其他虚拟环境，清楚重建 venv 模块
 Python3.3 之后，可以用模块 venv 代替 virtualenv 工具，好处是不用单独安装，3.3 及之后的版本，都可以通过安装好的 Python 来创建虚拟环境
-python -m venv myvenv可以在当前目录创建一个名为 myvenv 的虚拟环境
+python -m venv myvenv 可以在当前目录创建一个名为 myvenv 的虚拟环境
 venv 有些参数，不过相比 virtualenv 少了些，这里简单介绍几个：
- &ndash;without-pip: 不需要安装 pip，默认为安装 &ndash;clear：如果创建虚拟环境的目录已经有了其他虚拟环境，清楚重建  因为 venv 是依附于一个 Python 解析器创建的，所以不需要指定 Python 解释器版本"/>
+&ndash;without-pip: 不需要安装 pip，默认为安装 &ndash;clear：如果创建虚拟环境的目录已经有了其他虚拟环境，清楚重建 因为 venv 是依附于一个 Python 解析器创建的，所以不需要指定 Python 解释器版本
+激活
+虚拟环境创建好后，需要激活才能在当前命令行中使用，可以理解成将当前命令行环境中 PATH 变量的值替换掉"/>
 
     <meta property="og:title" content="Python虚拟环境" />
 <meta property="og:description" content="virtualenv 工具
 在 python3.3 之前，只能通过 virtualenv 创建虚拟环境，首先需要安装 virtualenv
-pip install virtualenv安装完后，在当前目录下创建一个名为 myvenv 的虚拟环境
-virtualenv --no-site-packages myvenv参数 --no-site-packages 的意思是创建虚拟环境时，不复制主环境中安装的第三方包，也就是创建一个 “干净的” 虚拟环境
+pip install virtualenv 安装完后，在当前目录下创建一个名为 myvenv 的虚拟环境
+virtualenv --no-site-packages myvenv 参数 --no-site-packages 的意思是创建虚拟环境时，不复制主环境中安装的第三方包，也就是创建一个 “干净的” 虚拟环境
 virtualenv 还有很多参数，用于不同的使用场景，例如:
- -p: 用于指定 Python 解析器，就是安装好的 Python 应用程序，默认为当前环境中的 Python &ndash;no-pip：不需要安装 pip，默认为安装 &ndash;clear：如果创建虚拟环境的目录已经有了其他虚拟环境，清楚重建  venv 模块
+-p: 用于指定 Python 解析器，就是安装好的 Python 应用程序，默认为当前环境中的 Python &ndash;no-pip：不需要安装 pip，默认为安装 &ndash;clear：如果创建虚拟环境的目录已经有了其他虚拟环境，清楚重建 venv 模块
 Python3.3 之后，可以用模块 venv 代替 virtualenv 工具，好处是不用单独安装，3.3 及之后的版本，都可以通过安装好的 Python 来创建虚拟环境
-python -m venv myvenv可以在当前目录创建一个名为 myvenv 的虚拟环境
+python -m venv myvenv 可以在当前目录创建一个名为 myvenv 的虚拟环境
 venv 有些参数，不过相比 virtualenv 少了些，这里简单介绍几个：
- &ndash;without-pip: 不需要安装 pip，默认为安装 &ndash;clear：如果创建虚拟环境的目录已经有了其他虚拟环境，清楚重建  因为 venv 是依附于一个 Python 解析器创建的，所以不需要指定 Python 解释器版本" />
+&ndash;without-pip: 不需要安装 pip，默认为安装 &ndash;clear：如果创建虚拟环境的目录已经有了其他虚拟环境，清楚重建 因为 venv 是依附于一个 Python 解析器创建的，所以不需要指定 Python 解释器版本
+激活
+虚拟环境创建好后，需要激活才能在当前命令行中使用，可以理解成将当前命令行环境中 PATH 变量的值替换掉" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.hsinyuwang.cn/python/zbfxej8c/" /><meta property="article:section" content="python" />
 <meta property="article:published_time" content="2021-09-28T15:30:08+08:00" />
@@ -44,10 +47,9 @@ venv 有些参数，不过相比 virtualenv 少了些，这里简单介绍几个
 
 
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
     
-    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    
+    
   </head>
   <body>
     <header class="app-header">
@@ -148,17 +150,6 @@ venv 有些参数，不过相比 virtualenv 少了些，这里简单介绍几个
   </article>
 
     </main>
-    <meting-js
-    id="7628905309"
-    lrc-type="0"
-    server="netease"
-    order="list"
-    type="playlist"
-    fixed="true"
-    list-olded="true"
-    autoplay="true"
-    mutex="true"
-    >
-    </meting-js>
+    
   </body>
 </html>

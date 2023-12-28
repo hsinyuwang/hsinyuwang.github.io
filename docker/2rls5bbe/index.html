@@ -5,33 +5,32 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <script src="/iconfont/iconfont.js"></script>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="generator" content="Hugo 0.121.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="hsinyuwang" />
     <meta name="description" content="" />
     <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
 
     
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="搭建docker私有镜像站"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="搭建docker私有镜像站"/>
 <meta name="twitter:description" content="在本地（局域网）搭建一个私有镜像站，搭建好之后，我们可以将镜像提交到私有仓库中，避免镜像被暴露的风险。
 一、服务器部署 下载镜像
-docker pull registry运行registry容器
-docker run -itd -v /data/registry:/var/lib/registry -p 5000:5000 --restart=always --name registry registry:latest参数说明：
- -itd：在容器中打开一个伪终端进行交互操作，并在后台运行 -v：把宿主机的/data/registry目录绑定到容器/var/lib/registry目录(这个目录是registry容器中存放镜像文件的目录)，来实现数据的持久化 -p：映射端口，访问宿主机的5000端口就访问到registry容器的服务了 &ndash;restart=always：这是重启的策略，假如这个容器异常退出会自动重启容器 &ndash;name registry：创建容器命名为registry registry:latest：这个是刚才pull下来的镜像  二、用户端docker部署 修改镜像源，添加如下内容，并重启docker服务
-vim /etc/docker/daemon.json{ &#34;registry-mirror&#34;: [&#34;https://registry.docker-cn.com&#34;], &#34;insecure-registries&#34;: [&#34;192.168.43.249:5000&#34;] } 上传镜像到服务器
-docker push 192.168.43.249:5000/image:tag从服务器下载镜像
-docker pull 192.168.43.249:5000/image:tag"/>
+docker pull registry 运行registry容器
+docker run -itd -v /data/registry:/var/lib/registry -p 5000:5000 --restart=always --name registry registry:latest 参数说明：
+-itd：在容器中打开一个伪终端进行交互操作，并在后台运行 -v：把宿主机的/data/registry目录绑定到容器/var/lib/registry目录(这个目录是registry容器中存放镜像文件的目录)，来实现数据的持久化 -p：映射端口，访问宿主机的5000端口就访问到registry容器的服务了 &ndash;restart=always：这是重启的策略，假如这个容器异常退出会自动重启容器 &ndash;name registry：创建容器命名为registry registry:latest：这个是刚才pull下来的镜像 二、用户端docker部署 修改镜像源，添加如下内容，并重启docker服务
+vim /etc/docker/daemon.json { &#34;registry-mirror&#34;: [&#34;https://registry.docker-cn.com&#34;], &#34;insecure-registries&#34;: [&#34;192.168.43.249:5000&#34;] } 上传镜像到服务器
+docker push 192.168.43.249:5000/image:tag 从服务器下载镜像
+docker pull 192.168.43.249:5000/image:tag "/>
 
     <meta property="og:title" content="搭建docker私有镜像站" />
 <meta property="og:description" content="在本地（局域网）搭建一个私有镜像站，搭建好之后，我们可以将镜像提交到私有仓库中，避免镜像被暴露的风险。
 一、服务器部署 下载镜像
-docker pull registry运行registry容器
-docker run -itd -v /data/registry:/var/lib/registry -p 5000:5000 --restart=always --name registry registry:latest参数说明：
- -itd：在容器中打开一个伪终端进行交互操作，并在后台运行 -v：把宿主机的/data/registry目录绑定到容器/var/lib/registry目录(这个目录是registry容器中存放镜像文件的目录)，来实现数据的持久化 -p：映射端口，访问宿主机的5000端口就访问到registry容器的服务了 &ndash;restart=always：这是重启的策略，假如这个容器异常退出会自动重启容器 &ndash;name registry：创建容器命名为registry registry:latest：这个是刚才pull下来的镜像  二、用户端docker部署 修改镜像源，添加如下内容，并重启docker服务
-vim /etc/docker/daemon.json{ &#34;registry-mirror&#34;: [&#34;https://registry.docker-cn.com&#34;], &#34;insecure-registries&#34;: [&#34;192.168.43.249:5000&#34;] } 上传镜像到服务器
-docker push 192.168.43.249:5000/image:tag从服务器下载镜像
-docker pull 192.168.43.249:5000/image:tag" />
+docker pull registry 运行registry容器
+docker run -itd -v /data/registry:/var/lib/registry -p 5000:5000 --restart=always --name registry registry:latest 参数说明：
+-itd：在容器中打开一个伪终端进行交互操作，并在后台运行 -v：把宿主机的/data/registry目录绑定到容器/var/lib/registry目录(这个目录是registry容器中存放镜像文件的目录)，来实现数据的持久化 -p：映射端口，访问宿主机的5000端口就访问到registry容器的服务了 &ndash;restart=always：这是重启的策略，假如这个容器异常退出会自动重启容器 &ndash;name registry：创建容器命名为registry registry:latest：这个是刚才pull下来的镜像 二、用户端docker部署 修改镜像源，添加如下内容，并重启docker服务
+vim /etc/docker/daemon.json { &#34;registry-mirror&#34;: [&#34;https://registry.docker-cn.com&#34;], &#34;insecure-registries&#34;: [&#34;192.168.43.249:5000&#34;] } 上传镜像到服务器
+docker push 192.168.43.249:5000/image:tag 从服务器下载镜像
+docker pull 192.168.43.249:5000/image:tag " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.hsinyuwang.cn/docker/2rls5bbe/" /><meta property="article:section" content="docker" />
 <meta property="article:published_time" content="2021-10-21T17:10:40+08:00" />
@@ -40,10 +39,9 @@ docker pull 192.168.43.249:5000/image:tag" />
 
 
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
     
-    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    
+    
   </head>
   <body>
     <header class="app-header">
@@ -117,11 +115,11 @@ docker pull 192.168.43.249:5000/image:tag" />
 <h2 id="二用户端docker部署">二、用户端docker部署</h2>
 <p>修改镜像源，添加如下内容，并重启docker服务</p>
 <pre tabindex="0"><code>vim /etc/docker/daemon.json
-</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-    <span style="color:#f92672">&#34;registry-mirror&#34;</span>: [<span style="color:#e6db74">&#34;https://registry.docker-cn.com&#34;</span>],
-    <span style="color:#f92672">&#34;insecure-registries&#34;</span>: [<span style="color:#e6db74">&#34;192.168.43.249:5000&#34;</span>]
-}
-</code></pre></div><p><img src="/images/2rls5bbe/1.png" alt=""></p>
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;registry-mirror&#34;</span>: [<span style="color:#e6db74">&#34;https://registry.docker-cn.com&#34;</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;insecure-registries&#34;</span>: [<span style="color:#e6db74">&#34;192.168.43.249:5000&#34;</span>]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img src="/images/2rls5bbe/1.png" alt=""></p>
 <p>上传镜像到服务器</p>
 <pre tabindex="0"><code>docker push 192.168.43.249:5000/image:tag
 </code></pre><p>从服务器下载镜像</p>
@@ -134,17 +132,6 @@ docker pull 192.168.43.249:5000/image:tag" />
   </article>
 
     </main>
-    <meting-js
-    id="7628905309"
-    lrc-type="0"
-    server="netease"
-    order="list"
-    type="playlist"
-    fixed="true"
-    list-olded="true"
-    autoplay="true"
-    mutex="true"
-    >
-    </meting-js>
+    
   </body>
 </html>

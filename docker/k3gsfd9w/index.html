@@ -5,19 +5,18 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <script src="/iconfont/iconfont.js"></script>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="generator" content="Hugo 0.121.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="hsinyuwang" />
     <meta name="description" content="" />
     <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
 
     
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="docker部署Minio"/>
-<meta name="twitter:description" content="1、创建目录 mkdir -p /docker/minio/data /docker/minio/config2、拉取镜像 docker pull minio/minio3、运行容器 docker run -p 9000:9000 -p 9090:9090 \--name minio \-d --restart=always \-e &quot;MINIO_ACCESS_KEY=admin&quot; \-e &quot;MINIO_SECRET_KEY=admin123456&quot; \-v /docker/minio/data:/data \-v /docker/minio/config:/root/.minio \minio/minio server /data --console-address &quot;:9090&quot; -address &quot;:9000&quot;4、访问地址 http://ip:9090"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="docker部署Minio"/>
+<meta name="twitter:description" content="1、创建目录 mkdir -p /docker/minio/data /docker/minio/config 2、拉取镜像 docker pull minio/minio 3、运行容器 docker run -p 9000:9000 -p 9090:9090 \--name minio \-d --restart=always \-e &#34;MINIO_ACCESS_KEY=admin&#34; \-e &#34;MINIO_SECRET_KEY=admin123456&#34; \-v /docker/minio/data:/data \-v /docker/minio/config:/root/.minio \minio/minio server /data --console-address &#34;:9090&#34; -address &#34;:9000&#34; 4、访问地址 http://ip:9090 "/>
 
     <meta property="og:title" content="docker部署Minio" />
-<meta property="og:description" content="1、创建目录 mkdir -p /docker/minio/data /docker/minio/config2、拉取镜像 docker pull minio/minio3、运行容器 docker run -p 9000:9000 -p 9090:9090 \--name minio \-d --restart=always \-e &quot;MINIO_ACCESS_KEY=admin&quot; \-e &quot;MINIO_SECRET_KEY=admin123456&quot; \-v /docker/minio/data:/data \-v /docker/minio/config:/root/.minio \minio/minio server /data --console-address &quot;:9090&quot; -address &quot;:9000&quot;4、访问地址 http://ip:9090" />
+<meta property="og:description" content="1、创建目录 mkdir -p /docker/minio/data /docker/minio/config 2、拉取镜像 docker pull minio/minio 3、运行容器 docker run -p 9000:9000 -p 9090:9090 \--name minio \-d --restart=always \-e &#34;MINIO_ACCESS_KEY=admin&#34; \-e &#34;MINIO_SECRET_KEY=admin123456&#34; \-v /docker/minio/data:/data \-v /docker/minio/config:/root/.minio \minio/minio server /data --console-address &#34;:9090&#34; -address &#34;:9000&#34; 4、访问地址 http://ip:9090 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.hsinyuwang.cn/docker/k3gsfd9w/" /><meta property="article:section" content="docker" />
 <meta property="article:published_time" content="2023-03-23T15:00:11+08:00" />
@@ -26,10 +25,9 @@
 
 
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
     
-    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    
+    
   </head>
   <body>
     <header class="app-header">
@@ -93,11 +91,11 @@
 <pre tabindex="0"><code>docker run -p 9000:9000 -p 9090:9090 \
 --name minio \
 -d --restart=always \
--e &quot;MINIO_ACCESS_KEY=admin&quot; \
--e &quot;MINIO_SECRET_KEY=admin123456&quot; \
+-e &#34;MINIO_ACCESS_KEY=admin&#34; \
+-e &#34;MINIO_SECRET_KEY=admin123456&#34; \
 -v /docker/minio/data:/data  \
 -v /docker/minio/config:/root/.minio \
-minio/minio server /data --console-address &quot;:9090&quot; -address &quot;:9000&quot;
+minio/minio server /data --console-address &#34;:9090&#34; -address &#34;:9000&#34;
 </code></pre><h3 id="4访问地址">4、访问地址</h3>
 <pre tabindex="0"><code>http://ip:9090
 </code></pre>
@@ -108,17 +106,6 @@ minio/minio server /data --console-address &quot;:9090&quot; -address &quot;:900
   </article>
 
     </main>
-    <meting-js
-    id="7628905309"
-    lrc-type="0"
-    server="netease"
-    order="list"
-    type="playlist"
-    fixed="true"
-    list-olded="true"
-    autoplay="true"
-    mutex="true"
-    >
-    </meting-js>
+    
   </body>
 </html>
