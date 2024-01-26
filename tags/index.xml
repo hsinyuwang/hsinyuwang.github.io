@@ -2,80 +2,80 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Hsinyuwang&#39;s Blog</title>
-    <link>https://www.hsinyuwang.cn/tags/</link>
+    <link>https://hsinyuwang.github.io/tags/</link>
     <description>Recent content in Tags on Hsinyuwang&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <lastBuildDate>Thu, 23 Mar 2023 15:00:11 +0800</lastBuildDate>
-    <atom:link href="https://www.hsinyuwang.cn/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://hsinyuwang.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>docker</title>
-      <link>https://www.hsinyuwang.cn/tags/docker/</link>
+      <link>https://hsinyuwang.github.io/tags/docker/</link>
       <pubDate>Thu, 23 Mar 2023 15:00:11 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/tags/docker/</guid>
+      <guid>https://hsinyuwang.github.io/tags/docker/</guid>
       <description></description>
     </item>
     <item>
       <title>hackintosh</title>
-      <link>https://www.hsinyuwang.cn/tags/hackintosh/</link>
+      <link>https://hsinyuwang.github.io/tags/hackintosh/</link>
       <pubDate>Sat, 18 Dec 2021 21:01:00 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/tags/hackintosh/</guid>
+      <guid>https://hsinyuwang.github.io/tags/hackintosh/</guid>
       <description></description>
     </item>
     <item>
       <title>后端</title>
-      <link>https://www.hsinyuwang.cn/tags/%E5%90%8E%E7%AB%AF/</link>
+      <link>https://hsinyuwang.github.io/tags/%E5%90%8E%E7%AB%AF/</link>
       <pubDate>Sat, 16 Oct 2021 15:30:08 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/tags/%E5%90%8E%E7%AB%AF/</guid>
+      <guid>https://hsinyuwang.github.io/tags/%E5%90%8E%E7%AB%AF/</guid>
       <description></description>
     </item>
     <item>
       <title>Python</title>
-      <link>https://www.hsinyuwang.cn/tags/python/</link>
+      <link>https://hsinyuwang.github.io/tags/python/</link>
       <pubDate>Tue, 28 Sep 2021 15:30:08 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/tags/python/</guid>
+      <guid>https://hsinyuwang.github.io/tags/python/</guid>
       <description></description>
     </item>
     <item>
       <title>服务器</title>
-      <link>https://www.hsinyuwang.cn/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <link>https://hsinyuwang.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
       <pubDate>Fri, 06 Aug 2021 15:30:08 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <guid>https://hsinyuwang.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
       <description></description>
     </item>
     <item>
       <title>路由器</title>
-      <link>https://www.hsinyuwang.cn/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/</link>
+      <link>https://hsinyuwang.github.io/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/</link>
       <pubDate>Sun, 01 Aug 2021 10:22:14 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/</guid>
+      <guid>https://hsinyuwang.github.io/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/</guid>
       <description></description>
     </item>
     <item>
       <title>树莓派</title>
-      <link>https://www.hsinyuwang.cn/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</link>
+      <link>https://hsinyuwang.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</link>
       <pubDate>Fri, 30 Jul 2021 15:30:08 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</guid>
+      <guid>https://hsinyuwang.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</guid>
       <description></description>
     </item>
     <item>
       <title>前端</title>
-      <link>https://www.hsinyuwang.cn/tags/%E5%89%8D%E7%AB%AF/</link>
+      <link>https://hsinyuwang.github.io/tags/%E5%89%8D%E7%AB%AF/</link>
       <pubDate>Thu, 29 Jul 2021 15:30:08 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/tags/%E5%89%8D%E7%AB%AF/</guid>
+      <guid>https://hsinyuwang.github.io/tags/%E5%89%8D%E7%AB%AF/</guid>
       <description></description>
     </item>
     <item>
       <title>微信小程序</title>
-      <link>https://www.hsinyuwang.cn/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/</link>
+      <link>https://hsinyuwang.github.io/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/</link>
       <pubDate>Mon, 16 Nov 2020 15:30:08 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/</guid>
+      <guid>https://hsinyuwang.github.io/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/</guid>
       <description></description>
     </item>
     <item>
       <title>esp8266</title>
-      <link>https://www.hsinyuwang.cn/tags/esp8266/</link>
+      <link>https://hsinyuwang.github.io/tags/esp8266/</link>
       <pubDate>Wed, 05 Jun 2019 07:12:26 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/tags/esp8266/</guid>
+      <guid>https://hsinyuwang.github.io/tags/esp8266/</guid>
       <description></description>
     </item>
   </channel>

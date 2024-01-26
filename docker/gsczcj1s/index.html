@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="hsinyuwang" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+    <link rel="stylesheet" href="https://hsinyuwang.github.io/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
 
     
     <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="docker部署RockerMQ"/>
@@ -20,7 +20,7 @@ brokerClusterName = DefaultClusterbrokerName = broker-abrokerId = 0deleteWhen
 <meta property="og:description" content="安装NameServer 1、拉取镜像 docker pull rocketmqinc/rocketmq 2、创建数据目录 mkdir -p /docker/rocketmq/nameserver/logs /docker/rocketmq/nameserver/store 3、运行 docker run -d \--restart=always \--name rmqnamesrv \--privileged=true \-p 9876:9876 \-v /docker/rocketmq/nameserver/logs:/root/logs \-v /docker/rocketmq/nameserver/store:/root/store \-e &#34;MAX_POSSIBLE_HEAP=100000000&#34; rocketmqinc/rocketmq \sh mqnamesrv 安装broker 1、创建broker.conf配置文件 目录为 /opt/docker/rocketmq/broker.conf
 brokerClusterName = DefaultClusterbrokerName = broker-abrokerId = 0deleteWhen = 04fileReservedTime = 48brokerRole = ASYNC_MASTERflushDiskType = ASYNC_FLUSHbrokerIP1 = 主机的IP 2、启动broker docker run -d \--restart=always \--name rmqbroker \--link rmqnamesrv:namesrv \-p 10911:10911 \-p 10909:10909 \--privileged=true \-v /docker/rocketmq/data/broker/logs:/root/logs \-v /docker/rocketmq/data/broker/store:/root/store \-v /docker/rocketmq/conf/broker." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.hsinyuwang.cn/docker/gsczcj1s/" /><meta property="article:section" content="docker" />
+<meta property="og:url" content="https://hsinyuwang.github.io/docker/gsczcj1s/" /><meta property="article:section" content="docker" />
 <meta property="article:published_time" content="2023-03-23T14:39:14+08:00" />
 <meta property="article:modified_time" content="2023-03-23T14:39:14+08:00" />
 
@@ -33,7 +33,7 @@ brokerClusterName = DefaultClusterbrokerName = broker-abrokerId = 0deleteWhen
   </head>
   <body>
     <header class="app-header">
-      <a href="https://www.hsinyuwang.cn"><img class="app-header-avatar" src="/avatar.jpg" alt="hsinyuwang" /></a>
+      <a href="https://hsinyuwang.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="hsinyuwang" /></a>
       <h1>Hsinyuwang&#39;s Blog</h1>
       <nav class="app-header-menu">
           <a class="app-header-menu-item" href="/tags/">分类</a>
@@ -80,7 +80,7 @@ brokerClusterName = DefaultClusterbrokerName = broker-abrokerId = 0deleteWhen
   <title>tag</title>
   <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
 </svg>
-              <a class="tag" href="https://www.hsinyuwang.cn/tags/docker/">docker</a>
+              <a class="tag" href="https://hsinyuwang.github.io/tags/docker/">docker</a>
         </div>
       </div>
     </header>

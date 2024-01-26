@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="hsinyuwang" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="https://www.hsinyuwang.cn/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+    <link rel="stylesheet" href="https://hsinyuwang.github.io/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
 
     
     <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="CentOS 7 Spring Boot启动脚本"/>
@@ -18,7 +18,7 @@
     <meta property="og:title" content="CentOS 7 Spring Boot启动脚本" />
 <meta property="og:description" content="#!/bin/bash#这里可替换为你自己的执行程序，其他代码无需更改APP_NAME=包名.jar#使用说明，用来提示输入参数usage() {echo &#34;Usage: sh wss.sh [start|stop|restart|status]&#34;exit 1}#检查程序是否在运行is_exist(){pid=`ps -ef|grep $APP_NAME|grep -v grep|awk &#39;{print $2}&#39; `#如果不存在返回1，存在返回0 if [ -z &#34;${pid}&#34; ]; thenreturn 1elsereturn 0fi}#启动方法start(){is_existif [ $? -eq &#34;0&#34; ]; thenecho &#34;${APP_NAME} is already running. pid=${pid} .&#34;elsenohup java -jar /root/project/websocket/$APP_NAME &gt; /root/project/websocket/websocketserverlog.file 2&gt;&amp;1 &amp;echo &#34;${APP_NAME} start success&#34;fi}#停止方法stop(){is_existif [ $?" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.hsinyuwang.cn/server/ispf5vtl/" /><meta property="article:section" content="server" />
+<meta property="og:url" content="https://hsinyuwang.github.io/server/ispf5vtl/" /><meta property="article:section" content="server" />
 <meta property="article:published_time" content="2020-09-21T10:11:20+08:00" />
 <meta property="article:modified_time" content="2020-09-21T10:11:20+08:00" />
 
@@ -31,7 +31,7 @@
   </head>
   <body>
     <header class="app-header">
-      <a href="https://www.hsinyuwang.cn"><img class="app-header-avatar" src="/avatar.jpg" alt="hsinyuwang" /></a>
+      <a href="https://hsinyuwang.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="hsinyuwang" /></a>
       <h1>Hsinyuwang&#39;s Blog</h1>
       <nav class="app-header-menu">
           <a class="app-header-menu-item" href="/tags/">分类</a>
@@ -78,7 +78,7 @@
   <title>tag</title>
   <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
 </svg>
-              <a class="tag" href="https://www.hsinyuwang.cn/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+              <a class="tag" href="https://hsinyuwang.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
         </div>
       </div>
     </header>

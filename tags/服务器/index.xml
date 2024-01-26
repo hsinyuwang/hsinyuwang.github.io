@@ -2,94 +2,94 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>服务器 on Hsinyuwang&#39;s Blog</title>
-    <link>https://www.hsinyuwang.cn/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+    <link>https://hsinyuwang.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
     <description>Recent content in 服务器 on Hsinyuwang&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <lastBuildDate>Fri, 06 Aug 2021 15:30:08 +0800</lastBuildDate>
-    <atom:link href="https://www.hsinyuwang.cn/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://hsinyuwang.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CentOS 7修改SSH端口</title>
-      <link>https://www.hsinyuwang.cn/server/fgr2pqu1/</link>
+      <link>https://hsinyuwang.github.io/server/fgr2pqu1/</link>
       <pubDate>Fri, 06 Aug 2021 15:30:08 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/server/fgr2pqu1/</guid>
+      <guid>https://hsinyuwang.github.io/server/fgr2pqu1/</guid>
       <description>一、修改ssh配置文件sshd_config&#xA;vim /etc/ssh/sshd_config 二、防火墙放行&#xA;firewall-cmd --zone=public --add-port=8022/tcp --permanent&#xD;firewall-cmd --reload 三、向SELinux中添加修改的SSH端口&#xA;先安装SELinux的管理工具 semanage (如果已经安装了就直接到下一步) ：&#xA;yum provides semanage 安装运行semanage所需依赖工具包 policycoreutils-python：&#xA;yum -y install policycoreutils-python 查询当前 ssh 服务端口：&#xA;semanage port -l | grep ssh 向 SELinux 中添加 ssh 端口：&#xA;semanage port -a -t ssh_port_t -p tcp 8022 重启 ssh 服务：&#xA;systemctl restart sshd.service 测试成功后，将原来的22端口注释掉即可</description>
     </item>
     <item>
       <title>CentOS 7安装frps配置自启动</title>
-      <link>https://www.hsinyuwang.cn/server/5skjfaf6/</link>
+      <link>https://hsinyuwang.github.io/server/5skjfaf6/</link>
       <pubDate>Fri, 06 Aug 2021 15:30:08 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/server/5skjfaf6/</guid>
+      <guid>https://hsinyuwang.github.io/server/5skjfaf6/</guid>
       <description>1和2二选一&#xA;1、脚本安装frps&#xA;cd /tmp&#xD;wget --no-check-certificate https://raw.githubusercontent.com/clangcn/onekey-install-shell/master/frps/install-frps.sh -O ./install-frps.sh&#xD;chmod 777 install-frps.sh&#xD;./install-frps.sh install 2、程序包安装&#xA;（1）下载frp程序文件&#xA;https://github.com/fatedier/frp/releases （2）解压文件&#xA;下载后解压到自己的目录，我这里解压到/usr/local/frp:&#xA;（3）添加systemd配置文件：&#xA;vim /etc/systemd/system/frps.service 文件内容如下：&#xA;[Unit]&#xD;Description=FRP Server Daemon&#xD;[Service]&#xD;Type=simple&#xD;ExecStartPre=-/sbin/setcap cap_net_bind_service=+ep /usr/local/frp/frps&#xD;ExecStart=/usr/local/frp/frps -c /usr/local/frp/frps.ini&#xD;Restart=always&#xD;RestartSec=20s&#xD;User=nobody&#xD;PermissionsStartOnly=true&#xD;[Install]&#xD;WantedBy=multi-user.target ExecStart的内容请根据自己frp安装目录修改。&#xA;（4）设置开机启动&#xA;systemctl daemon-reload&#xD;systemctl enable frp （5）启动 frp&#xA;systemctl start frp （6）查看frp是否启动&#xA;ps aux | grep frp 看到这里就说明启动成功了。</description>
     </item>
     <item>
       <title>CentOS 7密码错误设置锁定账号</title>
-      <link>https://www.hsinyuwang.cn/server/cf4wsq4g/</link>
+      <link>https://hsinyuwang.github.io/server/cf4wsq4g/</link>
       <pubDate>Sat, 14 Nov 2020 15:30:08 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/server/cf4wsq4g/</guid>
+      <guid>https://hsinyuwang.github.io/server/cf4wsq4g/</guid>
       <description>1、限制用户远程登录&#xA;在#%PAM-1.0的下面，即第二行，添加内容，一定要写在前面，如果写在后面，虽然用户被锁定，但是只要用户输入正确的密码，还是可以登录的！&#xA;vim /etc/pam.d/sshd #%PAM-1.0 auth required pam_tally2.so deny=3 unlock_time=300 even_deny_root root_unlock_time=10 参数解释&#xA;even_deny_root 也限制root用户；&#xA;deny 设置普通用户和root用户连续错误登陆的最大次数，超过最大次数，则锁定该用户；&#xA;unlock_time 设定普通用户锁定后，多少时间后解锁，单位是秒；&#xA;root_unlock_time 设定root用户锁定后，多少时间后解锁，单位是秒；&#xA;此处使用的是 pam_tally2 模块，如果不支持 pam_tally2 可以使用 pam_tally 模块。另外，不同的pam版本，设置可能有所不同，具体使用方法，可以参照相关模块的使用规则。&#xA;2、限制用户从tty登录&#xA;在#%PAM-1.0的下面，即第二行，添加内容，一定要写在前面，如果写在后面，虽然用户被锁定，但是只要用户输入正确的密码，还是可以登录的！&#xA;vim /etc/pam.d/login #%PAM-1.0 auth required pam_tally2.so deny=3 lock_time=300 even_deny_root root_unlock_time=10 同样是增加在第2行！&#xA;3、查看用户登录失败次数&#xA;cd /etc/pam.d/&#xD;pam_tally2 --user root 4、解锁指定用户&#xA;pam_tally2 -r -u root </description>
     </item>
     <item>
       <title>CentOS 7开放及查看端口</title>
-      <link>https://www.hsinyuwang.cn/server/26iciptk/</link>
+      <link>https://hsinyuwang.github.io/server/26iciptk/</link>
       <pubDate>Wed, 14 Oct 2020 15:30:08 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/server/26iciptk/</guid>
+      <guid>https://hsinyuwang.github.io/server/26iciptk/</guid>
       <description>1、开放端口&#xA;firewall-cmd --zone=public --add-port=5672/tcp --permanent # 开放5672端口&#xD;firewall-cmd --zone=public --remove-port=5672/tcp --permanent #关闭5672端口&#xD;firewall-cmd --reload # 配置立即生效 2、查看防火墙所有开放的端口&#xA;firewall-cmd --zone=public --list-ports 3、关闭防火墙&#xA;systemctl stop firewalld.service 4、查看防火墙状态&#xA;firewall-cmd --state 5、查看监听的端口&#xA;netstat -lnpt 6、检查端口被哪个进程占用&#xA;netstat -lnpt |grep 5672 7、查看进程的详细信息&#xA;ps 6832 8、中止进程&#xA;kill -9 6832 </description>
     </item>
     <item>
       <title>CentOS 7允许、禁止ping</title>
-      <link>https://www.hsinyuwang.cn/server/iczegbgn/</link>
+      <link>https://hsinyuwang.github.io/server/iczegbgn/</link>
       <pubDate>Wed, 07 Oct 2020 15:30:08 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/server/iczegbgn/</guid>
+      <guid>https://hsinyuwang.github.io/server/iczegbgn/</guid>
       <description>一、临时生效&#xA;1、允许ping&#xA;echo 0 &amp;gt;/proc/sys/net/ipv4/icmp_echo_ignore_all 2、禁止ping&#xA;echo 1 &amp;gt;/proc/sys/net/ipv4/icmp_echo_ignore_all 二、永久生效&#xA;修改文件：/etc/sysctl.conf&#xA;1、允许ping&#xA;增加一行：&#xA;vim /etc/sysctl.conf&#xD;net.ipv4.icmp_echo_ignore_all=0 2、禁止ping&#xA;增加一行：&#xA;vim /etc/sysctl.conf&#xD;net.ipv4.icmp_echo_ignore_all=1 修改后使用以下命令使之生效：&#xA;sysctl -p </description>
     </item>
     <item>
       <title>Linux设置定时任务</title>
-      <link>https://www.hsinyuwang.cn/server/vtxpza4k/</link>
+      <link>https://hsinyuwang.github.io/server/vtxpza4k/</link>
       <pubDate>Tue, 22 Sep 2020 15:30:08 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/server/vtxpza4k/</guid>
+      <guid>https://hsinyuwang.github.io/server/vtxpza4k/</guid>
       <description>常用命令&#xA;## 编辑定时任务&#xD;crontab -e&#xD;## 显示定时任务&#xD;crontab -l 查看执行的日志&#xA;cat /var/log/cron 基本格式为&#xA;* * * * * commond 前面的五个星号分别表示 分 时 日 月 周，commond表示你要操作的命令&#xA;分（1-59）（或/1表示每分钟）&#xA;时（1-23）（0表示0点）&#xA;日（1-31）&#xA;月（1-12）&#xA;周（1-6）（0表示周日）&#xA;字段 允许值 允许的特殊字符 秒 0-59 - * / 分 0-59 - * / 小时 0-23 - * / 日期 1-31 - * ? / L W C 月份 1-12 或者 JAN-DEC - * / 星期 1-7 或者 SUN-SAT - * ?</description>
     </item>
     <item>
       <title>CentOS 7 Spring Boot启动脚本</title>
-      <link>https://www.hsinyuwang.cn/server/ispf5vtl/</link>
+      <link>https://hsinyuwang.github.io/server/ispf5vtl/</link>
       <pubDate>Mon, 21 Sep 2020 10:11:20 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/server/ispf5vtl/</guid>
+      <guid>https://hsinyuwang.github.io/server/ispf5vtl/</guid>
       <description>#!/bin/bash&#xD;#这里可替换为你自己的执行程序，其他代码无需更改&#xD;APP_NAME=包名.jar&#xD;#使用说明，用来提示输入参数&#xD;usage() {&#xD;echo &amp;#34;Usage: sh wss.sh [start|stop|restart|status]&amp;#34;&#xD;exit 1&#xD;}&#xD;#检查程序是否在运行&#xD;is_exist(){&#xD;pid=`ps -ef|grep $APP_NAME|grep -v grep|awk &amp;#39;{print $2}&amp;#39; `&#xD;#如果不存在返回1，存在返回0 if [ -z &amp;#34;${pid}&amp;#34; ]; then&#xD;return 1&#xD;else&#xD;return 0&#xD;fi&#xD;}&#xD;#启动方法&#xD;start(){&#xD;is_exist&#xD;if [ $? -eq &amp;#34;0&amp;#34; ]; then&#xD;echo &amp;#34;${APP_NAME} is already running. pid=${pid} .&amp;#34;&#xD;else&#xD;nohup java -jar /root/project/websocket/$APP_NAME &amp;gt; /root/project/websocket/websocketserverlog.file 2&amp;gt;&amp;amp;1 &amp;amp;&#xD;echo &amp;#34;${APP_NAME} start success&amp;#34;&#xD;fi&#xD;}&#xD;#停止方法&#xD;stop(){&#xD;is_exist&#xD;if [ $?</description>
     </item>
     <item>
       <title>解决ARP报错</title>
-      <link>https://www.hsinyuwang.cn/server/5ifkuus4/</link>
+      <link>https://hsinyuwang.github.io/server/5ifkuus4/</link>
       <pubDate>Mon, 21 Sep 2020 10:11:20 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/server/5ifkuus4/</guid>
+      <guid>https://hsinyuwang.github.io/server/5ifkuus4/</guid>
       <description>报错信息：&#xA;The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib&#xA;什么是APR？ APR(Apache portable Run-time libraries，Apache可移植运行库)的目的如其名称一样，主要为上层的应用程序提供一个可以跨越多操作系统平台使用的底层支持接口库。在早期 的Apache版本中，应用程序本身必须能够处理各种具体操作系统平台的细节，并针对不同的平台调用不同的处理函数。&#xA;随着Apache的进一步开发，Apache组织决定将这些通用的函数独立出来并发展成为一个新的项目。这样，APR的开发就从Apache中独立出来，Apache仅仅是使用 APR而已。&#xA;APR使得平台细节的处理进行下移。对于应用程序而言，它们根本就不需要考虑具体的平台，不管是Unix、Linux还是Window，应用程序执行的接口基本都是统一一致的。因此对于APR而言，可移植性和统一的上层接口是其考虑的一个重点。而APR最早的目的并不是如此，它最早只是希望将Apache中用到的所有代码合并为一个通用的代码库，然而这不是一个正确的策略，因此后来APR改变了其目标。有的时候使用公共代码并不是一件好事，比如如何将一个请求映射到线程或者进程是平台相关的，因此仅仅一个公共的代码库并不能完成这种区分。APR的目标则是希望安全合并所有的能够合并的代码而不需要牺牲性能。&#xA;APR的最早的一个目标就是为所有的平台(不是部分)提供一个公共的统一操作函数接口，这是一个非常了不起的目的，当然也是不现实的一个目标。我们不可能支持所有平台的所有特征，因此APR目前只能为大多数平台提供所有的APR特性支持，包括Win32、OS/2、BeOS、Darwin、Linux等等。为了能够实现这个目标，APR开发者必须为那些不能运行于所有平台的特性创建了一系列的特征宏(FEATURE MACROS)以在各个平台之间区分这些特征。这些特征宏定义非常简单，通常用APR_HAS_FEATURE参数设置：&#xA;如果某个平台具有这个特性，则该宏必须设置为true，比如Linux和window都具有内存映射文件，同时APR提供了内存映射文件的操作接口，因此在这两个平台上，APR_HAS_MMAP宏必须设置，同时ap_mmap_*函数应该将磁盘文件映射为内存并返回适当的状态码。如果你的操作系统并不支持内存映射，那么APR_HAS_MMAP必须设置为0，而且所有的ap_mmap_*函数也可以不需要定义。第二步就是对于那些在程序中使用了不支持的函数必须提出警告。&#xA;解决方法 1、安装apr 首先安装依赖&#xA;yum install openssl-devel&#xD;yum install apr-devel 然后安装apr，下载链接为https://downloads.apache.org//apr/apr-1.7.0.tar.gz&#xA;源码方式安装&#xA;tar zxvf apr-1.7.0.tar.gz&#xD;cd apr-1.7.0 ./configure make &amp;amp;&amp;amp; make install apr 默认安装在 /usr/local/apr&#xA;或者&#xA;yum install apr 2、然后安装apr-util 下载链接为https://archive.apache.org/dist/apr/apr-util-1.6.1.tar.bz2&#xA;源码方式安装&#xA;tar -jxvf apr-util-1.6.1.tar.bz2 cd apr-util-1.6.1 .</description>
     </item>
     <item>
       <title>CentOS 7漏洞修复</title>
-      <link>https://www.hsinyuwang.cn/server/937kgb5r/</link>
+      <link>https://hsinyuwang.github.io/server/937kgb5r/</link>
       <pubDate>Thu, 11 Jun 2020 08:55:56 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/server/937kgb5r/</guid>
+      <guid>https://hsinyuwang.github.io/server/937kgb5r/</guid>
       <description>首先查看可升级系统软件&#xA;yum check-update 然后更新所有可升级的系统软件&#xA;yum upgrade 阿里云ECS提示RHSA-2017:3263: curl security update 1、更新ca-bundle 首先备份一下&#xA;cp /etc/pki/tls/certs/ca-bundle.crt /etc/pki/tls/certs/ca-bundle.crt.bak 更新并替换&#xA;curl http://curl.haxx.se/ca/cacert.pem -o /etc/pki/tls/certs/ca-bundle.crt 2、新增 repo 源 打开vim创建一个新文件&#xA;vim /etc/yum.repos.d/city-fan-for-curl.repo 向其中添加内容&#xA;[CityFanforCurl]&#xD;name=City Fan Repo&#xD;baseurl=http://www.city-fan.org/ftp/contrib/yum-repo/rhel7/x86_64/&#xD;enabled=0&#xD;gpgcheck=0 :wq退出 3、更新curl yum update curl --enablerepo=CityFanforCurl -y 4、重启 reboot </description>
     </item>
     <item>
       <title>CentOS 7添加新用户并授权</title>
-      <link>https://www.hsinyuwang.cn/server/f2c3eags/</link>
+      <link>https://hsinyuwang.github.io/server/f2c3eags/</link>
       <pubDate>Thu, 30 Apr 2020 15:30:08 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/server/f2c3eags/</guid>
+      <guid>https://hsinyuwang.github.io/server/f2c3eags/</guid>
       <description>1、添加新用户&#xA;（1）创建新用户&#xA;adduser [用户名] （2）修改新用户的密码&#xA;passwd [用户名] 2、授权&#xA;（1）添加sudoers文件可写权限&#xA;chmod -v u+w /etc/sudoers （2）修改sudoers文件&#xA;vim /etc/sudoers 在sudoers文件中找到如下位置并添加如下内容：&#xA;[用户名] ALL=(ALL) ALL（如需新用户使用sudo时不用输密码，把最后一个ALL改为NOPASSWD:ALL即可） （3）收回sudoers文件可写权限&#xA;chmod -v u-w /etc/sudoers </description>
     </item>
     <item>
       <title>tomcat 8005端口未启动</title>
-      <link>https://www.hsinyuwang.cn/server/zj61vvgx/</link>
+      <link>https://hsinyuwang.github.io/server/zj61vvgx/</link>
       <pubDate>Thu, 16 Apr 2020 10:20:08 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/server/zj61vvgx/</guid>
+      <guid>https://hsinyuwang.github.io/server/zj61vvgx/</guid>
       <description>8005端口未启动，无法关闭tomcat tomcat启动的时候看不出异常，关闭的时候回报错类似&#xA;Jul 17, 2015 9:47:54 AM org.apache.catalina.startup.Catalina stopServer SEVERE: Could not contact localhost:8005. Tomcat may not be running. Jul 17, 2015 9:47:54 AM org.apache.catalina.startup.Catalina stopServer SEVERE: Catalina.stop: Java.NET.ConnectException: Connection timed out at java.net.PlainSocketImpl.socketConnect(Native Method) at java.Net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333) at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195) at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182) at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366) at java.net.Socket.connect(Socket.java:525) at java.net.Socket.connect(Socket.java:475) at java.net.Socket.(Socket.java:372) at java.net.Socket.(Socket.java:186) at org.apache.catalina.startup.Catalina.stopServer(Catalina.java:498) at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39) at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25) at java.lang.reflect.Method.invoke(Method.java:597) at org.apache.catalina.startup.Bootstrap.stopServer(Bootstrap.java:370) at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:457) 即为8005端口未运行，使用命令netstat -ant 发现 没有找到8005端口，解决办法：</description>
     </item>
     <item>
       <title>CentOS 7更换yum源</title>
-      <link>https://www.hsinyuwang.cn/server/9jslvvrt/</link>
+      <link>https://hsinyuwang.github.io/server/9jslvvrt/</link>
       <pubDate>Sun, 12 Apr 2020 15:30:08 +0800</pubDate>
-      <guid>https://www.hsinyuwang.cn/server/9jslvvrt/</guid>
+      <guid>https://hsinyuwang.github.io/server/9jslvvrt/</guid>
       <description>一、备份当前源&#xA;cd /etc/yum.repos.d/&#xD;cp CentOS-Base.repo CentOS-Base-repo.bak 二、使用wget下载阿里yum源repo文件&#xA;wget http://mirrors.aliyun.com/repo/Centos-7.repo 三、清理旧包&#xA;yum clean all 四、把下载下来阿里云repo文件设置成为默认源&#xA;mv Centos-7.repo CentOS-Base.repo 五、生成阿里云yum源缓存并更新yum源&#xA;yum makecache&#xD;yum update </description>
     </item>
   </channel>
