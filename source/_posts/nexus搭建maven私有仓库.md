@@ -21,7 +21,7 @@ tags: [后端]
 
 ![](1.png)
 
-所以需要配置一个阿里云的仓库 [地址链接](https://developer.aliyun.com/mvn/guide)
+所以需要配置一个阿里云的仓库 [阿里云云效 Maven](https://developer.aliyun.com/mvn/guide)
 
 ![](2.png)
 
