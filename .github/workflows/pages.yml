@@ -21,6 +21,8 @@ jobs:
         run: npm install
       - name: Build Hexo
         run: npx hexo generate
+      - name: List public directory
+        run: ls -la ./public # 查看 public 目录内容
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
