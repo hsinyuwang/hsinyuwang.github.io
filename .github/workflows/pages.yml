@@ -1,9 +1,9 @@
-name: Pages
+name: Deploy Hexo to GitHub Pages
 
 on:
   push:
     branches:
-      - main # default branch
+      - main # 默认分支
 
 jobs:
   build:
@@ -13,17 +13,22 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: recursive
-      - name: Set up Node.js
+      - name: 使用 Node.js 20.x
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-      - name: Install Dependencies
+      - name: 缓存 NPM 依赖
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+      - name: 安装依赖
         run: npm install
-      - name: Build Hexo
-        run: npx hexo generate
-      - name: List public directory
-        run: ls -la ./public # 查看 public 目录内容
-      - name: Upload Pages artifact
+      - name: 生成静态文件
+        run: npm run generate # 确保在 package.json 中有对应的命令
+      - name: 上传页面工件
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
@@ -38,6 +43,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to GitHub Pages
+      - name: 部署到 GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v3
